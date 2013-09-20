@@ -1,0 +1,3 @@
+{% for src, dest in pillar['postfix']['aliases'].iteritems() -%}
+{{ src }} : {{ dest }}
+{% endfor -%}
