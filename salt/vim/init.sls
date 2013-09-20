@@ -3,8 +3,10 @@ vim:
     - installed
     - name: {{ pillar['pkgs']['vim'] }}
 
+{% if grains['os'] == 'Debian'%}
 vim-scripts:
   pkg.installed
+{% endif %}
 
 /etc/vim/vimrc.local:
   file.managed:
