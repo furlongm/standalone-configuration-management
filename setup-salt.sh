@@ -4,6 +4,7 @@ function usage() {
     echo "Usage:"
     echo "./$0 admin@example.com"
     echo "Substitute your email address to receive root email"
+    echo "You also need to install git prior to running this script"
     exit 1
 }
 
@@ -25,12 +26,13 @@ function main() {
   wget -O - http://bootstrap.saltstack.org | sudo sh
   github_config
   vim_syntax_highlighting
-  sed -i -e "s/admin@example.com/${1}" /srv/pillar/postfix/init.sls
+  sed -i -e "s/admin@example.com/${1}/" /srv/pillar/postfix/init.sls
   salt-call --local state.highstate
 }
 
 if [ "${1}" == "" ] ; then
     usage
 else
+    which git 1>/dev/null 2>&1 || usage
     main ${1}
 fi
