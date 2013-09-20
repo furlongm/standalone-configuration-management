@@ -2,7 +2,7 @@ openssh-server:
   pkg.installed
 
 ssh:
-  service
+  service:
     - name: {{ pillar['svcs']['ssh'] }}
     - running
     - enable: True
