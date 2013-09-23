@@ -22,7 +22,7 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 myhostname = {{ grains['host'] }}
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-myorigin = /etc/mailname
+myorigin = {{ grains['fqdn'] }}
 
 {% if grains['fqdn'] != grains['host'] -%}
 mydestination = {{ grains['fqdn']}}, {{ grains['host'] }}, localhost.localdomain, localhost
