@@ -5,7 +5,8 @@ vim:
 
 {% if grains['os'] == 'Debian'%}
 vim-scripts:
-  pkg.installed
+  pkg:
+    - installed
 {% endif %}
 
 /etc/vim/vimrc.local:
