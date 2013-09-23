@@ -7,6 +7,11 @@ postfix:
       - file: /etc/postfix/main.cf
       - cmd: newaliases
 
+mailx:
+  pkg:
+    - installed
+    - name: {{ pillar['pkgs']['mailx'] }}
+
 /etc/postfix/main.cf:
   file.managed:
     - source: salt://postfix/main.cf.jinja
