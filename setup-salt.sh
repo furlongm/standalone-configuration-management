@@ -5,8 +5,19 @@ function usage() {
     echo "./$0 admin@example.com"
     echo "This script needs to be run as root."
     echo "Substitute your email address as the first argument."
-    echo "You also need to install git prior to running this script."
     exit 1
+}
+
+function install_git() {
+
+    if [ -f '/etc/debian_version' ] ; then
+        pm=apt-get
+    elif [ -f '/etc/redhat-release' ] ; then
+        pm=yum
+    elif [ -f '/etc/SuSE-release' ] ; then
+        pm=zypper
+    fi
+    $pm install git
 }
 
 function vim_syntax_highlighting() {
@@ -34,8 +45,8 @@ function main() {
 if [ "${1}" == "" ] ; then
     usage
 else
-    which git 1>/dev/null 2>&1 || usage
     euid=$(id -u)
     if [ "${euid}" !=  "0" ] ;  then usage ; fi
+    which git 1>/dev/null 2>&1 || install_git
     main ${1}
 fi
