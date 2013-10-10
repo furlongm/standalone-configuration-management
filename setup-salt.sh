@@ -11,11 +11,11 @@ function usage() {
 function install_git() {
 
     if [ -f '/etc/debian_version' ] ; then
-        pm=apt-get
+        pm="apt-get -y"
     elif [ -f '/etc/redhat-release' ] ; then
-        pm=yum
+        pm="yum -y"
     elif [ -f '/etc/SuSE-release' ] ; then
-        pm=zypper
+        pm="zypper -n"
     fi
     $pm install git
 }
