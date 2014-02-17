@@ -12,3 +12,6 @@ telnet:
 
 iftop:
   pkg.installed
+
+bind-utils:
+  pkg.installed
