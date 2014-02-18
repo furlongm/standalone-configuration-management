@@ -1,15 +1,16 @@
 fail2ban:
-  pkg.installed
+  pkg:
+    - installed
   service:
     - running
     - enable: True
     - watch:
-      - file: /etc/fail2ban/fail2ban.conf
-      - file: /etc/fail2ban/jail.conf
+      - file: /etc/fail2ban/fail2ban.local
+      - file: /etc/fail2ban/jail.local
 
-/etc/fail2ban/jail.conf:
+/etc/fail2ban/jail.local:
   file.managed:
-    - source: salt://fail2ban/jail.conf.jinja
+    - source: salt://fail2ban/jail.local.jinja
     - template: jinja
     - user: root
     - group: root
@@ -17,9 +18,9 @@ fail2ban:
     - require:
       - pkg: fail2ban
 
-/etc/fail2ban/fail2ban.conf:
+/etc/fail2ban/fail2ban.local:
   file.managed:
-    - source: salt://fail2ban/fail2ban.conf
+    - source: salt://fail2ban/fail2ban.local
     - user: root
     - group: root
     - mode: '0644'
