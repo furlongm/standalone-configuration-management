@@ -6,3 +6,4 @@ base:
     - ssh
     - postfix
     - misc
+    - fail2ban
