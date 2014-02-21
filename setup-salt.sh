@@ -2,7 +2,7 @@
 
 function usage() {
     echo "Usage:"
-    echo "./$0 admin@example.com"
+    echo "$0 admin@example.com"
     echo "This script needs to be run as root."
     echo "Substitute your email address as the first argument."
     exit 1
