@@ -3,11 +3,22 @@ vim:
     - installed
     - name: {{ pillar['pkgs']['vim'] }}
 
-{% if grains['os'] == 'Debian'%}
+{% if grains['os'] == 'Debian' %}
 vim-scripts:
   pkg:
     - installed
 {% endif %}
+
+{% if grains['os'] == 'Suse' %}
+vim-data:
+  pkg:
+    - installed
+{% endif %}
+
+/etc/vim:
+  file.directory:
+    - require:
+      - pkg: vim
 
 /etc/vim/vimrc.local:
   file.managed:
@@ -16,4 +27,4 @@ vim-scripts:
     - group: root
     - mode: '0644'
     - require:
-      - pkg: vim
+      - file: /etc/vim

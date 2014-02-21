@@ -10,7 +10,5 @@ git:
 strace:
   pkg.installed
 
-locate:
-  pkg:
-    - installed
-    - name: {{ pillar['pkgs']['locate'] }}
+mlocate:
+  pkg.installed
