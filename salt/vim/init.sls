@@ -3,13 +3,13 @@ vim:
     - installed
     - name: {{ pillar['pkgs']['vim'] }}
 
-{% if grains['os'] == 'Debian' %}
+{% if grains['os_family'] == 'Debian' %}
 vim-scripts:
   pkg:
     - installed
 {% endif %}
 
-{% if grains['os'] == 'Suse' %}
+{% if grains['os_family'] == 'Suse' %}
 vim-data:
   pkg:
     - installed
