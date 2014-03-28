@@ -12,3 +12,9 @@ strace:
 
 mlocate:
   pkg.installed
+
+{% if grains['os'] == 'Debian' %}
+debian-goodies:
+  pkg:
+    - installed
+{% endif %}
