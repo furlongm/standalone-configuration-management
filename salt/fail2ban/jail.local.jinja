@@ -30,6 +30,6 @@ logpath  = /var/log/auth.log
 logpath  = /var/log/secure
 {% endif -%}
 {% if grains['os_family'] == 'Suse' -%}
-logpath  = /var/log/sshd.log
+logpath  = /var/log/messages
 {% endif -%}
 maxretry = 5
