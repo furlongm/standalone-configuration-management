@@ -16,5 +16,4 @@ iftop:
 bind-utils:
   pkg:
     - installed
-    - name: {{ pillar['pkgs']['bind-utils'] }}
-
+    - name: {{ salt['pillar.get']('pkgs:bind-utils') }}

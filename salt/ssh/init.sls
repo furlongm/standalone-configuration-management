@@ -1,7 +1,7 @@
 openssh-server:
   pkg:
     - installed
-    - name: {{ pillar['pkgs']['openssh-server'] }}
+    - name: {{ salt['pillar.get']('pkgs:openssh-server') }}
 
 ssh:
   service:

@@ -11,7 +11,7 @@ postfix:
 mailx:
   pkg:
     - installed
-    - name: {{ pillar['pkgs']['mailx'] }}
+    - name: {{ salt['pillar.get']('pkgs:mailx') }}
 
 /etc/postfix/main.cf:
   file.managed:

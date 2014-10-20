@@ -1,7 +1,7 @@
 vim:
   pkg:
     - installed
-    - name: {{ pillar['pkgs']['vim'] }}
+    - name: {{ salt['pillar.get']('pkgs:vim') }}
 
 {% if grains['os_family'] == 'Debian' %}
 vim-scripts:
