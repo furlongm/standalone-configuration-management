@@ -5,7 +5,7 @@ openssh-server:
 
 ssh:
   service:
-    - name: {{ pillar['svcs']['ssh'] }}
+    - name: {{ salt['pillar.get']('svcs:ssh') }}
     - running
     - enable: True
     - watch:
