@@ -35,7 +35,7 @@ function github_config() {
 }
 
 function main() {
-  wget -O - http://bootstrap.saltstack.org | sh
+  wget -O - http://bootstrap.saltstack.org | sh || exit 1
   github_config
   vim_syntax_highlighting
   sed -i -e "s/admin@example.com/${1}/" /srv/pillar/postfix/init.sls
