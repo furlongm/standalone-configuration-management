@@ -13,6 +13,9 @@ telnet:
 iftop:
   pkg.installed
 
+whois:
+  pkg.installed
+
 bind-utils:
   pkg:
     - installed
