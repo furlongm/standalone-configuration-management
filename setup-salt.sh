@@ -8,7 +8,7 @@ function usage() {
     exit 1
 }
 
-function install_git() {
+function install_deps() {
 
     if [ -f '/etc/debian_version' ] ; then
         pm="apt-get -y"
@@ -17,7 +17,7 @@ function install_git() {
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
     fi
-    $pm install git
+    $pm install git wget
 }
 
 function vim_syntax_highlighting() {
@@ -47,6 +47,7 @@ if [ "${1}" == "" ] ; then
 else
     euid=$(id -u)
     if [ "${euid}" !=  "0" ] ;  then usage ; fi
-    which git 1>/dev/null 2>&1 || install_git
+    which git 1>/dev/null 2>&1 || install_deps
+    which wget 1>/dev/null 2>&1 || install_deps
     main ${1}
 fi
