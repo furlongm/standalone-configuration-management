@@ -3,7 +3,7 @@ pkgs:
   openssh-server: openssh-server
   apache: httpd
   vim: vim-enhanced
-  mailx: bsd-mailx
+  mailx: mailx
   bind-utils: bind-utils
   {% elif grains['os_family'] == 'Debian' %}
   openssh-server: openssh-server
