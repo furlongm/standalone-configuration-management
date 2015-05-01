@@ -24,10 +24,11 @@ install_vim_syntax_highlighting() {
 }
 
 get_config_from_github() {
-  git clone https://github.com/furlongm/salt-pillar /tmp/salt-pillar.git
-  cp -r /tmp/salt-pillar.git/salt /srv
-  cp -r /tmp/salt-pillar.git/pillar /srv
-  rm -fr /tmp/salt-pillar.git
+  tmp_dir=$(mktemp -d)
+  git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+  cp -r ${tmp_dir}/saltstack/salt /srv
+  cp -r ${tmp_dir}/saltstack/pillar /srv
+  rm -fr ${tmp_dir}
 }
 
 main() {
