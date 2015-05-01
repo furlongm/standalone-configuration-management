@@ -16,14 +16,14 @@ install_deps() {
     $pm install git curl
 }
 
-vim_syntax_highlighting() {
+install_vim_syntax_highlighting() {
   mkdir -p ~/.vim
   git clone https://github.com/saltstack/salt-vim.git /tmp/salt-vim.git
   cp -r /tmp/salt-vim.git/ftdetect /tmp/salt-vim.git/ftplugin /tmp/salt-vim.git/syntax  ~/.vim/
   rm -fr /tmp/salt-vim.git
 }
 
-github_config() {
+get_config_from_github() {
   git clone https://github.com/furlongm/salt-pillar /tmp/salt-pillar.git
   cp -r /tmp/salt-pillar.git/salt /srv
   cp -r /tmp/salt-pillar.git/pillar /srv
@@ -32,8 +32,8 @@ github_config() {
 
 main() {
   curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
-  github_config
-  vim_syntax_highlighting
+  get_config_from_github
+  install_vim_syntax_highlighting
   sed -i -e "s/admin@example.com/${email}/" /srv/pillar/postfix/init.sls
   salt-call --local state.highstate
 }
