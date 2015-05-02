@@ -1,5 +1,6 @@
 base:
   '*':
+    - salt
     - vim
     - net
     - screen
