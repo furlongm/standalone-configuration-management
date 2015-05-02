@@ -1,3 +1,0 @@
-{% for src, dest in salt['pillar.get']('postfix:aliases').iteritems() -%}
-{{ src }}: {{ dest }}
-{% endfor -%}

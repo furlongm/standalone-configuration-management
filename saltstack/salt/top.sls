@@ -4,12 +4,7 @@ base:
     - net
     - screen
     - ssh
+    - alias
     - postfix
     - misc
     - fail2ban
-
-file_client: local
-
-file_roots:
-  base:
-    - /srv/salt

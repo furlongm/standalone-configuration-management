@@ -35,7 +35,7 @@ main() {
   curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
   get_config_from_github
   install_vim_syntax_highlighting
-  sed -i -e "s/admin@example.com/${email}/" /srv/pillar/postfix/init.sls
+  sed -i -e "s/admin@example.com/${email}/" /srv/salt/alias.sls
   salt-call --local state.highstate
 }
 
