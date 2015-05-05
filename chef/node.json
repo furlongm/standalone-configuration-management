@@ -2,5 +2,6 @@
   "run_list": [ "recipe[net]",
                 "recipe[misc]",
                 "recipe[screen]",
-                "recipe[fail2ban]" ]
+                "recipe[fail2ban]",
+                "recipe[postfix]" ]
 }
