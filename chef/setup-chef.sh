@@ -27,13 +27,21 @@ main() {
   curl -L https://www.chef.io/chef/install.sh | sudo bash || exit 1
   get_config_from_github
   #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
-  chef-solo -c /srv/chef/solo.rb
+  if [ "${local}" == "true" ] ; then
+      run_path=.
+  else
+      run_path=/srv/chef
+  fi
+  chef-solo -c ${run_path}/solo.rb
 }
 
-while getopts ":e:" opt ; do
+while getopts ":le:" opt ; do
   case ${opt} in
     e)
       email=${OPTARG}
+      ;;
+    l)
+      local=true
       ;;
     *)
       usage
