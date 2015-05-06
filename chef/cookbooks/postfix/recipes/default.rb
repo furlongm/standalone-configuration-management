@@ -1,22 +1,21 @@
-package 'postfix' do
-  action :install
+case node['platform_family']
+  when 'debian'
+    mailx = 'bsd-mailx'
+    logfile = '/var/log/auth.log'
+  when 'rhel'
+    logfile = '/var/log/secure'
+    mailx = 'mailx'
+  when 'suse'
+    logfile = '/var/log/messages'
+    mailx = 'mailx'
 end
 
-package 'mailx' do
+package ['postfix', mailx] do
   action :install
 end
 
 service 'postfix' do
   supports :status => true, :restart => true, :reload => true
-end
-
-case node['platform_family']
-  when 'debian'
-    logfile = '/var/log/auth.log'
-  when 'rhel'
-    logfile = '/var/log/secure'
-  when 'suse'
-    logfile = '/var/log/messages'
 end
 
 template 'main.cf' do
@@ -28,5 +27,5 @@ template 'main.cf' do
   variables(
     :logfile => logfile
   )
-  notifies :restart, 'service[fail2ban]'
+  notifies :restart, 'service[postfix]'
 end
