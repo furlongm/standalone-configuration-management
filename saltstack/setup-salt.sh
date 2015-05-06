@@ -17,37 +17,45 @@ install_deps() {
 }
 
 install_vim_syntax_highlighting() {
-  mkdir -p ~/.vim
-  git clone https://github.com/saltstack/salt-vim.git /tmp/salt-vim.git
-  cp -r /tmp/salt-vim.git/ftdetect /tmp/salt-vim.git/ftplugin /tmp/salt-vim.git/syntax  ~/.vim/
-  rm -fr /tmp/salt-vim.git
+    mkdir -p ~/.vim
+    git clone https://github.com/saltstack/salt-vim.git /tmp/salt-vim.git
+    cp -r /tmp/salt-vim.git/ftdetect /tmp/salt-vim.git/ftplugin /tmp/salt-vim.git/syntax  ~/.vim/
+    rm -fr /tmp/salt-vim.git
 }
 
 get_config_from_github() {
-  tmp_dir=$(mktemp -d)
-  git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-  cp -r ${tmp_dir}/saltstack/salt /srv
-  cp -r ${tmp_dir}/saltstack/pillar /srv
-  rm -fr ${tmp_dir}
+    tmp_dir=$(mktemp -d)
+    git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    cp -r ${tmp_dir}/saltstack/salt /srv
+    cp -r ${tmp_dir}/saltstack/pillar /srv
+    rm -fr ${tmp_dir}
 }
 
 main() {
-  curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
-  get_config_from_github
-  install_vim_syntax_highlighting
-  sed -i -e "s/admin@example.com/${email}/" /srv/salt/alias.sls
-  salt-call --local state.highstate
+    curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
+    get_config_from_github
+    install_vim_syntax_highlighting
+    if [ "${run_local}" == "true" ] ; then
+        run_path=.
+    else
+        run_path=/srv
+    fi
+    sed -i -e "s/admin@example.com/${email}/" ${run_path}/salt/alias.sls
+    salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate
 }
 
-while getopts ":e:" opt ; do
-  case ${opt} in
-    e)
-      email=${OPTARG}
-      ;;
-    *)
-      usage
-      ;;
-  esac
+while getopts ":le:" opt ; do
+    case ${opt} in
+        e)
+            email=${OPTARG}
+            ;;
+        l)
+            run_local=true
+            ;;
+        *)
+            usage
+            ;;
+    esac
 done
 
 if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
