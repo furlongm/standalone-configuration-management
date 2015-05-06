@@ -6,7 +6,7 @@ service 'fail2ban' do
   supports :status => true, :restart => true, :reload => true
 end
 
-file 'fail2ban.local' do
+cookbook_file 'fail2ban.local' do
   path '/etc/fail2ban/fail2ban.local'
   owner 'root'
   group 'root'

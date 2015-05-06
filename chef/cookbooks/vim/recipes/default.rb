@@ -15,7 +15,7 @@ when 'suse'
   end
 end
 
-file 'vimrc.local' do
+cookbook_file 'vimrc.local' do
   path '/etc/vim/vimrc.local'
   owner 'root'
   group 'root'
