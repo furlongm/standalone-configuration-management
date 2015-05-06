@@ -7,12 +7,10 @@ case node['platform_family']
     package 'vim-enhanced' do
       action :install
     end
-  end
   when 'suse'
     package ['vim', 'vim-data'] do
       action :install
     end
-  end
 end
 
 cookbook_file 'vimrc.local' do
