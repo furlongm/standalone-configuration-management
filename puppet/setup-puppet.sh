@@ -48,8 +48,8 @@ get_config_from_github() {
 
 main() {
     which puppet 1>/dev/null 2>&1 || install_puppet
-    get_config_from_github
     install_vim_syntax_highlighting
+    get_config_from_github
     if [ "${runlocal}" == "true" ] ; then
         run_path=.
     else

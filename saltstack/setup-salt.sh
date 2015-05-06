@@ -38,8 +38,8 @@ get_config_from_github() {
 
 main() {
     which salt-call 1>/dev/null 2>&1 || install_salt
-    get_config_from_github
     install_vim_syntax_highlighting
+    get_config_from_github
     if [ "${run_local}" == "true" ] ; then
         run_path=.
     else
