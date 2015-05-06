@@ -3,5 +3,6 @@
                 "recipe[misc]",
                 "recipe[screen]",
                 "recipe[fail2ban]",
-                "recipe[postfix]" ]
+                "recipe[postfix]",
+                "recipe[vim]" ]
 }
