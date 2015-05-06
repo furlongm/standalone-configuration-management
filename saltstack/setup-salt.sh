@@ -16,11 +16,16 @@ install_deps() {
     $pm install git curl
 }
 
+install_salt() {
+    curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
+}
+
 install_vim_syntax_highlighting() {
+    tmp_dir=$(mktemp -d)
     mkdir -p ~/.vim
-    git clone https://github.com/saltstack/salt-vim.git /tmp/salt-vim.git
-    cp -r /tmp/salt-vim.git/ftdetect /tmp/salt-vim.git/ftplugin /tmp/salt-vim.git/syntax  ~/.vim/
-    rm -fr /tmp/salt-vim.git
+    git clone https://github.com/saltstack/salt-vim.git ${tmp_dir}
+    cp -r ${tmp_dir}/ftdetect ${tmp_dir}/ftplugin ${tmp_dir}/syntax  ~/.vim/
+    rm -fr ${tmp_dir}
 }
 
 get_config_from_github() {
@@ -32,7 +37,7 @@ get_config_from_github() {
 }
 
 main() {
-    curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
+    which salt-call 1>/dev/null 2>&1 || install_salt
     get_config_from_github
     install_vim_syntax_highlighting
     if [ "${run_local}" == "true" ] ; then
