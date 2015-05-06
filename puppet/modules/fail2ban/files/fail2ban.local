@@ -1,0 +1,4 @@
+[Definition]
+loglevel = 3
+logtarget = SYSLOG
+socket = /var/run/fail2ban/fail2ban.sock
