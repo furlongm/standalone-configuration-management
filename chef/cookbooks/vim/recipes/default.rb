@@ -1,17 +1,17 @@
 case node['platform_family']
-when 'debian'
-  package ['vim', 'vim-scripts'] do
-    action :install
+  when 'debian'
+    package ['vim', 'vim-scripts'] do
+      action :install
+    end
+  when 'rhel'
+    package 'vim-enhanced' do
+      action :install
+    end
   end
-end
-when 'rhel'
-  package 'vim-enhanced' do
-    action :install
-  end
-end
-when 'suse'
-  package ['vim', 'vim-data'] do
-    action :install
+  when 'suse'
+    package ['vim', 'vim-data'] do
+      action :install
+    end
   end
 end
 
