@@ -16,6 +16,10 @@ install_deps() {
     $pm install git curl
 }
 
+install_chef() {
+    curl -L https://www.chef.io/chef/install.sh | sudo bash || exit 1
+}
+
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
     git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
@@ -24,7 +28,7 @@ get_config_from_github() {
 }
 
 main() {
-    curl -L https://www.chef.io/chef/install.sh | sudo bash || exit 1
+    which chef-solo 1>/dev/null 2>&1 || install_chef
     get_config_from_github
     #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
     if [ "${run_local}" == "true" ] ; then
