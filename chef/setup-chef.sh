@@ -17,36 +17,36 @@ install_deps() {
 }
 
 get_config_from_github() {
-  tmp_dir=$(mktemp -d)
-  git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-  cp -r ${tmp_dir}/chef /srv
-  rm -fr ${tmp_dir}
+    tmp_dir=$(mktemp -d)
+    git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    cp -r ${tmp_dir}/chef /srv
+    rm -fr ${tmp_dir}
 }
 
 main() {
-  curl -L https://www.chef.io/chef/install.sh | sudo bash || exit 1
-  get_config_from_github
-  #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
-  if [ "${local}" == "true" ] ; then
-      run_path=.
-  else
-      run_path=/srv/chef
-  fi
-  chef-solo -c ${run_path}/solo.rb
+    curl -L https://www.chef.io/chef/install.sh | sudo bash || exit 1
+    get_config_from_github
+    #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
+    if [ "${run_local}" == "true" ] ; then
+        run_path=.
+    else
+        run_path=/srv/chef
+    fi
+    chef-solo -c ${run_path}/solo.rb
 }
 
 while getopts ":le:" opt ; do
-  case ${opt} in
-    e)
-      email=${OPTARG}
-      ;;
-    l)
-      local=true
-      ;;
-    *)
-      usage
-      ;;
-  esac
+    case ${opt} in
+        e)
+            email=${OPTARG}
+            ;;
+        l)
+            run_local=true
+            ;;
+        *)
+            usage
+            ;;
+    esac
 done
 
 if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
