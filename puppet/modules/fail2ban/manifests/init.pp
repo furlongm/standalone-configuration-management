@@ -6,6 +6,7 @@ class fail2ban {
 
   service { 'fail2ban':
     ensure  => running,
+    enable  => true,
     require => [Package['fail2ban'],
                   File['/etc/fail2ban/jail.local',
                     '/etc/fail2ban/fail2ban.local']],

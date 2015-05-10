@@ -4,6 +4,7 @@ end
 
 service 'fail2ban' do
   supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
 end
 
 cookbook_file 'fail2ban.local' do
