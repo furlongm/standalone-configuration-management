@@ -14,4 +14,11 @@ node default {
     recipient => 'admin@example.com',
     target    => '/etc/aliases'
   }
+
+  exec { 'newaliases':
+    command     => '/usr/bin/newaliases',
+    refreshonly => true,
+    subscribe   => Mailalias['root_alias'],
+    notify      => Service['postfix'],
+  }
 }
