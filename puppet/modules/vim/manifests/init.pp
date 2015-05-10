@@ -34,6 +34,6 @@ class vim {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => File['etc/vim'],
+    require => File['/etc/vim'],
   }
 }
