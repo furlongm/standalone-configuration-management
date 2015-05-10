@@ -22,7 +22,7 @@ class vim {
   }
 
   file { '/etc/vim':
-    ensure  => present,
+    ensure  => directory,
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
