@@ -21,12 +21,19 @@ class vim {
     }
   }
 
+  file { '/etc/vim':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+  }    
+
   file { '/etc/vim/vimrc.local':
     source  => 'puppet:///modules/vim/vimrc.local',
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    require => Package[$vim],
+    require => File['etc/vim'],
   }
 }

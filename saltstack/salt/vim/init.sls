@@ -17,8 +17,9 @@ vim-data:
 
 /etc/vim:
   file.directory:
-    - require:
-      - pkg: vim
+    - user: root
+    - group: root
+    - mode: '0755'
 
 /etc/vim/vimrc.local:
   file.managed:

@@ -13,6 +13,13 @@ case node['platform_family']
     end
 end
 
+directory '/etc/vim' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
 cookbook_file 'vimrc.local' do
   path '/etc/vim/vimrc.local'
   owner 'root'
