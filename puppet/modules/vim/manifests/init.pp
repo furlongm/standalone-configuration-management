@@ -22,15 +22,15 @@ class vim {
   }
 
   file { '/etc/vim':
-    ensure  => directory,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-  }    
+    ensure => directory,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
+  }
 
   file { '/etc/vim/vimrc.local':
-    source  => 'puppet:///modules/vim/vimrc.local',
     ensure  => present,
+    source  => 'puppet:///modules/vim/vimrc.local',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

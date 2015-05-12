@@ -8,7 +8,7 @@ class screen {
     source  => 'puppet:///modules/screen/screenrc',
     owner   => 'root',
     group   => 'root',
-    mode    => 0644,
+    mode    => '0644',
     require => Package['screen'],
   }
 }

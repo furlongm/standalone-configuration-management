@@ -23,7 +23,7 @@ class postfix {
     content => template('postfix/main.cf.erb'),
     owner   => 'root',
     group   => 'root',
-    mode    => 0644,
+    mode    => '0644',
     require => Package['postfix'],
     notify  => Service['postfix'],
   }
