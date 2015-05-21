@@ -1,0 +1,28 @@
+- action: apt pkg={{ item }} state=installed
+  with_items:
+  - htop
+  - tree
+  - git
+  - strace
+  - mlocate
+  - debian-goodies
+  when: ansible_os_family == 'Debian'
+
+- action: yum pkg={{ item }} state=installed
+  with_items:
+  - htop
+  - tree
+  - git
+  - strace
+  - mlocate
+  when: ansible_os_family == 'RedHat'
+
+- action: zypper pkg={{ item }} state=installed
+  with_items:
+  - htop
+  - tree
+  - git
+  - strace
+  - mlocate
+  when: ansible_os_family == 'Suse'
+

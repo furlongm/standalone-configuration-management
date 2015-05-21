@@ -52,7 +52,7 @@ main() {
         run_path=/srv/puppet
     fi
     #sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
-    ansible -c local
+    ansible-playbook -i hosts playbooks/site.yml
 }
 
 while getopts ":le:" opt ; do

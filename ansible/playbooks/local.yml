@@ -1,0 +1,6 @@
+- hosts: 127.0.0.1 
+  user: root 
+  connection: local
+
+  tasks:
+     - include: roles/misc/tasks/main.yml
