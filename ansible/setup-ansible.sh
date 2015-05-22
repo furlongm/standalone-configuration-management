@@ -49,7 +49,7 @@ main() {
     if [ "${runlocal}" == "true" ] ; then
         run_path=.
     else
-        run_path=/srv/puppet
+        run_path=/srv/ansible
     fi
     #sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
     ansible-playbook -i ${run_path}/hosts ${run_path}/playbooks/site.yml
