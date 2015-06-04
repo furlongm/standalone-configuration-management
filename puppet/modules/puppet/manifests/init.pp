@@ -10,10 +10,12 @@ class puppet {
   file { '/etc/puppet/modules':
     ensure => 'link',
     target => '/srv/puppet/modules',
+    force  => true,
   }
 
   file { '/etc/puppet/manifests':
     ensure => 'link',
     target => '/srv/puppet/manifests',
+    force  => true,
   }
 }
