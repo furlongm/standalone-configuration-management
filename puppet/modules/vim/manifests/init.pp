@@ -19,6 +19,24 @@ class vim {
     package { 'vim-data':
       ensure => installed,
     }
+
+    file { '/etc/vimrc':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/vim/vimrc.Suse',
+    }
+  }
+
+  if $::osfamily == 'RedHat' {
+    file { '/etc/vimrc':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/vim/vimrc.RedHat',
+    }
   }
 
   file { '/etc/vim':
