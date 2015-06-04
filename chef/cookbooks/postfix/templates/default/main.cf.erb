@@ -22,12 +22,20 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 myhostname = <%= node[:hostname] %>
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-myorigin = <%= node[:fqdn] %>
-
-<% if node[:fqdn] != node[:hostname] -%>
-mydestination = <%= node[:fqdn] %>, <%= node[:hostname] %>, localhost.localdomain, localhost
+<% if node[:fqdn] == nil -%>
+myorigin = <%= node[:hostname] %>
 <% else -%>
+myorigin = <%= node[:fqdn] %>
+<% end -%>
+
+<% if node[:fqdn] == nil -%>
+mydestination = <%= node[:hostname] %>, localhost.localdomain, localhost
+<% else -%>
+  <%- if node[:fqdn] != node[:hostname] -%>
+mydestination = <%= node[:fqdn] %>, <%= node[:hostname] %>, localhost.localdomain, localhost
+  <%- else -%>
 mydestination = <%= node[:fqdn] %>, localhost.localdomain, localhost
+  <%- end -%>
 <% end -%>
 
 #relayhost =
