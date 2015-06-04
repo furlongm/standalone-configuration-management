@@ -4,22 +4,12 @@ node default {
   include net
   include screen
   include ssh
-  include postfix
   include misc
   include fail2ban
   include puppet
 
-  mailalias { 'root_alias':
-    ensure    => present,
-    name      => 'root',
-    recipient => 'admin@example.com',
-    target    => '/etc/aliases'
+  class { 'postfix':
+    root_alias => 'admin@example.com',
   }
 
-  exec { 'newaliases':
-    command     => '/usr/bin/newaliases',
-    refreshonly => true,
-    subscribe   => Mailalias['root_alias'],
-    notify      => Service['postfix'],
-  }
 }

@@ -1,4 +1,6 @@
-class postfix {
+class postfix(
+  $root_alias='admin@example.com'
+) {
 
   package { 'postfix':
     ensure => installed,
@@ -26,5 +28,19 @@ class postfix {
     mode    => '0644',
     require => Package['postfix'],
     notify  => Service['postfix'],
+  }
+
+  mailalias { 'root_alias':
+    ensure    => present,
+    name      => 'root',
+    recipient => "${root_alias}",
+    target    => '/etc/aliases'
+  }
+
+  exec { 'newaliases':
+    command     => '/usr/bin/newaliases',
+    refreshonly => true,
+    subscribe   => Mailalias['root_alias'],
+    notify      => Service['postfix'],
   }
 }
