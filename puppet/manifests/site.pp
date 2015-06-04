@@ -7,6 +7,7 @@ node default {
   include postfix
   include misc
   include fail2ban
+  include puppet
 
   mailalias { 'root_alias':
     ensure    => present,
