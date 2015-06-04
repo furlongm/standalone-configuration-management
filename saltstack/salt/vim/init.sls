@@ -13,6 +13,22 @@ vim-scripts:
 vim-data:
   pkg:
     - installed
+
+/etc/vimrc:
+  file.managed:
+    - source: salt://vim/vimrc.Suse
+    - user: root
+    - group: root
+    - mode: '0644'
+{% endif %}
+
+{% if grains['os_family'] == 'RedHat' %}
+/etc/vimrc:
+  file.managed:
+    - source: salt://vim/vimrc.RedHat
+    - user: root
+    - group: root
+    - mode: '0644'
 {% endif %}
 
 /etc/vim:
