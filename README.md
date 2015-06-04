@@ -12,13 +12,13 @@ sudo bash -x setup-puppet.sh -e furlongm@gmail.com
 
 ### Salt
 ```
-wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/puppet/setup-salt.sh
+wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/saltstack/setup-salt.sh
 sudo bash -x setup-salt.sh -e furlongm@gmail.com
 ```
 
 ### Chef
 ```
-wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/puppet/setup-chef.sh
+wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/chef/setup-chef.sh
 sudo bash -x setup-chef.sh -e furlongm@gmail.com
 ```
 
