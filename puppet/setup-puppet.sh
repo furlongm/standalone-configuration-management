@@ -7,6 +7,7 @@ usage() {
 
 install_deps() {
     if [ -f '/etc/debian_version' ] ; then
+        apt-get update
         pm="apt-get -y"
     elif [ -f '/etc/redhat-release' ] ; then
         pm="yum -y"
