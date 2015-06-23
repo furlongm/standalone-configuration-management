@@ -13,7 +13,7 @@ case node['platform_family']
     mailx = 'mailx'
 end
 
-package exim do:
+package exim do
   action :remove
 end
 
