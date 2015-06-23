@@ -3,7 +3,8 @@ class postfix(
 ) {
 
   package { 'postfix':
-    ensure => installed,
+    ensure  => installed,
+    require => Package[$exim],
   }
 
   $mailx = $::osfamily ? {
@@ -13,6 +14,15 @@ class postfix(
 
   package { $mailx:
     ensure => installed,
+  }
+
+  $exim = $::osfamily ? {
+    'Debian' => 'exim4',
+    default  => 'exim',
+  }
+
+  package { $exim:
+    ensure => absent,
   }
 
   service { 'postfix':

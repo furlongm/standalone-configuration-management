@@ -1,6 +1,8 @@
 postfix:
   pkg:
     - installed
+    - require:
+      - pkg: exim
   service:
     - running
     - enable: True
@@ -11,6 +13,12 @@ mailx:
   pkg:
     - installed
     - name: {{ salt['pillar.get']('pkgs:mailx') }}
+
+exim:
+  pkg:
+    - removed
+    - name: {{ salt['pillar.get']('pkgs:exim') }}
+
 
 /etc/postfix/main.cf:
   file.managed:

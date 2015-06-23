@@ -1,13 +1,20 @@
 case node['platform_family']
   when 'debian'
+    exim = 'exim4'
     mailx = 'bsd-mailx'
     logfile = '/var/log/auth.log'
   when 'rhel'
+    exim = 'exim'
     logfile = '/var/log/secure'
     mailx = 'mailx'
   when 'suse'
+    exim = 'exim'
     logfile = '/var/log/messages'
     mailx = 'mailx'
+end
+
+package exim do:
+  action :remove
 end
 
 package ['postfix', mailx] do
