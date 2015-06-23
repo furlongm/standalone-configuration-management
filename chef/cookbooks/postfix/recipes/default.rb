@@ -17,13 +17,12 @@ package exim do
   action :remove
 end
 
-package ['postfix', mailx] do
+package mailx do
   action :install
 end
 
-service 'postfix' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+package 'postfix' do
+  action :install
 end
 
 template 'main.cf' do
@@ -36,4 +35,9 @@ template 'main.cf' do
     :logfile => logfile
   )
   notifies :restart, 'service[postfix]'
+end
+
+service 'postfix' do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
 end
