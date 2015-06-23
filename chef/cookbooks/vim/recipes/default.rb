@@ -15,7 +15,10 @@ case node['platform_family']
       action :create
     end
   when 'suse'
-    package ['vim', 'vim-data'] do
+    package 'vim' do
+      action :install
+    end
+    package 'vim-data' do
       action :install
     end
     cookbook_file 'vimrc.Suse' do
