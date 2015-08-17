@@ -8,12 +8,14 @@ if node['platform_family'] == 'rhel'
     action :create
   end
 
-  package 'epel-release' do
-    action :install
-  end
-
   execute 'yum_makecache' do
     command '/bin/yum -y makecache'
+    action :nothing
+  end
+
+  package 'epel-release' do
+    action :install
+    notifies :run, 'execute[yum_makecache]', :immediately
   end
 
 end
