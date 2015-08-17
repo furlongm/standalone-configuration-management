@@ -1,5 +1,7 @@
 class misc {
 
+  require epel
+
   $misc_packages = ['htop', 'tree', 'git', 'strace', 'mlocate']
 
   package { $misc_packages:
