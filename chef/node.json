@@ -1,5 +1,6 @@
 {
-  "run_list": [ "recipe[net]",
+  "run_list": [ "recipe[epel]",
+                "recipe[net]",
                 "recipe[misc]",
                 "recipe[screen]",
                 "recipe[fail2ban]",
