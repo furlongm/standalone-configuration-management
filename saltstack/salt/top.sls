@@ -1,5 +1,6 @@
 base:
   '*':
+    - epel
     - salt
     - vim
     - net
