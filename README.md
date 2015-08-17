@@ -6,19 +6,19 @@ This project aims to give some basic examples of how to use each of chef, puppet
 
 ### Puppet
 ```
-wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/puppet/setup-puppet.sh
+curl -O https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/puppet/setup-puppet.sh
 sudo bash -x setup-puppet.sh -e furlongm@gmail.com
 ```
 
 ### Salt
 ```
-wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/saltstack/setup-salt.sh
+curl -O https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/saltstack/setup-salt.sh
 sudo bash -x setup-salt.sh -e furlongm@gmail.com
 ```
 
 ### Chef
 ```
-wget https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/chef/setup-chef.sh
+curl -O https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/chef/setup-chef.sh
 sudo bash -x setup-chef.sh -e furlongm@gmail.com
 ```
 
