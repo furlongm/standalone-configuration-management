@@ -1,5 +1,9 @@
 node default {
 
+  Package {
+    allow_virtual => true
+  }
+
   include vim
   include net
   include screen
