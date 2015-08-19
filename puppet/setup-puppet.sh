@@ -57,7 +57,7 @@ main() {
         run_path=/srv/puppet
     fi
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
-    puppet apply --modulepath ${run_path}/modules ${run_path}/manifests/site.pp
+    puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/site.pp
 }
 
 while getopts ":le:" opt ; do
