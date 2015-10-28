@@ -46,7 +46,7 @@ main() {
     else
         run_path=/srv/chef
     fi
-    chef-solo -c ${run_path}/solo.rb
+    chef-client --local-mode -c ${run_path}/client.rb
 }
 
 while getopts ":le:" opt ; do
