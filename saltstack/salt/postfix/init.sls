@@ -19,7 +19,6 @@ exim:
     - removed
     - name: {{ salt['pillar.get']('pkgs:exim') }}
 
-
 /etc/postfix/main.cf:
   file.managed:
     - source: salt://postfix/main.cf.jinja
