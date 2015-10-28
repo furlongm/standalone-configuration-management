@@ -1,0 +1,29 @@
+- action: apt pkg={{ item }} state=installed
+  with_items:
+  - tcpdump
+  - nmap
+  - telnet
+  - iftop
+  - whois
+  - dnsutils
+  when: ansible_os_family == 'Debian'
+
+- action: yum pkg={{ item }} state=installed
+  with_items:
+  - tcpdump
+  - nmap
+  - telnet
+  - iftop
+  - whois
+  - bind-utils
+  when: ansible_os_family == 'RedHat'
+
+- action: zypper pkg={{ item }} state=installed
+  with_items:
+  - tcpdump
+  - nmap
+  - telnet
+  - iftop
+  - whois
+  - bind-utils
+  when: ansible_os_family == 'Suse'
