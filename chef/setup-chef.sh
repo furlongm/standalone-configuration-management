@@ -37,7 +37,7 @@ get_config_from_github() {
 }
 
 main() {
-    which chef-solo 1>/dev/null 2>&1 || install_chef
+    which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
     get_config_from_github
     #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
