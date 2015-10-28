@@ -5,3 +5,4 @@
   tasks:
      - include: roles/misc/tasks/main.yml
      - include: roles/net/tasks/main.yml
+     - include: roles/screen/tasks/main.yml

@@ -1,0 +1,16 @@
+- action: apt pkg={{ item }} state=installed
+  with_items:
+  - screen
+  when: ansible_os_family == 'Debian'
+
+- action: yum pkg={{ item }} state=installed
+  with_items:
+  - screen
+  when: ansible_os_family == 'RedHat'
+
+- action: zypper pkg={{ item }} state=installed
+  with_items:
+  - screen
+  when: ansible_os_family == 'Suse'
+
+- copy: src=screenrc dest=/etc/screenrc owner=root group=root mode=0644 backup=yes
