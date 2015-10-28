@@ -50,11 +50,9 @@ get_config_from_github() {
 main() {
     which puppet 1>/dev/null 2>&1 || install_puppet
     install_vim_syntax_highlighting
-    get_config_from_github
-    if [ "${runlocal}" == "true" ] ; then
-        run_path=.
-    else
+    if [ -z "${run_path}" ] ; then
         run_path=/srv/puppet
+        get_config_from_github
     fi
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
     puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/site.pp
@@ -66,7 +64,7 @@ while getopts ":le:" opt ; do
             email=${OPTARG}
             ;;
         l)
-            runlocal=true
+            run_path=.
             ;;
         *)
             usage

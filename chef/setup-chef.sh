@@ -39,13 +39,11 @@ get_config_from_github() {
 main() {
     which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
-    get_config_from_github
-    #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
-    if [ "${run_local}" == "true" ] ; then
-        run_path=.
-    else
+    if [ -z "${run_path}" ] ; then
         run_path=/srv/chef
+        get_config_from_github
     fi
+    #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
     chef-client -c ${run_path}/client.rb
 }
 
@@ -55,7 +53,7 @@ while getopts ":le:" opt ; do
             email=${OPTARG}
             ;;
         l)
-            run_local=true
+            run_path=.
             ;;
         *)
             usage

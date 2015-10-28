@@ -40,11 +40,9 @@ get_config_from_github() {
 main() {
     which salt-call 1>/dev/null 2>&1 || install_salt
     install_vim_syntax_highlighting
-    get_config_from_github
-    if [ "${run_local}" == "true" ] ; then
-        run_path=.
-    else
+    if [ -z "${run_path}" ] ; then
         run_path=/srv
+        get_config_from_github
     fi
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/salt/alias.sls
     salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate
@@ -56,7 +54,7 @@ while getopts ":le:" opt ; do
             email=${OPTARG}
             ;;
         l)
-            run_local=true
+            run_path=.
             ;;
         *)
             usage

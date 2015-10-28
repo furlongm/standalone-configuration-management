@@ -45,12 +45,10 @@ get_config_from_github() {
 
 main() {
     which ansible 1>/dev/null 2>&1 || install_ansible
-    get_config_from_github
     install_vim_syntax_highlighting
-    if [ "${runlocal}" == "true" ] ; then
-        run_path=.
-    else
+    if [ -z "${run_path}" ] ; then
         run_path=/srv/ansible
+        get_config_from_github
     fi
     #sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
     ansible-playbook -i ${run_path}/hosts ${run_path}/playbooks/site.yml
@@ -62,7 +60,7 @@ while getopts ":le:" opt ; do
             email=${OPTARG}
             ;;
         l)
-            runlocal=true
+            run_path=.
             ;;
         *)
             usage
