@@ -51,7 +51,7 @@ main() {
         get_config_from_github
     fi
     #sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
-    ansible-playbook -i ${run_path}/hosts ${run_path}/playbooks/site.yml
+    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml
 }
 
 while getopts ":le:" opt ; do
