@@ -1,0 +1,6 @@
+- action: yum pkg=epel-release state=installed
+  
+- copy: src=RPM-GPG-KEY-EPEL-7 dest=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 owner=root group=root mode=0644
+
+- command: yum -y makecache
+  when: installed_epel_pkg or installed_epel_key
