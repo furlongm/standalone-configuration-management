@@ -1,0 +1,15 @@
+- include_vars: "{{ item }}"
+  with_first_found:
+   - "{{ ansible_os_family }}.yml"
+   - default.yml
+
+- action: apt pkg={{ openssh_package }} state=installed
+  when: ansible_os_family == 'Debian'
+
+- action: yum pkg={{ openssh_package }} state=installed
+  when: ansible_os_family == 'RedHat'
+
+- action: zypper pkg={{ openssh_package }} state=installed
+  when: ansible_os_family == 'Suse'
+
+- service: name={{ openssh_service }} state=started enabled=yes
