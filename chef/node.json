@@ -3,6 +3,7 @@
                 "recipe[net]",
                 "recipe[misc]",
                 "recipe[screen]",
+                "recipe[ssh]",
                 "recipe[fail2ban]",
                 "recipe[postfix]",
                 "recipe[vim]" ]
