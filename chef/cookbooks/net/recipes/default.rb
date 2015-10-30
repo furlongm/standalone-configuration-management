@@ -5,6 +5,6 @@
 end
 
 package 'bind-utils' do
-  package_name node['bindutils']['package']
+  package_name node['bind-utils']['package']
   action :install
 end
