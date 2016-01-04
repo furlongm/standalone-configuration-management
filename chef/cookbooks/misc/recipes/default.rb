@@ -1,4 +1,4 @@
-%w{htop tree git strace mlocate}.each do |pkg|
+%w{htop tree git strace mlocate diffstat}.each do |pkg|
   package pkg do
     action :install
   end

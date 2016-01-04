@@ -5,6 +5,7 @@
   - git
   - strace
   - mlocate
+  - diffstat
   - debian-goodies
   when: ansible_os_family == 'Debian'
 
@@ -14,6 +15,7 @@
   - tree
   - git
   - strace
+  - diffstat
   - mlocate
   when: ansible_os_family == 'RedHat'
 
@@ -23,6 +25,7 @@
   - tree
   - git
   - strace
+  - diffstat
   - mlocate
   when: ansible_os_family == 'Suse'
 
