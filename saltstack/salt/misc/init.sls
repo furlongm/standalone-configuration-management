@@ -19,6 +19,9 @@ diffstat:
 bash-completion:
   pkg.installed
 
+pwgen:
+  pkg.installed
+
 {% if grains['os_family'] == 'Debian' %}
 debian-goodies:
   pkg:

@@ -7,6 +7,7 @@
   - mlocate
   - diffstat
   - bash-completion
+  - pwgen
   - debian-goodies
   when: ansible_os_family == 'Debian'
 
@@ -19,6 +20,7 @@
   - diffstat
   - mlocate
   - bash-completion
+  - pwgen
   when: ansible_os_family == 'RedHat'
 
 - action: zypper pkg={{ item }} state=installed
@@ -30,5 +32,6 @@
   - diffstat
   - mlocate
   - bash-completion
+  - pwgen
   when: ansible_os_family == 'Suse'
 
