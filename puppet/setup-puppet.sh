@@ -43,7 +43,8 @@ install_vim_syntax_highlighting() {
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
     git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-    cp -r ${tmp_dir}/puppet /srv
+    cp -r ${tmp_dir}/puppet/modules/* /etc/puppet/modules
+    cp -r ${tmp_dir}/puppet/manifests/* /etc/puppet/manifests
     rm -fr ${tmp_dir}
 }
 
@@ -51,11 +52,11 @@ main() {
     which puppet 1>/dev/null 2>&1 || install_puppet
     install_vim_syntax_highlighting
     if [ -z "${run_path}" ] ; then
-        run_path=/srv/puppet
+        run_path=/etc/puppet
         get_config_from_github
     fi
-    sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
-    puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/site.pp
+    sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/standalone-site.pp
+    puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
 }
 
 while getopts ":le:" opt ; do
