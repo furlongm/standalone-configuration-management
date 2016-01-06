@@ -17,8 +17,8 @@
   - tree
   - git
   - strace
-  - diffstat
   - mlocate
+  - diffstat
   - bash-completion
   - pwgen
   when: ansible_os_family == 'RedHat'
@@ -29,8 +29,8 @@
   - tree
   - git
   - strace
-  - diffstat
   - mlocate
+  - diffstat
   - bash-completion
   - pwgen
   when: ansible_os_family == 'Suse'
