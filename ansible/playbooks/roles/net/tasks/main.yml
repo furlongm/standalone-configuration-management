@@ -5,6 +5,7 @@
   - telnet
   - iftop
   - whois
+  - wget
   - dnsutils
   when: ansible_os_family == 'Debian'
 
@@ -15,6 +16,7 @@
   - telnet
   - iftop
   - whois
+  - wget
   - bind-utils
   when: ansible_os_family == 'RedHat'
 
@@ -25,5 +27,6 @@
   - telnet
   - iftop
   - whois
+  - wget
   - bind-utils
   when: ansible_os_family == 'Suse'

@@ -16,6 +16,9 @@ iftop:
 whois:
   pkg.installed
 
+wget:
+  pkg.installed
+
 bind-utils:
   pkg:
     - installed

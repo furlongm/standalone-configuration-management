@@ -1,4 +1,4 @@
-%w{ethtool tcpdump nmap telnet iftop whois}.each do |pkg|
+%w{ethtool tcpdump nmap telnet iftop whois wget}.each do |pkg|
   package pkg do
     action :install
   end
