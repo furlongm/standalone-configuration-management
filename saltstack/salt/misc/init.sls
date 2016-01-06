@@ -16,6 +16,9 @@ mlocate:
 diffstat:
   pkg.installed
 
+bash-completion:
+  pkg.installed
+
 {% if grains['os_family'] == 'Debian' %}
 debian-goodies:
   pkg:

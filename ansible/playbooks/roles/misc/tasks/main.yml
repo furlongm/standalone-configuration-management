@@ -6,6 +6,7 @@
   - strace
   - mlocate
   - diffstat
+  - bash-completion
   - debian-goodies
   when: ansible_os_family == 'Debian'
 
@@ -17,6 +18,7 @@
   - strace
   - diffstat
   - mlocate
+  - bash-completion
   when: ansible_os_family == 'RedHat'
 
 - action: zypper pkg={{ item }} state=installed
@@ -27,5 +29,6 @@
   - strace
   - diffstat
   - mlocate
+  - bash-completion
   when: ansible_os_family == 'Suse'
 
