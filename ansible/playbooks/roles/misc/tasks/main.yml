@@ -8,6 +8,7 @@
   - diffstat
   - bash-completion
   - pwgen
+  - lsof
   - debian-goodies
   when: ansible_os_family == 'Debian'
 
@@ -20,6 +21,7 @@
   - mlocate
   - diffstat
   - bash-completion
+  - lsof
   - pwgen
   when: ansible_os_family == 'RedHat'
 
@@ -32,6 +34,7 @@
   - mlocate
   - diffstat
   - bash-completion
+  - lsof
   - pwgen
   when: ansible_os_family == 'Suse'
 

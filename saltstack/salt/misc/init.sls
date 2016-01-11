@@ -22,6 +22,9 @@ bash-completion:
 pwgen:
   pkg.installed
 
+lsof:
+  pkg.installed
+
 {% if grains['os_family'] == 'Debian' %}
 debian-goodies:
   pkg:
