@@ -1,6 +1,14 @@
 class net {
 
-  $net_packages = ['ethtool', 'tcpdump', 'nmap', 'telnet', 'iftop', 'whois', 'wget']
+  $net_packages = [
+    'ethtool',
+    'tcpdump',
+    'nmap',
+    'telnet',
+    'iftop',
+    'whois',
+    'wget',
+  ]
 
   package { $net_packages:
     ensure => installed,
