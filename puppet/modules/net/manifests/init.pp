@@ -8,6 +8,8 @@ class net {
     'iftop',
     'whois',
     'wget',
+    'iperf',
+    'ipset',
   ]
 
   package { $net_packages:

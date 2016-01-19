@@ -19,6 +19,12 @@ whois:
 wget:
   pkg.installed
 
+iperf:
+  pkg.installed
+
+ipset:
+  pkg.installed
+
 bind-utils:
   pkg:
     - installed
