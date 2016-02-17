@@ -1,17 +1,9 @@
-- action: apt pkg={{ item }} state=installed
-  with_items:
-  - tcpdump
-  - nmap
-  - telnet
-  - iftop
-  - whois
-  - wget
-  - dnsutils
-  - iperf
-  - ipset
-  when: ansible_os_family == 'Debian'
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "../vars/{{ ansible_os_family }}.yml"
+    - "../vars/default.yml"
 
-- action: yum pkg={{ item }} state=installed
+- package: name={{ item }} state=present
   with_items:
   - tcpdump
   - nmap
@@ -19,20 +11,7 @@
   - iftop
   - whois
   - wget
-  - bind-utils
   - iperf
   - ipset
-  when: ansible_os_family == 'RedHat'
 
-- action: zypper pkg={{ item }} state=installed
-  with_items:
-  - tcpdump
-  - nmap
-  - telnet
-  - iftop
-  - whois
-  - wget
-  - bind-utils
-  - iperf
-  - ipset
-  when: ansible_os_family == 'Suse'
+- package: name={{ bindutils_package }} state=present

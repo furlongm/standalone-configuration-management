@@ -1,4 +1,4 @@
-- action: apt pkg={{ item }} state=installed
+- package: name={{ item }} state=present
   with_items:
   - htop
   - tree
@@ -10,34 +10,6 @@
   - pwgen
   - lsof
   - multitail
-  - debian-goodies
+
+- package: name=debian-goodies state=present
   when: ansible_os_family == 'Debian'
-
-- action: yum pkg={{ item }} state=installed
-  with_items:
-  - htop
-  - tree
-  - git
-  - strace
-  - mlocate
-  - diffstat
-  - bash-completion
-  - pwgen
-  - lsof
-  - multitail
-  when: ansible_os_family == 'RedHat'
-
-- action: zypper pkg={{ item }} state=installed
-  with_items:
-  - htop
-  - tree
-  - git
-  - strace
-  - mlocate
-  - diffstat
-  - bash-completion
-  - pwgen
-  - lsof
-  - multitail
-  when: ansible_os_family == 'Suse'
-
