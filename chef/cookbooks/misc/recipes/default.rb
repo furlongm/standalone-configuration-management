@@ -1,7 +1,18 @@
-%w{htop tree git strace mlocate diffstat bash-completion pwgen lsof multitail}.each do |pkg|
-  package pkg do
-    action :install
-  end
+misc_packages = [
+  'htop',
+  'tree',
+  'git',
+  'strace',
+  'mlocate',
+  'diffstat',
+  'bash-completion',
+  'pwgen',
+  'lsof',
+  'multitail',
+]
+
+package misc_packages do
+  action :install
 end
 
 case node['platform_family']

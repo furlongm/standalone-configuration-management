@@ -1,7 +1,17 @@
-%w{ethtool tcpdump nmap telnet iftop whois wget iperf ipset}.each do |pkg|
-  package pkg do
-    action :install
-  end
+net_packages = [
+  'ethtool',
+  'tcpdump',
+  'nmap',
+  'telnet',
+  'iftop',
+  'whois',
+  'wget',
+  'iperf',
+  'ipset',
+]
+
+package net_packages do
+  action :install
 end
 
 package 'bind-utils' do
