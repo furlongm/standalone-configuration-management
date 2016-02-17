@@ -12,6 +12,7 @@ class misc {
     'bash-completion',
     'pwgen',
     'lsof',
+    'multitail',
   ]
 
   package { $misc_packages:

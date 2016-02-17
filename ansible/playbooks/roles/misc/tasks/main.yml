@@ -9,6 +9,7 @@
   - bash-completion
   - pwgen
   - lsof
+  - multitail
   - debian-goodies
   when: ansible_os_family == 'Debian'
 
@@ -21,8 +22,9 @@
   - mlocate
   - diffstat
   - bash-completion
-  - lsof
   - pwgen
+  - lsof
+  - multitail
   when: ansible_os_family == 'RedHat'
 
 - action: zypper pkg={{ item }} state=installed
@@ -34,7 +36,8 @@
   - mlocate
   - diffstat
   - bash-completion
-  - lsof
   - pwgen
+  - lsof
+  - multitail
   when: ansible_os_family == 'Suse'
 

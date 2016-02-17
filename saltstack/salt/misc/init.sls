@@ -25,6 +25,9 @@ pwgen:
 lsof:
   pkg.installed
 
+multitail:
+  pkg.installed
+
 {% if grains['os_family'] == 'Debian' %}
 debian-goodies:
   pkg:
