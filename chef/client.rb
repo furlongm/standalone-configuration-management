@@ -6,8 +6,8 @@ if File.exists?(local_file)
     run_path = yaml['run_path']
   end
 end
-file_cache_path = run_path
-cookbook_path = run_path + "/cookbooks"
+file_cache_path run_path
+cookbook_path run_path + "/cookbooks"
 
 puts "file_cache_path: " + file_cache_path
 puts "cookbook_path: " + cookbook_path
