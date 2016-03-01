@@ -2,10 +2,10 @@
   user: root
   connection: local
 
-  tasks:
-     - include: roles/epel/tasks/main.yml
+  roles:
+     - role: 'epel'
        when: ansible_os_family == 'RedHat'
-     - include: roles/misc/tasks/main.yml
-     - include: roles/net/tasks/main.yml
-     - include: roles/screen/tasks/main.yml
-     - include: roles/ssh/tasks/main.yml
+     - role: 'misc'
+     - role: 'net'
+     - role: 'screen'
+     - role: 'ssh'
