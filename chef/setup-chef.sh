@@ -22,6 +22,9 @@ install_chef() {
 }
 
 install_vim_syntax_highlighting() {
+    if [ -f ~/.vim/syntax/chef.vim ] ; then
+        return
+    fi
     tmp_dir=$(mktemp -d)
     mkdir -p ~/.vim
     git clone https://github.com/vadv/vim-chef.git ${tmp_dir}
