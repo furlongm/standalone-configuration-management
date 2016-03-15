@@ -12,6 +12,3 @@
 
 - template: src=jail.local.jinja dest=/etc/fail2ban/jail.local owner=root group=root mode=0644 backup=yes
   notify: restart fail2ban
-
-- name: restart fail2ban
-  service: name=fail2ban state=restarted
