@@ -39,7 +39,7 @@ get_config_from_github() {
 main() {
     which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
-    if [ -z "${run_path}" ] ; then
+    if [ "${run_path}" != "." ] ; then
         run_path=/srv/chef
         get_config_from_github
     else

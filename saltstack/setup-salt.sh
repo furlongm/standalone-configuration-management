@@ -40,7 +40,7 @@ get_config_from_github() {
 main() {
     which salt-call 1>/dev/null 2>&1 || install_salt
     install_vim_syntax_highlighting
-    if [ -z "${run_path}" ] ; then
+    if [ "${run_path}" != "." ] ; then
         run_path=/srv
         get_config_from_github
     fi

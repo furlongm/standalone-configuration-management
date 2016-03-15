@@ -46,7 +46,7 @@ get_config_from_github() {
 main() {
     which ansible 1>/dev/null 2>&1 || install_ansible
     install_vim_syntax_highlighting
-    if [ -z "${run_path}" ] ; then
+    if [ "${run_path}" != "." ] ; then
         run_path=/srv/ansible
         get_config_from_github
     fi
