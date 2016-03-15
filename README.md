@@ -23,4 +23,7 @@ sudo bash -x setup-chef.sh -e furlongm@gmail.com
 ```
 
 ### Ansible
-TBD
+```
+curl -O https://raw.githubusercontent.com/furlongm/standalone-configuration-management/master/ansible/setup-ansible.sh
+sudo bash -x setup-ansible.sh -e furlongm@gmail.com
+```
