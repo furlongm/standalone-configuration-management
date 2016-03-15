@@ -33,6 +33,11 @@ install_puppet() {
 }
 
 install_vim_syntax_highlighting() {
+    for i in ftdetect ftplugin indent syntax ; do
+        if [ -f ~/.vim/${i}/puppet.vim ] ; then
+            return
+        fi
+    done
     tmp_dir=$(mktemp -d)
     mkdir -p ~/.vim
     git clone https://github.com/puppetlabs/puppet-syntax-vim.git ${tmp_dir}
