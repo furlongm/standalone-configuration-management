@@ -29,9 +29,14 @@ install_ansible() {
 }
 
 install_vim_syntax_highlighting() {
+    for i in ftdetect ftplugin indent syntax ; do
+        if [ -f ~/.vim/${i}/ansible.vim ] ; then
+            return
+        fi
+    done
     tmp_dir=$(mktemp -d)
     mkdir -p ~/.vim
-    git clone https://github.com/chase/vim-ansible-yaml.git ${tmp_dir}
+    git clone https://github.com/pearofducks/ansible-vim.git ${tmp_dir}
     cp -r ${tmp_dir}/* ~/.vim/
     rm -fr ${tmp_dir}
 }
