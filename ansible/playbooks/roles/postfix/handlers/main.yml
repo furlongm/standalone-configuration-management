@@ -1,0 +1,5 @@
+- name: restart postfix
+  service: name=postfix state=restarted
+
+- name: exec newaliases
+  command: /usr/bin/newaliases

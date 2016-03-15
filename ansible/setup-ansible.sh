@@ -55,8 +55,7 @@ main() {
         run_path=/srv/ansible
         get_config_from_github
     fi
-    #sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/site.pp
-    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml
+    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml --extra-vars "root_mail_alias=${email}"
 }
 
 while getopts ":le:" opt ; do
