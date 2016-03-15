@@ -22,6 +22,11 @@ install_salt() {
 }
 
 install_vim_syntax_highlighting() {
+    for i in ftdetect ftplugin indent ; do
+        if [ -f ~/.vim/${i}/sls.vim ] ; then
+            return
+        fi
+    done
     tmp_dir=$(mktemp -d)
     mkdir -p ~/.vim
     git clone https://github.com/saltstack/salt-vim.git ${tmp_dir}
