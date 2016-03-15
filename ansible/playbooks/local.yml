@@ -9,3 +9,4 @@
      - role: 'net'
      - role: 'screen'
      - role: 'ssh'
+     - role: 'fail2ban'

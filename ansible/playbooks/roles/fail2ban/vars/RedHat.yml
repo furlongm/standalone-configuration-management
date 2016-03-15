@@ -1,0 +1,1 @@
+fail2ban_logpath: /var/log/secure
