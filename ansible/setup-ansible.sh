@@ -18,14 +18,7 @@ install_deps() {
 }
 
 install_ansible() {
-    if [ -f '/etc/debian_version' ] ; then
-        pm="apt-get -y"
-    elif [ -f '/etc/redhat-release' ] ; then
-        pm="yum -y"
-    elif [ -f '/etc/SuSE-release' ] ; then
-        pm="zypper -n"
-    fi
-    $pm install ansible
+    pip install ansible
 }
 
 install_vim_syntax_highlighting() {
