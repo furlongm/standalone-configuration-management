@@ -47,7 +47,7 @@ main() {
         get_config_from_github
         client_args="-c ${run_path}/client.rb"
     fi
-    #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
+    sed -i -e "s/root_mail_alias.*/root_mail_alias\": \"${email}\"/" ${run_path}/node.json
     chef-client -z -j ${run_path}/node.json ${client_args}
 }
 
