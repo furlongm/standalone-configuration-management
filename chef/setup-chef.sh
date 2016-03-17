@@ -45,12 +45,10 @@ main() {
     if [ "${run_path}" != "." ] ; then
         run_path=/srv/chef
         get_config_from_github
-    else
-        echo "run_path: ${run_path}" > ${run_path}/local.yaml
+        client_args="-c ${run_path}/client.rb"
     fi
     #sed -i -e "s/admin@example.com/${email}/" /srv/chef/postfix/init.sls
-    chef-client -z -j ${run_path}/node.json -c ${run_path}/client.rb
-    rm -f ${run_path}/local.yaml
+    chef-client -z -j ${run_path}/node.json ${client_args}
 }
 
 while getopts ":le:" opt ; do
