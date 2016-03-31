@@ -33,15 +33,23 @@ install_puppet() {
 }
 
 install_vim_syntax_highlighting() {
+    if [ ! -z "${SUDO_UID}" ] ; then
+        home=$(getent passwd ${SUDO_UID} | cut -d \: -f 6)
+    else
+        home=~
+    fi
     for i in ftdetect ftplugin indent syntax ; do
-        if [ -f ~/.vim/${i}/puppet.vim ] ; then
+        if [ -f ${home}/.vim/${i}/puppet.vim ] ; then
             return
         fi
     done
     tmp_dir=$(mktemp -d)
-    mkdir -p ~/.vim
+    mkdir -p ${home}/.vim
     git clone https://github.com/puppetlabs/puppet-syntax-vim.git ${tmp_dir}
-    cp -r ${tmp_dir}/* ~/.vim/
+    cp -r ${tmp_dir}/* ${home}/.vim/
+    if [ ! -z "${SUDO_UID}" ] ; then
+        chown -R ${SUDO_UID}:${SUDO_GID} ${home}/.vim
+    fi
     rm -fr ${tmp_dir}
 }
 
