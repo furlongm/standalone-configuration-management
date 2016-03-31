@@ -10,11 +10,12 @@ install_deps() {
         apt-get update
         pm="apt-get -y"
     elif [ -f '/etc/redhat-release' ] ; then
+        yum -y install epel-release
         pm="yum -y"
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
     fi
-    $pm install git curl
+    $pm install git curl python-pip
 }
 
 install_ansible() {
@@ -70,5 +71,6 @@ if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
 else
     which git 1>/dev/null 2>&1 || install_deps
     which curl 1>/dev/null 2>&1 || install_deps
+    which pip 1>/dev/null 2>&1 || install_deps
     main
 fi
