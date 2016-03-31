@@ -15,7 +15,7 @@ install_deps() {
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
     fi
-    $pm install git curl python-pip
+    $pm install git curl python-crypto python-paramiko python-jinja2 python-pip
 }
 
 install_ansible() {
