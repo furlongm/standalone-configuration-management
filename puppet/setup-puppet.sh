@@ -56,6 +56,7 @@ install_vim_syntax_highlighting() {
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
     git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    mkdir -p /etc/puppet/{manifests,modules}
     cp -r ${tmp_dir}/puppet/modules/* /etc/puppet/modules
     cp -r ${tmp_dir}/puppet/manifests/* /etc/puppet/manifests
     rm -fr ${tmp_dir}
