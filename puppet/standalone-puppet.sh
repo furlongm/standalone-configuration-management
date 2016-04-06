@@ -25,12 +25,14 @@ install_puppet() {
         else
             codename=$(echo ${VERSION} | sed -e "s/.*(\(.*\))/\1/")
         fi
-        puppet_deb=puppetlabs-release-${codename}.deb
-        curl -O https://apt.puppetlabs.com/${puppet_deb}
-        dpkg -i ${puppet_deb}
+        if [ "${codename}" != "xenial" ] ; then
+            puppet_deb=puppetlabs-release-${codename}.deb
+            curl -O https://apt.puppetlabs.com/${puppet_deb}
+            dpkg -i ${puppet_deb}
+            rm -f ${puppet_deb}
+        fi
         apt-get -y update
         apt-get -y install puppet
-        rm -f ${puppet_deb}
     elif [ -f '/etc/redhat-release' ] ; then
         rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
         yum -y install puppet
