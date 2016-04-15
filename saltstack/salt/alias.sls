@@ -1,3 +1,3 @@
 root:
   alias.present:
-    - target: furlongm@gmail.com
+    - target: admin@example.com
