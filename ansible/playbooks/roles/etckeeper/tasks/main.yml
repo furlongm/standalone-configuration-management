@@ -6,6 +6,6 @@
 
 - command: etckeeper init
   run_once: true
-  when: installed_etckeeper_pkg.changed and etc_git.stat.exists == False
+  when: installed_etckeeper_pkg.changed or etc_git.stat.exists == False
 
 - template: src=gitconfig.j2 dest=/etc/.git/config owner=root group=root mode=0644

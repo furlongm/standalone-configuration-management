@@ -16,5 +16,4 @@ etckeeper init:
     - group: root
     - mode: '0644'
     - require:
-      - file: /etc/.git
-
+        - cmd: etckeeper init

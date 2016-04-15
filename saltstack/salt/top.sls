@@ -1,6 +1,7 @@
 base:
   '*':
     - epel
+    - etckeeper
     - salt
     - vim
     - net

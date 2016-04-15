@@ -1,15 +1,15 @@
 class etckeeper {
 
-  $etckeeper_pkgs = ['etckeeper', 'git']
+  require epel
 
-  package { $etckeeper_pkgs:
+  package { 'etckeeper':
     ensure => installed,
   }
 
   exec { 'etckeeper-init':
     path      => '/usr/bin:/usr/sbin:/bin:/sbin',
     command   => 'etckeeper init',
-    subscribe => Package[$etckeeper_pkgs],
+    subscribe => Package['etckeeper'],
     unless    => 'test -d /etc/.git',
   }
 

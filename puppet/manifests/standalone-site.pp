@@ -4,6 +4,7 @@ node default {
     allow_virtual => true
   }
 
+  include etckeeper
   include vim
   include net
   include screen

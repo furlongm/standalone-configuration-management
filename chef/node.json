@@ -5,6 +5,7 @@
   },
 
   "run_list": [ "recipe[epel]",
+                "recipe[etckeeper]",
                 "recipe[net]",
                 "recipe[misc]",
                 "recipe[screen]",
