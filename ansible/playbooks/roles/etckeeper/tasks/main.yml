@@ -1,0 +1,9 @@
+- package: name=etckeeper state=present
+  register: installed_etckeeper_pkg
+
+- stat: path=/etc/.git
+  register: etc_git
+
+- command: etckeeper init
+  run_once: true
+  when: installed_etckeeper_pkg.changed and etc_git.stat.exists == False
