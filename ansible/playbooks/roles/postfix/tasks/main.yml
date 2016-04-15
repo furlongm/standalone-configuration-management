@@ -11,7 +11,7 @@
 
 - service: name=postfix state=started enabled=yes
 
-- template: src=main.cf.jinja dest=/etc/postfix/main.cf owner=root group=root mode=0644 backup=yes
+- template: src=main.cf.j2 dest=/etc/postfix/main.cf owner=root group=root mode=0644 backup=yes
   notify: restart postfix
 
 - lineinfile: 'dest=/etc/aliases regexp="^root:\s+{{ root_mail_alias }}" line="root: {{ root_mail_alias }}"'

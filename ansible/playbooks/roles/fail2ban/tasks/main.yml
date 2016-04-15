@@ -10,5 +10,5 @@
 - copy: src=fail2ban.local dest=/etc/fail2ban/fail2ban.local owner=root group=root mode=0644 backup=yes
   notify: restart fail2ban
 
-- template: src=jail.local.jinja dest=/etc/fail2ban/jail.local owner=root group=root mode=0644 backup=yes
+- template: src=jail.local.j2 dest=/etc/fail2ban/jail.local owner=root group=root mode=0644 backup=yes
   notify: restart fail2ban
