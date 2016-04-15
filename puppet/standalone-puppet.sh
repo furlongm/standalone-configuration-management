@@ -20,8 +20,12 @@ install_deps() {
 install_puppet() {
     if [ -f '/etc/debian_version' ] ; then
         . /etc/os-release
-        if [ ! -z ${UBUNTU_CODENAME} ] ; then
-            codename=${UBUNTU_CODENAME}
+        if [ ${ID} == "ubuntu" ] ; then
+            if [ ! -z ${UBUNTU_CODENAME} ] ; then
+                codename=${UBUNTU_CODENAME}
+            else
+                codename='trusty'
+            fi
         else
             codename=$(echo ${VERSION} | sed -e "s/.*(\(.*\))/\1/")
         fi
