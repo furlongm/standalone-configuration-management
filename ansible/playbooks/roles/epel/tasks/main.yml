@@ -5,5 +5,4 @@
   register: installed_epel_key
 
 - command: yum -y makecache
-  run_once: true
   when: installed_epel_pkg.changed or installed_epel_key.changed
