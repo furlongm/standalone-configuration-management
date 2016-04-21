@@ -11,6 +11,7 @@ node default {
   include ssh
   include misc
   include fail2ban
+  include haveged
   include puppet
 
   class { 'postfix':

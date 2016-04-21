@@ -11,6 +11,7 @@
                 "recipe[screen]",
                 "recipe[ssh]",
                 "recipe[fail2ban]",
+                "recipe[haveged]",
                 "recipe[postfix]",
                 "recipe[vim]" ]
 }

@@ -11,3 +11,4 @@ base:
     - postfix
     - misc
     - fail2ban
+    - haveged

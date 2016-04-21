@@ -11,5 +11,6 @@
      - role: 'screen'
      - role: 'ssh'
      - role: 'fail2ban'
+     - role: 'haveged'
      - role: 'vim'
      - role: 'postfix'
