@@ -4,15 +4,15 @@ node default {
     allow_virtual => true
   }
 
+  include puppet
   include etckeeper
-  include vim
+  include misc
   include net
   include screen
   include ssh
-  include misc
   include fail2ban
   include haveged
-  include puppet
+  include vim
 
   class { 'postfix':
     root_alias => 'admin@example.com',

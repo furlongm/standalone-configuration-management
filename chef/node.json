@@ -6,12 +6,12 @@
 
   "run_list": [ "recipe[epel]",
                 "recipe[etckeeper]",
-                "recipe[net]",
                 "recipe[misc]",
+                "recipe[net]",
                 "recipe[screen]",
                 "recipe[ssh]",
                 "recipe[fail2ban]",
                 "recipe[haveged]",
-                "recipe[postfix]",
-                "recipe[vim]" ]
+                "recipe[vim]",
+                "recipe[postfix]" ]
 }

@@ -1,14 +1,14 @@
 base:
   '*':
+    - salt
     - epel
     - etckeeper
-    - salt
-    - vim
+    - misc
     - net
     - screen
     - ssh
-    - alias
-    - postfix
-    - misc
     - fail2ban
     - haveged
+    - vim
+    - alias
+    - postfix
