@@ -7,27 +7,15 @@ syntax on
 " Enable the modelines
 set modeline
 
+" Don't do autoindent when pasting text
+set paste
+
 " Four spaces for tabs
 set tabstop=4
 set shiftwidth=4
 set smarttab
 set expandtab
-set sts=4
-
-" Don't do autoindent when pasting text
-set paste
-
-if has("autocmd")
-    " Jump to the last position when reopening a file
-    autocmd BufReadPost *
-    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-    \   exe "normal! g'\"" |
-    \ endif
-    " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
-    autocmd BufNewFile,BufReadPre /media/*,/run/media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
-    " Fix puppet files to be Ruby
-    autocmd BufRead *.pp set filetype=ruby
-endif
+set softtabstop=4
 
 " Show the cursor position all the time
 set ruler
@@ -47,3 +35,18 @@ set hlsearch
 " Show extraneous whitespace
 set list
 set listchars=tab:>-,trail:=
+
+" Support backspace in insert mode
+set backspace=indent,eol,start
+
+if has("autocmd")
+    " Jump to the last position when reopening a file
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal! g'\"" |
+    \ endif
+    " Don't write swapfile on most commonly used directories for NFS mounts or USB sticks
+    autocmd BufNewFile,BufReadPre /media/*,/run/media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
+    " Fix puppet files to be Ruby
+    autocmd BufRead *.pp set filetype=ruby
+endif
