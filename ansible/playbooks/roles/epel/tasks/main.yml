@@ -1,7 +1,9 @@
-- yum: pkg={{ epel_release_uri }} state=present
+- include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution }}.yml"
     - "default.yml"
+
+- yum: pkg={{ epel_release_uri }} state=present
   register: installed_epel_pkg
 
 - copy: src=RPM-GPG-KEY-EPEL-7 dest=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 owner=root group=root mode=0644
