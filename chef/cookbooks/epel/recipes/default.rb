@@ -13,10 +13,18 @@ if node['platform_family'] == 'rhel'
     action :nothing
   end
 
-  package 'epel-release' do
-    package_name node['epel-release']['package']
-    action :install
-    notifies :run, 'execute[yum_makecache]', :immediately
+  if node['platform'] == "centos"
+    package 'epel-release' do
+      action :install
+      notifies :run, 'execute[yum_makecache]', :immediately
+    end
+  else
+    package 'epel-release' do
+      source 'http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+      action :install
+      provider Chef::Provider::Package::Rpm
+      notifies :run, 'execute[yum_makecache]', :immediately
+    end
   end
 
 end
