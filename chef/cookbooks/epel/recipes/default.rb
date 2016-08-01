@@ -14,6 +14,7 @@ if node['platform_family'] == 'rhel'
   end
 
   package 'epel-release' do
+    package_name node['epel-release']['package']
     action :install
     notifies :run, 'execute[yum_makecache]', :immediately
   end
