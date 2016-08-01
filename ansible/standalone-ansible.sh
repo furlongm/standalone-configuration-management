@@ -10,7 +10,13 @@ install_deps() {
         apt-get update
         pm="apt-get -y"
     elif [ -f '/etc/redhat-release' ] ; then
-        yum -y install epel-release
+        grep "Red Hat" /etc/redhat-release 2>&1 >/dev/null 
+        if [ $? -eq 0 ] ; then
+            epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        else
+            epel_release_uri=epel-release
+        fi
+        yum -y install ${epel_release_uri}
         pm="yum -y"
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
