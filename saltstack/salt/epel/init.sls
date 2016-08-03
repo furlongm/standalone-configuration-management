@@ -10,6 +10,7 @@ epel-release:
   pkg.installed:
     - require:
       - file: install_pubkey_epel
+    - source: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     - on_changes:
       - cmd.run yum -y makecache
 
