@@ -1,11 +1,9 @@
 # This is the global screenrc file. Handle with care.
 
-#termcapinfo xterm* G0:is=\E[?4l\E>:ti@:te@
-#termcapinfo linux me=\E[m:AX
 startup_message off
 defscrollback 30720
 
-# turn visual bell on
+# Turn visual bell on
 vbell on
 vbell_msg "   Wuff  ----  Wuff!!  "
 
@@ -21,7 +19,7 @@ bind } history
 bindkey -k F1 prev
 bindkey -k F2 next
 
-# set these terminals up to be 'optimal' instead of vt100
+# Set these terminals up to be 'optimal' instead of vt100
 termcapinfo xterm*|linux*|rxvt*|Eterm* OP
 
 # Change the xterm initialization string from is2=\E[!p\E[?3;4l\E[4l\E>
@@ -37,6 +35,9 @@ termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
+
+# Enable SSH agent persistence over logins
+setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
 # Window list at the bottom.
 hardstatus alwayslastline
