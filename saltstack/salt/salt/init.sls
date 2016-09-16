@@ -1,7 +1,7 @@
 salt-minion:
   service:
-    - running
-    - enable: True
+    - dead
+    - enable: False
     - watch:
       - file: /etc/salt/minion.d/standalone.conf
 
