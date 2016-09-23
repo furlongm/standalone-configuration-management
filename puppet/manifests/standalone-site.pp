@@ -4,6 +4,14 @@ node default {
     allow_virtual => true
   }
 
+  stage { ['pre', 'post']: }
+
+  Stage['pre'] -> Stage['main'] -> Stage['post']
+
+  class { 'epel':
+    stage => 'pre',
+  }
+
   include puppet
   include etckeeper
   include misc
