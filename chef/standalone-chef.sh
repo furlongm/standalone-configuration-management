@@ -5,20 +5,25 @@ usage() {
     exit 1
 }
 
-install_deps() {
+get_pm() {
     if [ -f '/etc/debian_version' ] ; then
-        apt-get update
         pm="apt-get -y"
+        ${pm} update 
     elif [ -f '/etc/redhat-release' ] ; then
         pm="yum -y"
+        ${pm} makecache
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
+        ${pm} refresh
     fi
-    $pm install git curl
+}
+
+install_deps() {
+    ${pm} install git curl
 }
 
 install_chef() {
-    curl -L https://www.chef.io/chef/install.sh | sudo bash || exit 1
+    curl -L https://www.chef.io/chef/install.sh | bash || exit 1
 }
 
 install_vim_syntax_highlighting() {
@@ -48,6 +53,9 @@ get_config_from_github() {
 }
 
 main() {
+    get_pm
+    which git 1>/dev/null 2>&1 || install_deps
+    which curl 1>/dev/null 2>&1 || install_deps
     which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
     if [ "${run_path}" != "." ] ; then
@@ -75,8 +83,5 @@ done
 
 if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
     usage
-else
-    which git 1>/dev/null 2>&1 || install_deps
-    which curl 1>/dev/null 2>&1 || install_deps
-    main
 fi
+main
