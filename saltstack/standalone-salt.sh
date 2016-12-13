@@ -23,7 +23,7 @@ install_deps() {
 }
 
 install_salt() {
-    curl -L http://bootstrap.saltstack.org | sudo bash || exit 1
+    curl -L http://bootstrap.saltstack.org | bash || exit 1
 }
 
 install_vim_syntax_highlighting() {
