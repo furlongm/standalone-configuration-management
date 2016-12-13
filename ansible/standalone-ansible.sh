@@ -7,12 +7,14 @@ usage() {
 
 get_pm() {
     if [ -f '/etc/debian_version' ] ; then
-        apt-get update
         pm="apt-get -y"
+        ${pm} update 
     elif [ -f '/etc/redhat-release' ] ; then
         pm="yum -y"
+        ${pm} makecache
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
+        ${pm} refresh
     fi
 }
 
