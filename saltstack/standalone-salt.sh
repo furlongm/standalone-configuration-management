@@ -56,6 +56,7 @@ get_config_from_github() {
 }
 
 main() {
+    get_pm
     which git 1>/dev/null 2>&1 || install_deps
     which curl 1>/dev/null 2>&1 || install_deps
     which salt-call 1>/dev/null 2>&1 || install_salt
