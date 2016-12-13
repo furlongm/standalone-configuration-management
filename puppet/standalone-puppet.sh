@@ -5,16 +5,21 @@ usage() {
     exit 1
 }
 
-install_deps() {
+get_pm() {
     if [ -f '/etc/debian_version' ] ; then
-        apt-get update
         pm="apt-get -y"
+        ${pm} update 
     elif [ -f '/etc/redhat-release' ] ; then
         pm="yum -y"
+        ${pm} makecache
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
+        ${pm} refresh
     fi
-    $pm install git curl
+}
+
+install_deps() {
+    ${pm} install git curl
 }
 
 install_puppet() {
@@ -35,14 +40,11 @@ install_puppet() {
             dpkg -i ${puppet_deb}
             rm -f ${puppet_deb}
         fi
-        apt-get -y update
-        apt-get -y install puppet
+        ${pm} update
     elif [ -f '/etc/redhat-release' ] ; then
-        rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
-        yum -y install puppet
-    elif [ -f '/etc/SuSE-release' ] ; then
-        zypper -n install puppet
+        ${pm} install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
     fi
+    ${pm} install puppet
 }
 
 install_vim_syntax_highlighting() {
@@ -76,6 +78,9 @@ get_config_from_github() {
 }
 
 main() {
+    get_pm
+    which git 1>/dev/null 2>&1 || install_deps
+    which curl 1>/dev/null 2>&1 || install_deps
     which puppet 1>/dev/null 2>&1 || install_puppet
     install_vim_syntax_highlighting
     if [ "${run_path}" != "." ] ; then
@@ -102,8 +107,5 @@ done
 
 if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
     usage
-else
-    which git 1>/dev/null 2>&1 || install_deps
-    which curl 1>/dev/null 2>&1 || install_deps
-    main
 fi
+main
