@@ -5,27 +5,33 @@ usage() {
     exit 1
 }
 
-install_deps() {
+get_pm() {
     if [ -f '/etc/debian_version' ] ; then
         apt-get update
         pm="apt-get -y"
     elif [ -f '/etc/redhat-release' ] ; then
-        grep "Red Hat" /etc/redhat-release 2>&1 >/dev/null 
-        if [ $? -eq 0 ] ; then
-            epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-        else
-            epel_release_uri=epel-release
-        fi
-        yum -y install ${epel_release_uri}
         pm="yum -y"
     elif [ -f '/etc/SuSE-release' ] ; then
         pm="zypper -n"
     fi
-    $pm install git curl python-setuptools python-crypto python-paramiko python-jinja2 python-pip
+}
+
+install_epel() {
+    if ${pm}
+    grep "Red Hat" /etc/redhat-release 2>&1 >/dev/null 
+    if [ $? -eq 0 ] ; then
+        epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    else
+        epel_release_uri=epel-release
+    fi
+}
+
+install_deps() {
+    ${pm} install git curl
 }
 
 install_ansible() {
-    pip install ansible
+    ${pm} install ansible
 }
 
 install_vim_syntax_highlighting() {
@@ -57,6 +63,10 @@ get_config_from_github() {
 }
 
 main() {
+    get_pm
+    which yum 1>/dev/null 2>&1 && install_epel
+    which git 1>/dev/null 2>&1 || install_deps
+    which curl 1>/dev/null 2>&1 || install_deps
     which ansible 1>/dev/null 2>&1 || install_ansible
     install_vim_syntax_highlighting
     if [ "${run_path}" != "." ] ; then
@@ -82,9 +92,5 @@ done
 
 if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
     usage
-else
-    which git 1>/dev/null 2>&1 || install_deps
-    which curl 1>/dev/null 2>&1 || install_deps
-    which pip 1>/dev/null 2>&1 || install_deps
-    main
 fi
+main
