@@ -1,6 +1,5 @@
 etckeeper:
-  pkg:
-    - installed
+  pkg.installed
 
 etckeeper init:
   cmd.run:

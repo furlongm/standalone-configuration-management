@@ -4,15 +4,16 @@ vim:
     - name: {{ salt['pillar.get']('pkgs:vim') }}
 
 {% if grains['os_family'] == 'Debian' %}
+
 vim-scripts:
-  pkg:
-    - installed
+  pkg.installed
+
 {% endif %}
 
 {% if grains['os_family'] == 'Suse' %}
+
 vim-data:
-  pkg:
-    - installed
+  pkg.installed
 
 /etc/vimrc:
   file.managed:
