@@ -6,6 +6,7 @@ pkgs:
   mailx: mailx
   exim: exim
   bind-utils: bind-utils
+  locales: glibc-common
   {% elif grains['os_family'] == 'Debian' %}
   openssh-server: openssh-server
   apache: apache2
@@ -13,6 +14,7 @@ pkgs:
   mailx: bsd-mailx
   exim: exim4
   bind-utils: dnsutils
+  locales: locales
   {% elif grains['os_family'] == 'Suse' %}
   openssh-server: openssh
   apache: apache2
@@ -20,4 +22,5 @@ pkgs:
   mailx: mailx
   exim: exim
   bind-utils: bind-utils
+  locales: glibc-locale
   {% endif %}
