@@ -18,8 +18,15 @@ class misc {
   }
 
   if $::osfamily == 'Debian' {
-    package { 'debian-goodies':
+
+    $debian_packages = [
+      'apt-transport-https',
+      'debian-goodies',
+    ]
+
+    package { $debian_packages:
       ensure => installed,
     }
+
   }
 }

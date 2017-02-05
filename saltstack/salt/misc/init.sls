@@ -33,4 +33,7 @@ multitail:
 debian-goodies:
   pkg.installed
 
+apt-transport-https:
+  pkg.installed
+
 {% endif %}

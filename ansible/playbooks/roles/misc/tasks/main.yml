@@ -11,5 +11,8 @@
   - lsof
   - multitail
 
-- package: name=debian-goodies state=present
+- package: name={{ item }} state=present
   when: ansible_os_family == 'Debian'
+  with_items:
+  - debian-goodies
+  - apt-transport-https

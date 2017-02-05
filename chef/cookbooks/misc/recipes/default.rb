@@ -17,7 +17,11 @@ end
 
 case node['platform_family']
 when 'debian'
-  package 'debian-goodies' do
+  debian_packages =[
+    'debian-goodies',
+    'apt-transport-https',
+  ]
+  package debian_packages do
     action :install
   end
 end
