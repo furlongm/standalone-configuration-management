@@ -1,37 +1,15 @@
-ethtool:
-  pkg.installed
-
-tcpdump:
-  pkg.installed
-
-nmap:
-  pkg.installed
-
-telnet:
-  pkg.installed
-
-iftop:
-  pkg.installed
-
-whois:
-  pkg.installed
-
-wget:
-  pkg.installed
-
-iperf:
-  pkg.installed
-
-ipset:
-  pkg.installed
-
-nload:
-  pkg.installed
-
-bmon:
-  pkg.installed
-
-bind-utils:
-  pkg:
-    - installed
-    - name: {{ salt['pillar.get']('pkgs:bind-utils') }}
+netpkgs:
+  pkg.installed:
+    - pkgs:
+      - ethtool
+      - tcpdump
+      - nmap
+      - telnet
+      - iftop
+      - whois
+      - wget
+      - iperf
+      - ipset
+      - nload
+      - bmon
+      - {{ salt['pillar.get']('pkgs:bind-utils') }}
