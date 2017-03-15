@@ -8,6 +8,8 @@ net_packages = [
   'wget',
   'iperf',
   'ipset',
+  'nload',
+  'bmon',
 ]
 
 package net_packages do

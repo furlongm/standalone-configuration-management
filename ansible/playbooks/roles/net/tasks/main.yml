@@ -13,5 +13,7 @@
   - wget
   - iperf
   - ipset
+  - nload
+  - bmon
 
 - package: name={{ bindutils_package }} state=present

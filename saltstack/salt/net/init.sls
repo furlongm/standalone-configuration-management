@@ -25,6 +25,12 @@ iperf:
 ipset:
   pkg.installed
 
+nload:
+  pkg.installed
+
+bmon:
+  pkg.installed
+
 bind-utils:
   pkg:
     - installed
