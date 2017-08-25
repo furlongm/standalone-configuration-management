@@ -17,7 +17,7 @@ end
 
 case node['platform_family']
 when 'debian'
-  debian_packages =[
+  debian_packages = [
     'debian-goodies',
     'apt-transport-https',
   ]

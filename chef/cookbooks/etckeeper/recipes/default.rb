@@ -15,5 +15,3 @@ template 'gitconfig' do
   group 'root'
   mode '0644'
 end
-
-

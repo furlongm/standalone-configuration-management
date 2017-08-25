@@ -3,8 +3,8 @@ package 'fail2ban' do
 end
 
 service 'fail2ban' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
 end
 
 cookbook_file 'fail2ban.local' do
@@ -17,12 +17,12 @@ cookbook_file 'fail2ban.local' do
 end
 
 case node['platform_family']
-  when 'debian'
-    logfile = '/var/log/auth.log'
-  when 'rhel'
-    logfile = '/var/log/secure'
-  when 'suse'
-    logfile = '/var/log/messages'
+when 'debian'
+  logfile = '/var/log/auth.log'
+when 'rhel'
+  logfile = '/var/log/secure'
+when 'suse'
+  logfile = '/var/log/messages'
 end
 
 template 'jail.local' do
@@ -32,7 +32,7 @@ template 'jail.local' do
   mode '0644'
   action :create
   variables(
-    :logfile => logfile
+    logfile: logfile
   )
   notifies :restart, 'service[fail2ban]'
 end

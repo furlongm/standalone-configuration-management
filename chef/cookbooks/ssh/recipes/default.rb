@@ -13,6 +13,6 @@ end
 
 service 'openssh' do
   service_name node['ssh']['service']
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
 end

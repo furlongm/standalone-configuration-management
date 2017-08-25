@@ -1,13 +1,13 @@
 case node['platform_family']
-  when 'debian'
-    exim = 'exim4'
-    mailx = 'bsd-mailx'
-  when 'rhel'
-    exim = 'exim'
-    mailx = 'mailx'
-  when 'suse'
-    exim = 'exim'
-    mailx = 'mailx'
+when 'debian'
+  exim = 'exim4'
+  mailx = 'bsd-mailx'
+when 'rhel'
+  exim = 'exim'
+  mailx = 'mailx'
+when 'suse'
+  exim = 'exim'
+  mailx = 'mailx'
 end
 
 package exim do
@@ -32,13 +32,13 @@ template 'main.cf' do
 end
 
 service 'postfix' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
 end
 
 ruby_block 'add_root_mail_alias' do
   block do
-    mail_alias = 'root: ' + node[:postfix][:root_mail_alias]
+    mail_alias = 'root: ' + node['postfix']['root_mail_alias']
     file = Chef::Util::FileEdit.new('/etc/aliases')
     file.search_file_replace_line(/^root:/, mail_alias)
     file.insert_line_if_no_match(/^root:/, mail_alias)

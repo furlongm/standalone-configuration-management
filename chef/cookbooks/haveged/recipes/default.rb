@@ -3,6 +3,6 @@ package 'haveged' do
 end
 
 service 'haveged' do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
 end
