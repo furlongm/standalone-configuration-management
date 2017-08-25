@@ -19,22 +19,22 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
 
-myhostname = <%= node[:hostname] %>
+myhostname = <%= node['hostname'] %>
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-<% if node[:fqdn] == nil -%>
-myorigin = <%= node[:hostname] %>
+<% if node['fqdn'] == nil -%>
+myorigin = <%= node['hostname'] %>
 <% else -%>
-myorigin = <%= node[:fqdn] %>
+myorigin = <%= node['fqdn'] %>
 <% end -%>
 
-<% if node[:fqdn] == nil -%>
-mydestination = <%= node[:hostname] %>, localhost.localdomain, localhost
+<% if node['fqdn'] == nil -%>
+mydestination = <%= node['hostname'] %>, localhost.localdomain, localhost
 <% else -%>
-  <%- if node[:fqdn] != node[:hostname] -%>
-mydestination = <%= node[:fqdn] %>, <%= node[:hostname] %>, localhost.localdomain, localhost
+  <%- if node['fqdn'] != node['hostname'] -%>
+mydestination = <%= node['fqdn'] %>, <%= node['hostname'] %>, localhost.localdomain, localhost
   <%- else -%>
-mydestination = <%= node[:fqdn] %>, localhost.localdomain, localhost
+mydestination = <%= node['fqdn'] %>, localhost.localdomain, localhost
   <%- end -%>
 <% end -%>
 
@@ -44,7 +44,7 @@ mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = loopback-only
 
-<% if node[:platform_family] == 'suse' -%>
+<% if node['platform_family'] == 'suse' -%>
 setgid_group = maildrop
 daemon_directory = /usr/lib/postfix
 <% end -%>
