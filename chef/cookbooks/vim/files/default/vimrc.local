@@ -1,3 +1,16 @@
+" https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=864074
+" https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=837761
+if filereadable("/usr/share/vim/vim80/defaults.vim")
+  source /usr/share/vim/vim80/defaults.vim
+endif
+" Ensure defaults file is not loaded after this file
+let g:skip_defaults_vim = 1
+
+" Set the mouse mode to 'r'
+if has('mouse')
+  set mouse=r
+endif
+
 " Set nocompatible mode
 set nocompatible
 
