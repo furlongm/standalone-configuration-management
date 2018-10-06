@@ -9,7 +9,7 @@ if node['platform_family'] == 'rhel'
   end
 
   execute 'yum_makecache' do
-    command '/bin/yum -y makecache'
+    command '/usr/bin/yum -y makecache'
     action :nothing
   end
 

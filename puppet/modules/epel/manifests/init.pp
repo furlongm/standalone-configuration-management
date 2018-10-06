@@ -22,7 +22,7 @@ class epel {
     }
 
     exec { 'yum_makecache':
-      command     => '/bin/yum -y makecache',
+      command     => '/usr/bin/yum -y makecache',
       refreshonly => true,
     }
   }
