@@ -10,5 +10,5 @@ jobs:
       - run:
           name: Build ansible
           command: |
-            cd ${CIRCLE_PROJECT_REPONAME}/ansible
+            cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
