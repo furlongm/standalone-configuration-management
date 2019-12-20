@@ -9,4 +9,8 @@ jobs:
 
       - run:
           name: Build ansible
-          command: bash -x ${CIRCLE_PROJECT_REPONAME}/standalone-ansible.sh -e furlongm@gmail.com
+          command: |
+            ls -la
+            apt install -y tree
+            tree
+            bash -x ${CIRCLE_PROJECT_REPONAME}/standalone-ansible.sh -e furlongm@gmail.com
