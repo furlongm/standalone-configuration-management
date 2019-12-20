@@ -2,15 +2,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: debian:buster
 
     steps:
       - checkout
 
       - run:
-          name: Greeting
-          command: echo Hello, world.
-
-      - run:
-          name: Print the Current Time
-          command: date
+          name: Build ansible
+          command: sudo bash -x standalone-ansible.sh -e furlongm@gmail.com
