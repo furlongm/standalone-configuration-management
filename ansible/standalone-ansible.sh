@@ -13,6 +13,7 @@ get_pm() {
     elif [[ "$ID_LIKE" =~ "rhel" ]] ; then
         pm='dnf -y'
         ${pm} makecache
+        ${pm} install which
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} refresh
