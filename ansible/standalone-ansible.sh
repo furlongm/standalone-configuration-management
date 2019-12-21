@@ -28,7 +28,7 @@ install_epel() {
 }
 
 install_deps() {
-    ${pm} install git curl
+    ${pm} install git curl python3
 }
 
 install_ansible() {
