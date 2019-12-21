@@ -20,9 +20,9 @@ get_pm() {
 }
 
 install_epel() {
-    grep "Red Hat" /etc/redhat-release 2>&1 >/dev/null 
+    grep "Red Hat" /etc/redhat-release 2>&1 >/dev/null
     if [ $? -eq 0 ] ; then
-        epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     else
         epel_release_uri=epel-release
     fi
