@@ -11,7 +11,7 @@ get_pm() {
         pm='apt -y'
         ${pm} update
     elif [[ "$ID_LIKE" =~ "rhel" ]] ; then
-        pm='yum -y'
+        pm='dnf -y'
         ${pm} makecache
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
@@ -20,12 +20,12 @@ get_pm() {
 }
 
 install_epel() {
-    grep "Red Hat" /etc/redhat-release 2>&1 >/dev/null
-    if [ $? -eq 0 ] ; then
+    if [[ "${NAME}" =~ "Red Hat" ]] ; then
         epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
     else
         epel_release_uri=epel-release
     fi
+    ${pm} install ${epel_release_uri}
 }
 
 install_deps() {
@@ -66,7 +66,7 @@ get_config_from_github() {
 
 main() {
     get_pm
-    which yum 1>/dev/null 2>&1 && install_epel
+    which dnf 1>/dev/null 2>&1 && install_epel
     which git 1>/dev/null 2>&1 || install_deps
     which curl 1>/dev/null 2>&1 || install_deps
     which ansible 1>/dev/null 2>&1 || install_ansible
