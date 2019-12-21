@@ -1,14 +1,51 @@
 version: 2
 jobs:
-  build:
+  debian:
     docker:
-      - image: debian:buster
-
+      - image: debian:10
     steps:
       - checkout
-
       - run:
-          name: Build ansible
+          name: ansible-debian
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+  ubuntu:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: ansible-ubuntu
+          command: |
+            cd ansible
+            bash -x standalone-ansible.sh -e furlongm@gmail.com
+  centos:
+    docker:
+      - image: centos:8
+    steps:
+      - checkout
+      - run:
+          name: ansible-centos
+          command: |
+            cd ansible
+            bash -x standalone-ansible.sh -e furlongm@gmail.com
+  opensuse:
+    docker:
+      - image: opensuse/leap:15.1
+    steps:
+      - checkout
+      - run:
+          name: ansible-opensuse
+          command: |
+            cd ansible
+            bash -x standalone-ansible.sh -e furlongm@gmail.com
+
+workflows:
+  version: 2
+  test-all-combos:
+    jobs:
+      - debian
+      - ubuntu
+      - centos
+      - opensuse
