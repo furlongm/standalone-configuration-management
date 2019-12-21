@@ -6,7 +6,7 @@ usage() {
 }
 
 get_pm() {
-    . /etc/os-relase
+    . /etc/os-release
     if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
         pm='apt -y'
         ${pm} update
