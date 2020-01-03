@@ -3,7 +3,7 @@
     name: fail2ban
     state: started
     enabled: yes
-  when: ansible_virtualization_type != 'docker'
+  when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
 
 - name: configure fail2ban
   copy:
