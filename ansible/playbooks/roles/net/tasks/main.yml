@@ -5,19 +5,19 @@
 
 - package: name={{ item }} state=present
   with_items:
-  - tcpdump
-  - nmap
-  - telnet
-  - iftop
-  - whois
-  - wget
-  - ipset
-  - nload
-  - iperf3
+    - tcpdump
+    - nmap
+    - telnet
+    - iftop
+    - whois
+    - wget
+    - ipset
+    - nload
+    - iperf3
 
 - package: name={{ item }} state=present
   when: ansible_distribution_major_version != "8" and ansible_os_family != "RedHat"
   with_items:
-  - bmon
+    - bmon
 
 - package: name={{ bindutils_package }} state=present
