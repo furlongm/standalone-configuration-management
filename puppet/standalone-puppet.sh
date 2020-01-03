@@ -6,14 +6,16 @@ usage() {
 }
 
 get_pm() {
-    if [ -f '/etc/debian_version' ] ; then
-        pm="apt-get -y"
-        ${pm} update 
-    elif [ -f '/etc/redhat-release' ] ; then
-        pm="yum -y"
+    . /etc/os-release
+    if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
+        pm='apt -y'
+        ${pm} update
+    elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] ; then
+        pm='dnf -y'
         ${pm} makecache
-    elif [ -f '/etc/SuSE-release' ] ; then
-        pm="zypper -n"
+        ${pm} install which
+    elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
+        pm='zypper -n'
         ${pm} refresh
     fi
 }
