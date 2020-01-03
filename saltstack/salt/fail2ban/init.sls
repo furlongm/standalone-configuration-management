@@ -10,7 +10,7 @@ fail2ban:
 
 /etc/fail2ban/jail.local:
   file.managed:
-    - source: salt://fail2ban/jail.local.j2
+    - source: salt://fail2ban/files/jail.local.j2
     - template: jinja
     - user: root
     - group: root

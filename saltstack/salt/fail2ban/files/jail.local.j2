@@ -1,0 +1,18 @@
+[DEFAULT]
+ignoreip = 127.0.0.1/8
+bantime  = 600
+maxretry = 5
+backend = auto
+destemail = root@localhost
+
+[sshd]
+enabled  = true
+{% if grains['os_family'] == 'Debian' -%}
+logpath  = /var/log/auth.log
+{% endif -%}
+{% if grains['os_family'] == 'RedHat' -%}
+logpath  = /var/log/secure
+{% endif -%}
+{% if grains['os_family'] == 'Suse' -%}
+logpath  = /var/log/messages
+{% endif -%}
