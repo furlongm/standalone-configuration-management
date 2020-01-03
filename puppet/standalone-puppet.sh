@@ -25,27 +25,6 @@ install_deps() {
 }
 
 install_puppet() {
-    if [ -f '/etc/debian_version' ] ; then
-        . /etc/os-release
-        if [ ${ID} == "ubuntu" ] ; then
-            if [ ! -z ${UBUNTU_CODENAME} ] ; then
-                codename=${UBUNTU_CODENAME}
-            else
-                codename='trusty'
-            fi
-        else
-            codename=$(echo ${VERSION} | sed -e "s/.*(\(.*\))/\1/")
-        fi
-        if [ "${codename}" != "xenial" ] ; then
-            puppet_deb=puppetlabs-release-${codename}.deb
-            curl -O https://apt.puppetlabs.com/${puppet_deb}
-            dpkg -i ${puppet_deb}
-            rm -f ${puppet_deb}
-        fi
-        ${pm} update
-    elif [ -f '/etc/redhat-release' ] ; then
-        ${pm} install http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
-    fi
     ${pm} install puppet
 }
 
