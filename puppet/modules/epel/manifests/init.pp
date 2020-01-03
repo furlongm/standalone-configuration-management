@@ -4,16 +4,16 @@ class epel {
 
     $epel_release_uri = $::operatingsystem ? {
       'CentOS' => 'epel-release',
-      default  => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm',
+      default  => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm',
     }
 
     package { $epel_release_uri:
-      ensure  => installed,
-      notify  => Exec['yum_makecache'],
+      ensure => installed,
+      notify => Exec['dnf_makecache'],
     }
 
-    exec { 'yum_makecache':
-      command     => '/usr/bin/yum -y makecache',
+    exec { 'dnf_makecache':
+      command     => '/usr/bin/dnf -y makecache',
       refreshonly => true,
     }
   }
