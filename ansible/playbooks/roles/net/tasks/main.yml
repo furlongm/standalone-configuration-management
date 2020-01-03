@@ -13,11 +13,11 @@
   - wget
   - ipset
   - nload
+  - iperf3
 
 - package: name={{ item }} state=present
   when: ansible_distribution_major_version != "8" and ansible_os_family != "RedHat"
   with_items:
-  - iperf
   - bmon
 
 - package: name={{ bindutils_package }} state=present

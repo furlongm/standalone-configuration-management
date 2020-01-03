@@ -8,8 +8,8 @@ netpkgs:
       - iftop
       - whois
       - wget
-      - iperf
       - ipset
       - nload
+      - iperf3
       - bmon
       - {{ salt['pillar.get']('pkgs:bind-utils') }}

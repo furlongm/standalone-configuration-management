@@ -6,9 +6,9 @@ net_packages = [
   'iftop',
   'whois',
   'wget',
-  'iperf',
   'ipset',
   'nload',
+  'iperf3',
   'bmon',
 ]
 
