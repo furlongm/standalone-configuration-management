@@ -1,1 +1,1 @@
-- include: local.yml
+- import_playbook: local.yml
