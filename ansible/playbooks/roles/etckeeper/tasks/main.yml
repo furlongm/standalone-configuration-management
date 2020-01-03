@@ -9,7 +9,7 @@
 
 - command: /bin/true
   notify: etckeeper init
-  when: etc_git.stat.exists == False
+  when: not etc_git.stat.exists
 
 - template:
     src: gitconfig.j2
