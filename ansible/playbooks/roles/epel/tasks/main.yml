@@ -6,7 +6,7 @@
 - dnf:
     name: "{{ epel_release_uri }}"
     state: present
-  register: installed_epel_pkg
+  notify: update dnf cache
 
 - copy:
     src: RPM-GPG-KEY-EPEL-8
@@ -14,8 +14,4 @@
     owner: root
     group: root
     mode: 0644
-  register: installed_epel_key
-
-- command: dnf -y makecache
-  when: installed_epel_pkg.changed or installed_epel_key.changed
-  warn: false
+  notify: update dnf cache
