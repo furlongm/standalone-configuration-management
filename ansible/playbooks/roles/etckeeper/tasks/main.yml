@@ -1,14 +1,15 @@
 - package:
     name: etckeeper
     state: present
-  register: installed_etckeeper_pkg
+  notify: etckeeper init
 
 - stat:
     path: /etc/.git
   register: etc_git
 
-- command: etckeeper init
-  when: installed_etckeeper_pkg.changed or etc_git.stat.exists == False
+- command: /bin/true
+  notify: etckeeper init
+  when: etc_git.stat.exists == False
 
 - template:
     src: gitconfig.j2
