@@ -10,7 +10,7 @@ get_pm() {
     if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
         pm='apt -y'
         ${pm} update
-    elif [[ "$ID_LIKE" =~ "rhel" ]] ; then
+    elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
         ${pm} install which
