@@ -1,20 +1,21 @@
 - include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution }}.yml"
-    - "default.yml"
+    - default.yml
 
-- yum:
+- dnf:
     name: "{{ epel_release_uri }}"
     state: present
   register: installed_epel_pkg
 
 - copy:
-    src: RPM-GPG-KEY-EPEL-7
-    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+    src: RPM-GPG-KEY-EPEL-8
+    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
     owner: root
     group: root
     mode: 0644
   register: installed_epel_key
 
-- command: yum -y makecache
+- command: dnf -y makecache
   when: installed_epel_pkg.changed or installed_epel_key.changed
+  warn: false
