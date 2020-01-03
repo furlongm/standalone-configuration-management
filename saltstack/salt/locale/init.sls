@@ -22,7 +22,7 @@ locale.gen:
 environment:
   file.managed:
     - name: /etc/environment
-    - source: salt://locale/environment.j2
+    - source: salt://locale/files/environment.j2
     - template: jinja
     - user: root
     - group: root
