@@ -7,7 +7,8 @@
 
 - copy: src=sshrc dest=/etc/ssh/sshrc owner=root group=root mode=0644 backup=yes
 
-- service: name={{ openssh_service }}
-  state: started
-  enabled: yes
-  ignore_errors: True
+- service:
+    name: {{ openssh_service }}
+    state: started
+    enabled: yes
+    ignore_errors: True
