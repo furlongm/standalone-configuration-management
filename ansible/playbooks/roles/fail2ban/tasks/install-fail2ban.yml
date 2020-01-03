@@ -1,0 +1,4 @@
+- name: install fail2ban
+  package:
+    name: fail2ban
+    state: present
