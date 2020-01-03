@@ -37,7 +37,7 @@ install_vim_syntax_highlighting() {
     fi
     tmp_dir=$(mktemp -d)
     mkdir -p ${home}/.vim
-    git clone https://github.com/vadv/vim-chef.git ${tmp_dir}
+    git clone https://github.com/vadv/vim-chef ${tmp_dir}
     cp -r ${tmp_dir}/* ${home}/.vim/
     if [ ! -z "${SUDO_UID}" ] ; then
         chown -R ${SUDO_UID}:${SUDO_GID} ${home}/.vim

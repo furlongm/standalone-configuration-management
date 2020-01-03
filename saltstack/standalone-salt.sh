@@ -39,7 +39,7 @@ install_vim_syntax_highlighting() {
     done
     tmp_dir=$(mktemp -d)
     mkdir -p ${home}/.vim
-    git clone https://github.com/saltstack/salt-vim.git ${tmp_dir}
+    git clone https://github.com/saltstack/salt-vim ${tmp_dir}
     cp -r ${tmp_dir}/ftdetect ${tmp_dir}/ftplugin ${tmp_dir}/syntax ${home}/.vim/
     if [ ! -z "${SUDO_UID}" ] ; then
         chown -R ${SUDO_UID}:${SUDO_GID} ${home}/.vim

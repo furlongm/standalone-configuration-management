@@ -60,7 +60,7 @@ install_vim_syntax_highlighting() {
     done
     tmp_dir=$(mktemp -d)
     mkdir -p ${home}/.vim
-    git clone https://github.com/puppetlabs/puppet-syntax-vim.git ${tmp_dir}
+    git clone https://github.com/rodjek/vim-puppet ${tmp_dir}
     cp -r ${tmp_dir}/* ${home}/.vim/
     if [ ! -z "${SUDO_UID}" ] ; then
         chown -R ${SUDO_UID}:${SUDO_GID} ${home}/.vim
