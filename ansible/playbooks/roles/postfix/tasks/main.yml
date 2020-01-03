@@ -3,16 +3,34 @@
     - "{{ ansible_os_family }}.yml"
     - "default.yml"
 
-- package: name={{ exim_package }} state=absent
+- package:
+    name: {{ exim_package }}
+    state: absent
 
-- package: name={{ mailx_package }} state=present
+- package:
+    name: {{ mailx_package }}
+    state: present
 
-- package: name=postfix state=present
+- package:
+    name: postfix
+    state: present
 
-- service: name=postfix state=started enabled=yes
+- service:
+    name: postfix
+    state: started
+    enabled: yes
 
-- template: src=main.cf.j2 dest=/etc/postfix/main.cf owner=root group=root mode=0644 backup=yes
+- template:
+    src: main.cf.j2
+    dest: /etc/postfix/main.cf
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
   notify: restart postfix
 
-- lineinfile: 'dest=/etc/aliases regexp="^root:\s+{{ root_mail_alias }}" line="root: {{ root_mail_alias }}"'
+- lineinfile:
+    path: /etc/aliases
+    regexp: '^root:'
+    line: root: {{ root_mail_alias }}
   notify: exec newaliases

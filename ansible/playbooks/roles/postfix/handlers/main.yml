@@ -1,5 +1,7 @@
 - name: restart postfix
-  service: name=postfix state=restarted
+  service:
+    name: postfix
+    state: restarted
   ignore_errors: True
 
 - name: exec newaliases

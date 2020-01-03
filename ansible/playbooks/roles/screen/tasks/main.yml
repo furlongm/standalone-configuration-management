@@ -1,3 +1,11 @@
-- package: name=screen state=present
+- package:
+    name: screen
+    state: present
 
-- copy: src=screenrc dest=/etc/screenrc owner=root group=root mode=0644 backup=yes
+- copy:
+    src: screenrc
+    dest: /etc/screenrc
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes

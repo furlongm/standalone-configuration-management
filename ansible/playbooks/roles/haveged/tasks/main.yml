@@ -1,3 +1,8 @@
-- package: name=haveged state=present
+- package:
+    name: haveged
+    state: present
 
-- service: name=haveged state=started enabled=yes
+- service:
+    name: haveged
+    state: started
+    enabled: yes

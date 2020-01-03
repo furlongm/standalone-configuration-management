@@ -1,10 +1,18 @@
-- package: name=etckeeper state=present
+- package:
+    name: etckeeper
+    state: present
   register: installed_etckeeper_pkg
 
-- stat: path=/etc/.git
+- stat:
+    path: /etc/.git
   register: etc_git
 
 - command: etckeeper init
   when: installed_etckeeper_pkg.changed or etc_git.stat.exists == False
 
-- template: src=gitconfig.j2 dest=/etc/.git/config owner=root group=root mode=0644
+- template:
+    src: gitconfig.j2
+    dest: /etc/.git/config
+    owner: root
+    group: root
+    mode: 0644
