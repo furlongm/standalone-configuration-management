@@ -7,11 +7,3 @@
     name: "{{ epel_release_uri }}"
     state: present
   notify: update dnf cache
-
-- copy:
-    src: RPM-GPG-KEY-EPEL-8
-    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-8
-    owner: root
-    group: root
-    mode: 0644
-  notify: update dnf cache
