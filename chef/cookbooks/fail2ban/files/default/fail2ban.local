@@ -1,4 +1,1 @@
-[Definition]
-loglevel = WARNING
-logtarget = SYSLOG
-socket = /var/run/fail2ban/fail2ban.sock
+../../../../../common/files/fail2ban/fail2ban.local

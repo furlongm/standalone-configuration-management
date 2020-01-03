@@ -50,7 +50,7 @@ install_vim_syntax_highlighting() {
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
     git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-    cp -r ${tmp_dir}/chef /srv
+    cp -Lr ${tmp_dir}/chef /srv
     rm -fr ${tmp_dir}
 }
 

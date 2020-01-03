@@ -52,7 +52,7 @@ install_vim_syntax_highlighting() {
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
     git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-    cp -r ${tmp_dir}/saltstack/salt /srv
+    cp -Lr ${tmp_dir}/saltstack/salt /srv
     cp -r ${tmp_dir}/saltstack/pillar /srv
     rm -fr ${tmp_dir}
 }

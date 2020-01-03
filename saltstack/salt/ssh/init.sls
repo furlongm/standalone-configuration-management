@@ -5,7 +5,7 @@ openssh-server:
 
 /etc/ssh/sshrc:
   file.managed:
-    - source: salt://ssh/sshrc
+    - source: salt://ssh/files/sshrc
     - user: root
     - group: root
     - mode: '0644'

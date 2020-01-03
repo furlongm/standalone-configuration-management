@@ -3,7 +3,7 @@ screen:
 
 /etc/screenrc:
   file.managed:
-    - source: salt://screen/screenrc
+    - source: salt://screen/files/screenrc
     - user: root
     - group: root
     - mode: '0644'
