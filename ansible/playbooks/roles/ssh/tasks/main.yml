@@ -4,7 +4,7 @@
     - "default.yml"
 
 - package:
-    name: {{ openssh_package }}
+    name: "{{ openssh_package }}"
     state: present
 
 - copy:
@@ -16,7 +16,7 @@
     backup: yes
 
 - service:
-    name: {{ openssh_service }}
+    name: "{{ openssh_service }}"
     state: started
     enabled: yes
   ignore_errors: True

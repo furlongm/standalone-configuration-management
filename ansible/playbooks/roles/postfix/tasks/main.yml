@@ -4,11 +4,11 @@
     - "default.yml"
 
 - package:
-    name: {{ exim_package }}
+    name: "{{ exim_package }}"
     state: absent
 
 - package:
-    name: {{ mailx_package }}
+    name: "{{ mailx_package }}"
     state: present
 
 - package:
