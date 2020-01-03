@@ -2,3 +2,4 @@
   service:
     name: fail2ban
     state: restarted
+  when: ansible_virtualization_type != 'docker'

@@ -19,6 +19,7 @@
     name: postfix
     state: started
     enabled: yes
+  when: ansible_virtualization_type != 'docker'
 
 - template:
     src: main.cf.j2

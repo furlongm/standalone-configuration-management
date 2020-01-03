@@ -11,6 +11,7 @@
     name: fail2ban
     state: started
     enabled: yes
+  when: ansible_virtualization_type != 'docker'
 
 - copy:
    src: fail2ban.local

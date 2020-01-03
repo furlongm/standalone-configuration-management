@@ -2,7 +2,7 @@
   service:
     name: postfix
     state: restarted
-  ignore_errors: True
+  when: ansible_virtualization_type != 'docker'
 
 - name: exec newaliases
   command: /usr/bin/newaliases
