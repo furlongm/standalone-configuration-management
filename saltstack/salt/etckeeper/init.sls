@@ -9,10 +9,10 @@ etckeeper init:
 
 /etc/.git/config:
   file.managed:
-    - source: salt://etckeeper/gitconfig.j2
+    - source: salt://etckeeper/files/gitconfig.j2
     - template: jinja
     - user: root
     - group: root
     - mode: '0644'
     - require:
-        - cmd: etckeeper init
+      - cmd: etckeeper init
