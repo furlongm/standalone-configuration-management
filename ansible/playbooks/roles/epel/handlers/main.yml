@@ -1,3 +1,4 @@
 - name: update dnf cache
   command: dnf -y makecache
-  warn: false
+  args:
+    warn: false
