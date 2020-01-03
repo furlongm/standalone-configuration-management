@@ -21,7 +21,7 @@ exim:
 
 /etc/postfix/main.cf:
   file.managed:
-    - source: salt://postfix/main.cf.j2
+    - source: salt://postfix/files/main.cf.j2
     - template: jinja
     - user: root
     - group: root
