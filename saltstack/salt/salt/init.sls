@@ -7,7 +7,7 @@ salt-minion:
 
 /etc/salt/minion.d/standalone.conf:
   file.managed:
-    - source: salt://salt/standalone.conf
+    - source: salt://salt/files/standalone.conf
     - user: root
     - group: root
     - mode: '0640'
