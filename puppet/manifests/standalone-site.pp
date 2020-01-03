@@ -25,5 +25,4 @@ node default {
   class { 'postfix':
     root_alias => 'admin@example.com',
   }
-
 }
