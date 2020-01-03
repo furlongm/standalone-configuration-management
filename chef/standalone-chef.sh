@@ -64,7 +64,7 @@ main() {
         client_args="-c ${run_path}/client.rb"
     fi
     sed -i -e "s/root_mail_alias.*/root_mail_alias\": \"${email}\"/" ${run_path}/node.json
-    chef-client -z -j ${run_path}/node.json ${client_args}
+    chef-client -z -j ${run_path}/node.json ${client_args} --chef-license accept
 }
 
 while getopts ":le:" opt ; do
