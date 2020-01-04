@@ -12,7 +12,7 @@ openssh-server:
     - require:
       - pkg: openssh-server
 
-{% if grains['virtual'] != 'container' %}
+{% if grains['virtual_subtype'] != 'Docker' %}
 ssh:
   service:
     - name: {{ salt['pillar.get']('svcs:ssh') }}

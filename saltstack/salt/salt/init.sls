@@ -1,4 +1,4 @@
-{% if grains['virtual'] != 'container' %}
+{% if grains['virtual_subtype'] != 'Docker' %}
 salt-minion:
   service:
     - dead

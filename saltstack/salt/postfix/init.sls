@@ -3,7 +3,7 @@ postfix:
     - installed
     - require:
       - pkg: exim
-{% if grains['virtual'] != 'container' %}
+{% if grains['virtual_subtype'] != 'Docker' %}
   service:
     - running
     - enable: True
