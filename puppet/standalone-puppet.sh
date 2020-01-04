@@ -32,6 +32,9 @@ install_puppet() {
         ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
+        curl -k -O https://yum.puppetlabs.com/RPM-GPG-KEY-puppet
+        rpm --import RPM-GPG-KEY-puppet
+        rm RPM-GPG-KEY-puppet
         ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
         ${pm} --gpg-auto-import-keys refresh
     fi
