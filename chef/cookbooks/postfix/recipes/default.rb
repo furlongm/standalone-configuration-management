@@ -32,8 +32,8 @@ template 'main.cf' do
 end
 
 service 'postfix' do
-  supports status: true, restart: true, reload: true
   action [:enable, :start]
+  not_if { node['virtualization']['system'] == 'docker' }
 end
 
 ruby_block 'add_root_mail_alias' do
