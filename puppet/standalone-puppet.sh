@@ -80,7 +80,7 @@ main() {
     fi
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/standalone-site.pp
     export PATH=${PATH}:/opt/puppetlabs/bin
-    puppet module install --target-dir ${run_path}/modules mailalias
+    puppet module install --target-dir ${run_path}/modules puppetlabs-mailalias_core
     puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
 }
 
