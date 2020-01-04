@@ -16,13 +16,12 @@ class postfix(
     default  => 'exim',
   }
 
-  package { $exim:
-    ensure => absent,
-  }
-
   package { 'postfix':
     ensure  => installed,
-    require => Package[$exim],
+  }
+
+  package { $exim:
+    ensure => absent,
   }
 
   if $::virtual != 'docker' {
