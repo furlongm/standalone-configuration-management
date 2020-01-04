@@ -20,6 +20,16 @@ jobs:
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
+  salt-debian:
+    docker:
+      - image: debian:10
+    steps:
+      - checkout
+      - run:
+          name: salt-debian
+          command: |
+            cd saltstack
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   ansible-ubuntu:
     docker:
       - image: ubuntu:18.04
@@ -40,6 +50,16 @@ jobs:
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
+  salt-ubuntu:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: salt-ubuntu
+          command: |
+            cd saltstack
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   ansible-centos:
     docker:
       - image: centos:8
@@ -60,6 +80,16 @@ jobs:
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
+  salt-centos:
+    docker:
+      - image: centos:8
+    steps:
+      - checkout
+      - run:
+          name: salt-centos
+          command: |
+            cd saltstack
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   ansible-opensuse:
     docker:
       - image: opensuse/leap:15.1
@@ -80,6 +110,16 @@ jobs:
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
+  salt-opensuse:
+    docker:
+      - image: opensuse/leap:15.1
+    steps:
+      - checkout
+      - run:
+          name: salt-opensuse
+          command: |
+            cd saltstack
+            bash -x standalone-stack.sh -e furlongm@gmail.com
   ansible-fedora:
     docker:
       - image: fedora:31
@@ -100,6 +140,16 @@ jobs:
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
+  salt-fedora:
+    docker:
+      - image: fedora:31
+    steps:
+      - checkout
+      - run:
+          name: salt-fedora
+          command: |
+            cd saltstack
+            bash -x standalone-salt.sh -e furlongm@gmail.com
 
 workflows:
   version: 2
@@ -115,3 +165,8 @@ workflows:
       - puppet-centos
       - puppet-opensuse
       - puppet-fedora
+      - salt-debian
+      - salt-ubuntu
+      - salt-centos
+      - salt-opensuse
+      - salt-fedora
