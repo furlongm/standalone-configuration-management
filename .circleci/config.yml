@@ -149,7 +149,7 @@ jobs:
           name: salt-opensuse
           command: |
             cd saltstack
-            bash -x standalone-stack.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-opensuse:
     docker:
       - image: opensuse/leap:15.1
