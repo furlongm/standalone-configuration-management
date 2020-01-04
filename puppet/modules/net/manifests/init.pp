@@ -23,7 +23,12 @@ class net {
     default  => 'bind-utils',
   }
 
-  package { $bindutils:
+  $iperf = $::osfamily ? {
+    'Suse'  => 'iperf',
+    default => 'iperf3',
+  }
+
+  package { [$bindutils, $iperf]:
     ensure => installed,
   }
 }
