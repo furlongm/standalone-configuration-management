@@ -1,12 +1,14 @@
 fail2ban:
   pkg:
     - installed
+{% if grains['virtual'] != 'container' %}
   service:
     - running
     - enable: True
     - watch:
       - file: /etc/fail2ban/fail2ban.local
       - file: /etc/fail2ban/jail.local
+{% endif %}
 
 /etc/fail2ban/jail.local:
   file.managed:

@@ -3,11 +3,13 @@ postfix:
     - installed
     - require:
       - pkg: exim
+{% if grains['virtual'] != 'container' %}
   service:
     - running
     - enable: True
     - watch:
       - file: /etc/postfix/main.cf
+{% endif %}
 
 mailx:
   pkg:

@@ -12,6 +12,7 @@ openssh-server:
     - require:
       - pkg: openssh-server
 
+{% if grains['virtual'] != 'container' %}
 ssh:
   service:
     - name: {{ salt['pillar.get']('svcs:ssh') }}
@@ -22,3 +23,4 @@ ssh:
     - require:
       - pkg: openssh-server
       - file: /etc/ssh/sshrc
+{% endif %}
