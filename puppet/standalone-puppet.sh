@@ -32,8 +32,8 @@ install_puppet() {
         ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
-        ${pm} install https://yum.puppetlabs.com/puppet-release-sles-15.noarch.rpm
-        ${pm} refresh
+        ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
+        ${pm} --gpg-auto-import-keys refresh
     fi
     ${pm} install puppet
 }
@@ -79,6 +79,7 @@ main() {
         get_config_from_github
     fi
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/standalone-site.pp
+    export PATH=${PATH}:/opt/puppetlabs/bin
     puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
 }
 
