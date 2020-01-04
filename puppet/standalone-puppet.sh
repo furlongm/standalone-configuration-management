@@ -31,6 +31,9 @@ install_puppet() {
     if [[ "${pm}" =~ "dnf" ]] ; then
         ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         ${pm} makecache
+    elif [[ "${pm}" =~ "zypper" ]] ; then
+        ${pm} install https://yum.puppetlabs.com/puppet-release-sles-15.noarch.rpm
+        ${pm} refresh
     fi
     ${pm} install puppet
 }
