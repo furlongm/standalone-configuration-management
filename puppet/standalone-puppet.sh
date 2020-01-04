@@ -10,13 +10,16 @@ get_pm() {
     if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
         pm='apt -y'
         ${pm} update
-    elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] ; then
+    elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
         ${pm} install which
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} refresh
+    else
+        echo "Error: no package manager found."
+        exit 1
     fi
 }
 
