@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  debian:
+  ansible-debian:
     docker:
       - image: debian:10
     steps:
@@ -10,12 +10,17 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+  puppet-debian:
+    docker:
+      - image: debian:10
+    steps:
+      - checkout
       - run:
           name: puppet-debian
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
-  ubuntu:
+  ansible-ubuntu:
     docker:
       - image: ubuntu:18.04
     steps:
@@ -25,12 +30,17 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+  puppet-ubuntu:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
       - run:
           name: puppet-ubuntu
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
-  centos:
+  ansible-centos:
     docker:
       - image: centos:8
     steps:
@@ -40,12 +50,17 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+  puppet-centos:
+    docker:
+      - image: centos:8
+    steps:
+      - checkout
       - run:
           name: puppet-centos
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
-  opensuse:
+  ansible-opensuse:
     docker:
       - image: opensuse/leap:15.1
     steps:
@@ -55,17 +70,48 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+  puppet-opensuse:
+    docker:
+      - image: opensuse/leap:15.1
+    steps:
+      - checkout
       - run:
           name: puppet-opensuse
+          command: |
+            cd puppet
+            bash -x standalone-puppet.sh -e furlongm@gmail.com
+  ansible-fedora:
+    docker:
+      - image: fedora:31
+    steps:
+      - checkout
+      - run:
+          name: ansible-fedora
+          command: |
+            cd ansible
+            bash -x standalone-ansible.sh -e furlongm@gmail.com
+  puppet-fedora:
+    docker:
+      - image: fedora:31
+    steps:
+      - checkout
+      - run:
+          name: puppet-fedora
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
 
 workflows:
   version: 2
-  test-all-combos:
+  test-all-tool-distro-combos:
     jobs:
-      - debian
-      - ubuntu
-      - centos
-      - opensuse
+      - ansible-debian
+      - ansible-ubuntu
+      - ansible-centos
+      - ansible-opensuse
+      - ansible-fedora
+      - puppet-debian
+      - puppet-ubuntu
+      - puppet-centos
+      - puppet-opensuse
+      - puppet-fedora
