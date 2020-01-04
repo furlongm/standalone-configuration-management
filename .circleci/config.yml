@@ -10,6 +10,11 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+      - run:
+          name: puppet-debian
+          command: |
+            cd puppet
+            bash -x standalone-puppet.sh -e furlongm@gmail.com
   ubuntu:
     docker:
       - image: ubuntu:18.04
@@ -20,6 +25,11 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+      - run:
+          name: puppet-ubuntu
+          command: |
+            cd puppet
+            bash -x standalone-puppet.sh -e furlongm@gmail.com
   centos:
     docker:
       - image: centos:8
@@ -30,6 +40,11 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+      - run:
+          name: puppet-centos
+          command: |
+            cd puppet
+            bash -x standalone-puppet.sh -e furlongm@gmail.com
   opensuse:
     docker:
       - image: opensuse/leap:15.1
@@ -40,6 +55,11 @@ jobs:
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com
+      - run:
+          name: puppet-opensuse
+          command: |
+            cd puppet
+            bash -x standalone-puppet.sh -e furlongm@gmail.com
 
 workflows:
   version: 2
