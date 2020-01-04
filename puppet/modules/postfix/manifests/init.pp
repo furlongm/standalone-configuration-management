@@ -2,6 +2,15 @@ class postfix(
   $root_alias='admin@example.com'
 ) {
 
+  $mailx = $::osfamily ? {
+    'Debian' => 'bsd-mailx',
+    default  => 'mailx',
+  }
+
+  package { $mailx:
+    ensure => installed,
+  }
+
   $exim = $::osfamily ? {
     'Debian' => 'exim4',
     default  => 'exim',
@@ -14,15 +23,6 @@ class postfix(
   package { 'postfix':
     ensure  => installed,
     require => Package[$exim],
-  }
-
-  $mailx = $::osfamily ? {
-    'Debian' => 'bsd-mailx',
-    default  => 'mailx',
-  }
-
-  package { $mailx:
-    ensure => installed,
   }
 
   service { 'postfix':
