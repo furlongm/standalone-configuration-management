@@ -4,12 +4,16 @@ class fail2ban {
     ensure => installed,
   }
 
-  service { 'fail2ban':
-    ensure  => running,
-    enable  => true,
-    require => [Package['fail2ban'],
-                  File['/etc/fail2ban/jail.local',
-                    '/etc/fail2ban/fail2ban.local']],
+  if $::virtual != 'docker' {
+    service { 'fail2ban':
+      ensure    => running,
+      enable    => true,
+      require   => [Package['fail2ban'],
+                    File['/etc/fail2ban/jail.local',
+                         '/etc/fail2ban/fail2ban.local']],
+      subscribe => File['/etc/fail2ban/jail.local',
+                        '/etc/fail2ban/fail2ban.local']],
+    }
   }
 
   file { '/etc/fail2ban/jail.local':
@@ -18,7 +22,6 @@ class fail2ban {
     group   => 'root',
     mode    => '0644',
     require => Package['fail2ban'],
-    notify  => Service['fail2ban'],
   }
 
   file { '/etc/fail2ban/fail2ban.local':
@@ -27,6 +30,5 @@ class fail2ban {
     group   => 'root',
     mode    => '0644',
     require => Package['fail2ban'],
-    notify  => Service['fail2ban'],
   }
 }
