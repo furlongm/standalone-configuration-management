@@ -10,12 +10,7 @@ class net {
     'wget',
     'ipset',
     'nload',
-    'bmon',
   ]
-
-  package { $net_packages:
-    ensure => installed,
-  }
 
   $bindutils = $::osfamily ? {
     'Debian' => 'dnsutils',
@@ -27,7 +22,13 @@ class net {
     default => 'iperf3',
   }
 
-  package { [$bindutils, $iperf]:
+  $net_packages = $net_packages + [$bindutils, $iperf]
+
+  if $::osfamily != 'RedHat' {
+    $net_packages = $net_packages + 'bmon'
+  }
+
+  package { $net_packages:
     ensure => installed,
   }
 }

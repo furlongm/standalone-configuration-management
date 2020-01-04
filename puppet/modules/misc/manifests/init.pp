@@ -13,20 +13,18 @@ class misc {
     'multitail',
   ]
 
-  package { $misc_packages:
-    ensure => installed,
+  if $::osfamily != 'RedHat' {
+    $misc_packages = $misc_packages + 'bmon'
   }
 
   if $::osfamily == 'Debian' {
-
-    $debian_packages = [
+    $misc_packages += [
       'apt-transport-https',
       'debian-goodies',
     ]
+  }
 
-    package { $debian_packages:
-      ensure => installed,
-    }
-
+  package { $misc_packages:
+    ensure => installed,
   }
 }
