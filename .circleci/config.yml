@@ -30,6 +30,16 @@ jobs:
           command: |
             cd saltstack
             bash -x standalone-salt.sh -e furlongm@gmail.com
+  chef-debian:
+    docker:
+      - image: debian:10
+    steps:
+      - checkout
+      - run:
+          name: chef-debian
+          command: |
+            cd chef
+            bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-ubuntu:
     docker:
       - image: ubuntu:18.04
@@ -60,6 +70,16 @@ jobs:
           command: |
             cd saltstack
             bash -x standalone-salt.sh -e furlongm@gmail.com
+  chef-ubuntu:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: chef-ubuntu
+          command: |
+            cd chef
+            bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-centos:
     docker:
       - image: centos:8
@@ -90,6 +110,16 @@ jobs:
           command: |
             cd saltstack
             bash -x standalone-salt.sh -e furlongm@gmail.com
+  chef-centos:
+    docker:
+      - image: centos:8
+    steps:
+      - checkout
+      - run:
+          name: chef-centos
+          command: |
+            cd chef
+            bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-opensuse:
     docker:
       - image: opensuse/leap:15.1
@@ -120,6 +150,16 @@ jobs:
           command: |
             cd saltstack
             bash -x standalone-stack.sh -e furlongm@gmail.com
+  chef-opensuse:
+    docker:
+      - image: opensuse/leap:15.1
+    steps:
+      - checkout
+      - run:
+          name: chef-opensuse
+          command: |
+            cd chef
+            bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-fedora:
     docker:
       - image: fedora:31
@@ -150,6 +190,16 @@ jobs:
           command: |
             cd saltstack
             bash -x standalone-salt.sh -e furlongm@gmail.com
+  chef-fedora:
+    docker:
+      - image: fedora:31
+    steps:
+      - checkout
+      - run:
+          name: chef-fedora
+          command: |
+            cd chef
+            bash -x standalone-chef.sh -e furlongm@gmail.com
 
 workflows:
   version: 2
@@ -170,3 +220,8 @@ workflows:
       - salt-centos
       - salt-opensuse
       - salt-fedora
+      - chef-debian
+      - chef-ubuntu
+      - chef-centos
+      - chef-opensuse
+      - chef-fedora
