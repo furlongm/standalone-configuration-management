@@ -17,7 +17,7 @@ vim-data:
 
 /etc/vimrc:
   file.managed:
-    - source: salt://vim/vimrc.Suse
+    - source: salt://vim/files/vimrc.Suse
     - user: root
     - group: root
     - mode: '0644'
@@ -26,7 +26,7 @@ vim-data:
 {% if grains['os_family'] == 'RedHat' %}
 /etc/vimrc:
   file.managed:
-    - source: salt://vim/vimrc.RedHat
+    - source: salt://vim/files/vimrc.RedHat
     - user: root
     - group: root
     - mode: '0644'
@@ -40,7 +40,7 @@ vim-data:
 
 /etc/vim/vimrc.local:
   file.managed:
-    - source: salt://vim/vimrc.local
+    - source: salt://vim/files/vimrc.local
     - user: root
     - group: root
     - mode: '0644'
