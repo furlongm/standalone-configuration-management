@@ -1,11 +1,7 @@
-case node['platform_family']
-when 'debian'
+if node['platform_family'] == 'debian'
   exim = 'exim4'
   mailx = 'bsd-mailx'
-when 'rhel'
-  exim = 'exim'
-  mailx = 'mailx'
-when 'suse'
+else
   exim = 'exim'
   mailx = 'mailx'
 end
