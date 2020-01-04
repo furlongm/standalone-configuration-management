@@ -1,9 +1,11 @@
+{% if grains['virtual'] != 'container' %}
 salt-minion:
   service:
     - dead
     - enable: False
     - watch:
       - file: /etc/salt/minion.d/standalone.conf
+{% endif %}
 
 /etc/salt/minion.d/standalone.conf:
   file.managed:
