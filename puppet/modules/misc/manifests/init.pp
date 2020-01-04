@@ -18,7 +18,7 @@ class misc {
   }
 
   if $::osfamily == 'Debian' {
-    $misc_packages += [
+    $misc_packages = $misc_packages + [
       'apt-transport-https',
       'debian-goodies',
     ]
