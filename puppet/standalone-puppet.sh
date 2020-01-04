@@ -32,7 +32,7 @@ install_puppet() {
         ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
-        ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/ puppet
+        ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
         ${pm} --gpg-auto-import-keys refresh
     fi
     ${pm} install puppet
