@@ -10,7 +10,6 @@ class net {
     'wget',
     'ipset',
     'nload',
-    'iperf3',
     'bmon',
   ]
 
