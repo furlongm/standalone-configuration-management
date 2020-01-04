@@ -1,17 +1,5 @@
 class net {
 
-  $net_packages = [
-    'ethtool',
-    'tcpdump',
-    'nmap',
-    'telnet',
-    'iftop',
-    'whois',
-    'wget',
-    'ipset',
-    'nload',
-  ]
-
   $bindutils = $::osfamily ? {
     'Debian' => 'dnsutils',
     default  => 'bind-utils',
@@ -22,13 +10,27 @@ class net {
     default => 'iperf3',
   }
 
-  $net_packages = $net_packages + [$bindutils, $iperf]
-
-  if $::osfamily != 'RedHat' {
-    $net_packages = $net_packages + 'bmon'
-  }
+  $net_packages = [
+    'ethtool',
+    'tcpdump',
+    'nmap',
+    'telnet',
+    'iftop',
+    'whois',
+    'wget',
+    'ipset',
+    'nload',
+    $bindutils,
+    $iperf,
+  ]
 
   package { $net_packages:
     ensure => installed,
+  }
+
+  if $::osfamily != 'RedHat' {
+    package { 'bmon':
+      ensure => installed,
+    }
   }
 }
