@@ -12,7 +12,7 @@ class fail2ban {
                     File['/etc/fail2ban/jail.local',
                          '/etc/fail2ban/fail2ban.local']],
       subscribe => File['/etc/fail2ban/jail.local',
-                        '/etc/fail2ban/fail2ban.local']],
+                        '/etc/fail2ban/fail2ban.local'],
     }
   }
 
