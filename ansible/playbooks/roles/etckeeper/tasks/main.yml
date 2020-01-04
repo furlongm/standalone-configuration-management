@@ -11,6 +11,9 @@
   notify: etckeeper init
   when: installed_etckeeper_pkg or not etc_git.stat.exists
 
+- name: Force all notified handlers to run
+  meta: flush_handlers
+
 - template:
     src: gitconfig.j2
     dest: /etc/.git/config
