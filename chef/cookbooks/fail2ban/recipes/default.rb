@@ -3,8 +3,8 @@ package 'fail2ban' do
 end
 
 service 'fail2ban' do
-  supports status: true, restart: true, reload: true
   action [:enable, :start]
+  not_if { node['virtualization']['system'] == 'docker' }
 end
 
 cookbook_file 'fail2ban.local' do
