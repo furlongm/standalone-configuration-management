@@ -8,8 +8,9 @@ misc_packages = [
   'bash-completion',
   'pwgen',
   'lsof',
-  'multitail',
 ]
+
+net_packages += ['multitail'] unless node['platform_family'] == 'rhel'
 
 package misc_packages do
   action :install

@@ -8,8 +8,9 @@ net_packages = [
   'wget',
   'ipset',
   'nload',
-  'bmon',
 ]
+
+net_packages += ['bmon'] unless node['platform_family'] == 'rhel'
 
 package net_packages do
   action :install
