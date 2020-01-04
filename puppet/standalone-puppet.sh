@@ -13,7 +13,7 @@ get_pm() {
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
-        ${pm} install which
+        ${pm} install which findutils
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} refresh
