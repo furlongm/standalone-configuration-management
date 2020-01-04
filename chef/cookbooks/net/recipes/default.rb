@@ -8,10 +8,10 @@ net_packages = %w(
   wget
   ipset
   nload
-  node['bind-utils']['package']
-  node['iperf']['package']
 )
 
+net_packages += [node['bind-utils']['package']]
+net_packages += [node['iperf']['package']]
 net_packages += %w(bmon) unless node['platform_family'] == 'rhel'
 
 package net_packages do
