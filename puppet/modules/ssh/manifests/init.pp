@@ -22,8 +22,11 @@ class ssh {
     source => 'puppet:///modules/ssh/sshrc',
   }
 
-  service { $openssh_service:
-    ensure  => running,
-    require => [Package[$openssh_package], File['/etc/ssh/sshrc']],
+  if $::virtual != 'docker' {
+    service { $openssh_service:
+      ensure  => running,
+      require => [Package[$openssh_package],
+                  File['/etc/ssh/sshrc']],
+    }
   }
 }

@@ -25,10 +25,14 @@ class postfix(
     require => Package[$exim],
   }
 
-  service { 'postfix':
-    ensure  => running,
-    enable  => true,
-    require => Package['postfix'],
+  if $::virtual != 'docker' {
+    service { 'postfix':
+      ensure    => running,
+      enable    => true,
+      require   => Package['postfix'],
+      subscribe => [File['/etc/postfix/main.cf'],
+                    Exec['newaliases']],
+    }
   }
 
   file { '/etc/postfix/main.cf':
@@ -37,7 +41,6 @@ class postfix(
     group   => 'root',
     mode    => '0644',
     require => Package['postfix'],
-    notify  => Service['postfix'],
   }
 
   mailalias { 'root_alias':
@@ -51,6 +54,5 @@ class postfix(
     command     => '/usr/bin/newaliases',
     refreshonly => true,
     subscribe   => Mailalias['root_alias'],
-    notify      => Service['postfix'],
   }
 }
