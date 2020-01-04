@@ -1,7 +1,7 @@
 - package:
     name: etckeeper
     state: present
-    register: installed_etckeeper_pkg
+  register: installed_etckeeper_pkg
 
 - stat:
     path: /etc/.git
