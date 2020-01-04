@@ -1,27 +1,19 @@
-net_packages = [
-  'ethtool',
-  'tcpdump',
-  'nmap',
-  'telnet',
-  'iftop',
-  'whois',
-  'wget',
-  'ipset',
-  'nload',
-]
+net_packages = %w(
+  ethtool
+  tcpdump
+  nmap
+  telnet
+  iftop
+  whois
+  wget
+  ipset
+  nload
+  node['bind-utils']['package']
+  node['iperf']['package']
+)
 
-net_packages += ['bmon'] unless node['platform_family'] == 'rhel'
+net_packages += %w(bmon) unless node['platform_family'] == 'rhel'
 
 package net_packages do
-  action :install
-end
-
-package 'bind-utils' do
-  package_name node['bind-utils']['package']
-  action :install
-end
-
-package 'iperf' do
-  package_name node['iperf']['package']
   action :install
 end
