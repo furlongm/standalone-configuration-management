@@ -10,7 +10,13 @@ miscpkgs:
       - bash-completion
       - pwgen
       - lsof
-      - multitail
+
+{% if grains['os_family'] != 'RedHat' %}
+
+multitail:
+  pkg.installed
+
+{% endif %}
 
 {% if grains['os_family'] == 'Debian' %}
 
