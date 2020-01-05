@@ -29,8 +29,7 @@ jobs:
           name: salt-debian
           command: |
             cd saltstack
-            echo https://github.com/saltstack/salt-bootstrap/issues/1353
-            #bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-debian:
     docker:
       - image: debian:10
