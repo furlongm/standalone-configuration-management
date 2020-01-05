@@ -31,6 +31,7 @@ install_epel() {
         epel_release_uri=epel-release
     fi
     ${pm} install ${epel_release_uri}
+    ${pm} makecache
 }
 
 install_deps() {
