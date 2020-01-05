@@ -1,3 +1,3 @@
 locale:
-    locale: en_AU.UTF-8
-    timezone: Australia/Melbourne
+    locale: en_US.UTF-8
+    timezone: America/New York
