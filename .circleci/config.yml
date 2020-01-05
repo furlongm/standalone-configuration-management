@@ -109,8 +109,7 @@ jobs:
           name: salt-centos
           command: |
             cd saltstack
-            echo https://github.com/saltstack/salt-bootstrap/issues/1371
-            #bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-centos:
     docker:
       - image: centos:8
