@@ -17,8 +17,8 @@
     user: root
     group: root
     mode: '0644'
-    notify: locale-gen
   when: ansible_os_family == 'Debian'
+  notify: locale-gen
 
 - name: Add /etc/environment
   template:
