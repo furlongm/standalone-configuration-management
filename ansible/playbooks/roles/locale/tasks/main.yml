@@ -1,6 +1,6 @@
 - name: Include locale vars
   include_vars:
-    file: {{ item }}
+    file: "{{ item }}"
   loop:
     - "{{ ansible_os_family }}.yml"
     - default.yml
