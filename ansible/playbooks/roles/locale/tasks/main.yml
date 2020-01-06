@@ -43,5 +43,5 @@
   ignore_errors: True
 
 - name: Set timezone
-  command: timedatectl set-timezone {{ timezone) }}
+  command: timedatectl set-timezone {{ timezone }}
   when: result is failed
