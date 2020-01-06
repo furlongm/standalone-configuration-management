@@ -14,7 +14,7 @@
   copy:
     dest: /etc/locale.gen
     content: "{{ locale }} UTF-8"
-    user: root
+    owner: root
     group: root
     mode: '0644'
   when: ansible_os_family == 'Debian'
@@ -24,7 +24,7 @@
   template:
    src: environment.j2
    dest: /etc/environment
-   user: root
+   owner: root
    group: root
    mode: '0644'
 
