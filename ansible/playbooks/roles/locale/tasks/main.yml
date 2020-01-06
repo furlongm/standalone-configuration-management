@@ -7,7 +7,7 @@
 
 - name: Install locales package
   package:
-    name: {{ locales_package }}
+    name: "{{ locales_package }}"
     state: present
 
 - name: Add /etc/locale.gen file on Debian
