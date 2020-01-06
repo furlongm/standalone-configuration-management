@@ -2,6 +2,7 @@ base:
   '*':
     - salt
     - epel
+    - locale
     - etckeeper
     - misc
     - net
