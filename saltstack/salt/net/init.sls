@@ -18,4 +18,4 @@ netpkgs:
 bmon:
   pkg.installed
 
-{% endif %
+{% endif %}
