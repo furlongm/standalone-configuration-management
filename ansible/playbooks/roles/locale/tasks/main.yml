@@ -22,7 +22,7 @@
 
 - name: Add /etc/environment
   template:
-   src: files/environment.j2
+   src: environment.j2
    dest: /etc/environment
    user: root
    group: root
