@@ -1,0 +1,47 @@
+- name: Include locale vars
+  include_vars:
+    file: {{ item }}
+  loop:
+    - "{{ ansible_os_family }}.yml"
+    - default.yml
+
+- name: Install locales package
+  package:
+    name: {{ locales_package }}
+    state: present
+
+- name: Add /etc/locale.gen file on Debian
+  copy:
+    dest: /etc/locale.gen
+    content: "{{ locale }} UTF-8"
+    user: root
+    group: root
+    mode: '0644'
+    notify: locale-gen
+  when: ansible_os_family == 'Debian'
+
+- name: Add /etc/environment
+  template:
+   src: files/environment.j2
+   dest: /etc/environment
+   user: root
+   group: root
+   mode: '0644'
+
+- name: Get locale
+  shell: localectl status | grep {{ locale }}
+  register: result
+  ignore_errors: True
+
+- name: Set locale
+  command: localectl set-locale LANG={{ locale }}
+  when: result is failed
+
+- name: Get timezone
+  shell: timedatectl status | grep {{ timezone }}
+  register: result
+  ignore_errors: True
+
+- name: Set timezone
+  command: timedatectl set-timezone {{ timezone) }}
+  when: result is failed
