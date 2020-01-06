@@ -30,6 +30,8 @@ environment:
     - require:
       - pkg: locales
 
+{% if grains['virtual_subtype'] != 'Docker' %}
+
 localectl set-locale LANG={{ salt['pillar.get']('locale:locale') }}:
   cmd.run:
     - unless:
@@ -41,3 +43,5 @@ timedatectl set-timezone {{ salt['pillar.get']('locale:timezone') }}:
   cmd.run:
     - unless:
       - timedatectl status | grep {{ salt['pillar.get']('locale:timezone') }}
+
+{% endif %}
