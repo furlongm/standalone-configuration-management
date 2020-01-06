@@ -5,6 +5,7 @@
   roles:
     - role: 'epel'
       when: ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora'
+    - role: 'locale'
     - role: 'etckeeper'
     - role: 'misc'
     - role: 'net'
