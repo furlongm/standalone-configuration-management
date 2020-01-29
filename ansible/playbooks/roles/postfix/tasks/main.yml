@@ -1,28 +1,34 @@
-- include_vars:
+- name: Set up distro vars
+  include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
-- package:
+- name: Remove exim package
+  package:
     name: "{{ exim_package }}"
     state: absent
 
-- package:
+- name: Install mailx package
+  package:
     name: "{{ mailx_package }}"
     state: present
 
-- package:
+- name: Install postfix package
+  package:
     name: postfix
     state: present
 
-- service:
+- name: Start postfix service
+  service:
     name: postfix
     state: started
     enabled: yes
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
 
-- template:
+- name: Configure postfix
+  template:
     src: main.cf.j2
     dest: /etc/postfix/main.cf
     owner: root
@@ -31,7 +37,8 @@
     backup: yes
   notify: restart postfix
 
-- lineinfile:
+- name: Add root mail alias
+  lineinfile:
     path: /etc/aliases
     regexp: '^root:'
     line: "root: {{ root_mail_alias }}"

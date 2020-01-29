@@ -202,6 +202,19 @@ jobs:
           command: |
             cd chef
             bash -x standalone-chef.sh -e furlongm@gmail.com
+  lint:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: ansible-lint
+          command: |
+            virtualenv ansible-lint
+            . ansible-lint/bin/activate
+            pip install ansible-lint
+            cd ansible/playbooks/roles
+            ansible-lint *
 
 workflows:
   version: 2
@@ -227,3 +240,4 @@ workflows:
       - chef-centos
       - chef-opensuse
       - chef-fedora
+      - linting

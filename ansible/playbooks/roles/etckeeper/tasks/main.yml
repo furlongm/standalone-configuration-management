@@ -1,20 +1,24 @@
-- package:
+- name: Install etckeeper packaqge
+  package:
     name: etckeeper
     state: present
   register: installed_etckeeper_pkg
 
-- stat:
+- name: Check for /etc/.git dir
+  stat:
     path: /etc/.git
   register: etc_git
 
-- command: /bin/true
+- name: Run etckeeper init
+  command: /bin/true
   notify: etckeeper init
   when: installed_etckeeper_pkg or not etc_git.stat.exists
 
 - name: Force all notified handlers to run
   meta: flush_handlers
 
-- template:
+- name: Install /etc/.git/config
+  template:
     src: gitconfig.j2
     dest: /etc/.git/config
     owner: root
