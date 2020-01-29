@@ -1,4 +1,4 @@
-if node['platform_family'] == 'rhel'
+if platform_family?('rhel')
 
   execute 'dnf_makecache' do
     command '/usr/bin/dnf -y makecache'
@@ -11,5 +11,4 @@ if node['platform_family'] == 'rhel'
     provider Chef::Provider::Package::Rpm
     notifies :run, 'execute[dnf_makecache]', :immediately
   end
-
 end

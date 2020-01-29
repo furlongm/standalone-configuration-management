@@ -1,5 +1,61 @@
 version: 2
 jobs:
+  lint-ansible:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: ansible-lint
+          command: |
+            apt update
+            apt -y install build-essential python-virtualenv
+            virtualenv ansible-lint
+            . ansible-lint/bin/activate
+            pip install ansible-lint
+            cd ansible/playbooks/roles
+            ansible-lint *
+            deactivate
+  lint-puppet:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: puppet-lint
+          command: |
+            apt update
+            apt -y install build-essential zlib1g-dev ruby ruby-dev
+            gem install puppet-lint
+            puppet-lint --no-documentation-check puppet/modules
+  lint-salt:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: salt-lint
+          command: |
+            apt update
+            apt -y install build-essential python-dev python-virtualenv
+            virtualenv salt-lint
+            . salt-lint/bin/activate
+            pip install salt-lint
+            find saltstack -name "*.sls" -print0 | xargs -0 -n1 salt-lint
+            deactivate
+  lint-chef:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - checkout
+      - run:
+          name: chef-lint
+          command: |
+            apt update
+            apt -y install build-essential zlib1g-dev ruby ruby-dev
+            gem install foodcritic cookstyle
+            foodcritic -t ~FC031 -t ~FC071 -t ~FC011 -t ~FC109 chef/cookbooks
+            cookstyle chef
   ansible-debian:
     docker:
       - image: debian:10
@@ -205,7 +261,13 @@ jobs:
 
 workflows:
   version: 2
-  test-all-tool-distro-combos:
+  linters:
+   jobs:
+      - lint-ansible
+      - lint-puppet
+      - lint-salt
+      - lint-chef
+  test-tool-distro-combos:
     jobs:
       - ansible-debian
       - ansible-ubuntu

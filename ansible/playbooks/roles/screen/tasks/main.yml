@@ -1,8 +1,10 @@
-- package:
+- name: Install screen package
+  package:
     name: screen
     state: present
 
-- copy:
+- name: Copy screenrc file
+  copy:
     src: screenrc
     dest: /etc/screenrc
     owner: root

@@ -1,14 +1,17 @@
-- include_vars:
+- name: Set up distro vars
+  include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
-- package:
+- name: Install openssh package
+  package:
     name: "{{ openssh_package }}"
     state: present
 
-- copy:
+- name: Copy sshrc file
+  copy:
     src: sshrc
     dest: /etc/ssh/sshrc
     owner: root
@@ -16,7 +19,8 @@
     mode: 0644
     backup: yes
 
-- service:
+- name: Start openssh service
+  service:
     name: "{{ openssh_service }}"
     state: started
     enabled: yes

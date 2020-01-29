@@ -1,10 +1,12 @@
-- include_vars:
+- name: Set up distro vars
+  include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
-- package:
+- name: Install net packages
+  package:
     name: "{{ item }}"
     state: present
   with_items:
@@ -19,7 +21,8 @@
     - "{{ iperf_package }}"
     - "{{ bindutils_package }}"
 
-- package:
+- name: Don't install bmon on RHEL8
+  package:
     name: "{{ item }}"
     state: present
   when: ansible_distribution_major_version != "8" and ansible_os_family != "RedHat"
