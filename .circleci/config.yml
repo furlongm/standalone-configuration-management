@@ -54,7 +54,7 @@ jobs:
             apt update
             apt -y install build-essential zlib1g-dev ruby ruby-dev
             gem install foodcritic cookstyle
-            foodcritic chef/cookbooks
+            foodcritic -t ~FC031 -t ~FC071 -t ~FC011 -t ~FC109 chef/cookbooks
             cookstyle chef
   ansible-debian:
     docker:
