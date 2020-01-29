@@ -8,9 +8,8 @@ misc_packages = %w(
   bash-completion
   pwgen
   lsof
+  multitail
 )
-
-misc_packages += %w(multitail) unless node['platform_family'] == 'rhel'
 
 misc_packages += %w(debian-goodies apt-transport-https) if node['platform_family'] == 'debian'
 
