@@ -11,7 +11,7 @@ misc_packages = %w(
   multitail
 )
 
-misc_packages += %w(debian-goodies apt-transport-https) if node['platform_family'] == 'debian'
+misc_packages += %w(debian-goodies apt-transport-https) if platform_family?('debian')
 
 package misc_packages do
   action :install

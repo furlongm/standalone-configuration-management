@@ -1,4 +1,4 @@
-if node['platform_family'] == 'debian'
+if platform_family?('debian')
   exim = 'exim4'
   mailx = 'bsd-mailx'
 else
