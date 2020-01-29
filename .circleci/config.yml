@@ -202,7 +202,7 @@ jobs:
           command: |
             cd chef
             bash -x standalone-chef.sh -e furlongm@gmail.com
-  lint:
+  linting:
     docker:
       - image: ubuntu:18.04
     steps:
@@ -240,4 +240,6 @@ workflows:
       - chef-centos
       - chef-opensuse
       - chef-fedora
+  run-linters:
+   jobs:
       - linting
