@@ -27,7 +27,7 @@ jobs:
             apt update
             apt -y install build-essential zlib1g-dev ruby ruby-dev
             gem install puppet-lint
-            puppet-lint puppet/modules
+            puppet-lint --no-documentation-check puppet/modules
   lint-salt:
     docker:
       - image: ubuntu:18.04
