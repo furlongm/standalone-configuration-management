@@ -37,5 +37,5 @@ recipient_delimiter = +
 inet_interfaces = loopback-only
 {% if grains['os_family'] == 'Suse' %}
 setgid_group = maildrop
-daemon_directory = /usr/lib/postfix
+daemon_directory = /usr/lib/postfix/bin/
 {% endif %}
