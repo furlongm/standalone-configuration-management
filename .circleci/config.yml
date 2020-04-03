@@ -216,7 +216,7 @@ jobs:
           command: |
             cd chef
             echo https://github.com/chef/omnitruck/pull/375
-            #bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-fedora:
     docker:
       - image: fedora:31
@@ -247,7 +247,7 @@ jobs:
           command: |
             cd saltstack
             echo https://github.com/saltstack/salt/issues/55787
-            #bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-fedora:
     docker:
       - image: fedora:31
