@@ -30,7 +30,7 @@ environment:
     - require:
       - pkg: locales
 
-{% if grains['virtual_subtype'] != 'Docker' %}
+{% if not salt['grains.get']('virtual_subtype') or grains['virtual_subtype'] != 'Docker' %}
 
 localectl set-locale LANG={{ salt['pillar.get']('locale:locale') }}:
   cmd.run:

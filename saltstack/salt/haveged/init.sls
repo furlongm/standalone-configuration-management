@@ -1,7 +1,7 @@
 haveged:
   pkg:
     - installed
-{% if grains['virtual_subtype'] != 'Docker' %}
+{% if not salt['grains.get']('virtual_subtype') or grains['virtual_subtype'] != 'Docker' %}
   service:
     - running
     - enable: True
