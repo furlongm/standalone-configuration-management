@@ -22,6 +22,7 @@ set modeline
 
 " Don't do autoindent when pasting text
 set paste
+set noautoindent
 
 " Four spaces for tabs
 set tabstop=4

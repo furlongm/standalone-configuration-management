@@ -6,13 +6,13 @@ backend   = auto
 destemail = root@localhost
 
 [sshd]
-enabled  = true
+enabled = true
 <% if @osfamily == 'Debian' -%>
-logpath  = /var/log/auth.log
+logpath = /var/log/auth.log
 <% end -%>
 <% if @osfamily == 'RedHat' -%>
-logpath  = /var/log/secure
+logpath = /var/log/secure
 <% end -%>
 <% if @osfamily == 'Suse' -%>
-logpath  = /var/log/messages
+logpath = /var/log/messages
 <% end -%>

@@ -26,7 +26,7 @@ myorigin = {{ grains['fqdn'] }}
 
 {% if grains['fqdn'] != grains['host'] -%}
 mydestination = {{ grains['fqdn'] }}, {{ grains['host'] }}, localhost.localdomain, localhost
-{% else -%}
+{%- else -%}
 mydestination = {{ grains['host'] }}, localhost.localdomain, localhost
 {%- endif %}
 
@@ -38,4 +38,4 @@ inet_interfaces = loopback-only
 {% if grains['os_family'] == 'Suse' %}
 setgid_group = maildrop
 daemon_directory = /usr/lib/postfix/bin/
-{% endif %}
+{%- endif %}
