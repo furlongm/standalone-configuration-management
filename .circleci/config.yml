@@ -9,7 +9,7 @@ jobs:
           name: ansible-lint
           command: |
             apt update
-            apt -y install build-essential python-virtualenv
+            apt -y install build-essential python3-virtualenv
             virtualenv ansible-lint
             . ansible-lint/bin/activate
             pip install ansible-lint
@@ -37,7 +37,7 @@ jobs:
           name: salt-lint
           command: |
             apt update
-            apt -y install build-essential python-dev python-virtualenv
+            apt -y install build-essential python3-dev python3-virtualenv
             virtualenv salt-lint
             . salt-lint/bin/activate
             pip install salt-lint
