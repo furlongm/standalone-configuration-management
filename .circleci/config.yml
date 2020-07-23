@@ -114,6 +114,7 @@ jobs:
       - run:
           name: puppet-ubuntu
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
   salt-ubuntu:
