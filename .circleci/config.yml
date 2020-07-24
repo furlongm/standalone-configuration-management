@@ -2,14 +2,14 @@ version: 2
 jobs:
   lint-ansible:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
           name: ansible-lint
           command: |
             apt update
-            apt -y install build-essential python-virtualenv
+            apt -y install build-essential python3-virtualenv
             virtualenv ansible-lint
             . ansible-lint/bin/activate
             pip install ansible-lint
@@ -18,7 +18,7 @@ jobs:
             deactivate
   lint-puppet:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
@@ -30,14 +30,14 @@ jobs:
             puppet-lint --no-documentation-check puppet/modules
   lint-salt:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
           name: salt-lint
           command: |
             apt update
-            apt -y install build-essential python-dev python-virtualenv
+            apt -y install build-essential python3-dev python3-virtualenv
             virtualenv salt-lint
             . salt-lint/bin/activate
             pip install salt-lint
@@ -45,7 +45,7 @@ jobs:
             deactivate
   lint-chef:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
@@ -98,7 +98,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-ubuntu:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
@@ -108,17 +108,18 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com
   puppet-ubuntu:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
           name: puppet-ubuntu
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com
   salt-ubuntu:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
@@ -128,7 +129,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-ubuntu:
     docker:
-      - image: ubuntu:18.04
+      - image: ubuntu:20.04
     steps:
       - checkout
       - run:
@@ -178,7 +179,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-opensuse:
     docker:
-      - image: opensuse/leap:15.1
+      - image: opensuse/leap:15.2
     steps:
       - checkout
       - run:
@@ -188,7 +189,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com
   puppet-opensuse:
     docker:
-      - image: opensuse/leap:15.1
+      - image: opensuse/leap:15.2
     steps:
       - checkout
       - run:
@@ -198,7 +199,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com
   salt-opensuse:
     docker:
-      - image: opensuse/leap:15.1
+      - image: opensuse/leap:15.2
     steps:
       - checkout
       - run:
@@ -208,7 +209,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-opensuse:
     docker:
-      - image: opensuse/leap:15.1
+      - image: opensuse/leap:15.2
     steps:
       - checkout
       - run:
@@ -219,7 +220,7 @@ jobs:
             #bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-fedora:
     docker:
-      - image: fedora:31
+      - image: fedora:32
     steps:
       - checkout
       - run:
@@ -229,7 +230,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com
   puppet-fedora:
     docker:
-      - image: fedora:31
+      - image: fedora:32
     steps:
       - checkout
       - run:
@@ -239,7 +240,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com
   salt-fedora:
     docker:
-      - image: fedora:31
+      - image: fedora:32
     steps:
       - checkout
       - run:
@@ -250,7 +251,7 @@ jobs:
             #bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-fedora:
     docker:
-      - image: fedora:31
+      - image: fedora:32
     steps:
       - checkout
       - run:
