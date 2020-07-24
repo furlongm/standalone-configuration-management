@@ -1,4 +1,4 @@
-{% if grains['os_family'] == 'RedHat' %}
+{% if grains['os_family'] == 'RedHat' and grains['os'] != 'Fedora' %}
 
 epel-release:
   pkg.installed:
