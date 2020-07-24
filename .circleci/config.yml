@@ -216,8 +216,7 @@ jobs:
           name: chef-opensuse
           command: |
             cd chef
-            echo https://github.com/chef/omnitruck/pull/375
-            #bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com
   ansible-fedora:
     docker:
       - image: fedora:32

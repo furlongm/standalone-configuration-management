@@ -17,7 +17,7 @@ get_pm() {
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} refresh
-        ${pm} install gzip
+        ${pm} install gzip hostname
     else
         echo "Error: no package manager found."
         exit 1
