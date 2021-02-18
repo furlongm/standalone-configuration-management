@@ -8,11 +8,11 @@ net_packages = %w(
   wget
   ipset
   nload
+  bmon
 )
 
 net_packages += [node['bind-utils']['package']]
 net_packages += [node['iperf']['package']]
-net_packages += %w(bmon) unless platform_family?('rhel')
 
 package net_packages do
   action :install

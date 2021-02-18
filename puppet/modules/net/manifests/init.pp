@@ -20,17 +20,12 @@ class net {
     'wget',
     'ipset',
     'nload',
+    'bmon',
     $bindutils,
     $iperf,
   ]
 
   package { $net_packages:
     ensure => installed,
-  }
-
-  if $::osfamily != 'RedHat' {
-    package { 'bmon':
-      ensure => installed,
-    }
   }
 }

@@ -10,12 +10,6 @@ netpkgs:
       - wget
       - ipset
       - nload
+      - bmon
       - {{ salt['pillar.get']('pkgs:bind-utils') }}
       - {{ salt['pillar.get']('pkgs:iperf') }}
-
-{% if grains['os_family'] != 'RedHat' %}
-
-bmon:
-  pkg.installed
-
-{% endif %}
