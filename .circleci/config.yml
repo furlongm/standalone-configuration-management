@@ -12,7 +12,7 @@ jobs:
             apt -y install build-essential python3-virtualenv
             virtualenv ansible-lint
             . ansible-lint/bin/activate
-            pip install ansible-lint
+            pip install ansible ansible-lint
             cd ansible/playbooks/roles
             ansible-lint *
             deactivate
