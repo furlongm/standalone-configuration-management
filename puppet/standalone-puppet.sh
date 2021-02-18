@@ -10,10 +10,11 @@ get_pm() {
     if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
         pm='apt -y'
         ${pm} update
+        ${pm} install wget
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
-        ${pm} install --skip-broken which findutils hostname libxcrypt-compat
+        ${pm} install --skip-broken which coreutils findutils hostname libxcrypt-compat
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n --no-gpg-checks --gpg-auto-import-keys'
         ${pm} refresh
@@ -29,8 +30,12 @@ install_deps() {
 }
 
 install_puppet() {
-    if [[ "${pm}" =~ "dnf" ]] ; then
-        ${pm} install coreutils
+    if [[ "${pm}" =~ "apt" ]] ; then
+        deb=puppet7-release-${VERSION_CODENAME}.deb
+        wget https://apt.puppet.com/${deb}
+        dpkg -i ${deb}
+        rm ${deb}
+    elif [[ "${pm}" =~ "dnf" ]] ; then
         ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
