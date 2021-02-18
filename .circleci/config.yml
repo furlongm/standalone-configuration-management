@@ -246,7 +246,8 @@ jobs:
           name: salt-fedora
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com
+            echo https://github.com/saltstack/salt-bootstrap/issues/1488
+            #bash -x standalone-salt.sh -e furlongm@gmail.com
   chef-fedora:
     docker:
       - image: fedora:33
