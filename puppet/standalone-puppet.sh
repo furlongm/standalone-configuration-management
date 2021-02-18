@@ -15,7 +15,7 @@ get_pm() {
         ${pm} makecache
         ${pm} install --skip-broken which findutils hostname libxcrypt-compat
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
-        pm='zypper -n --gpg-auto-import-keys'
+        pm='zypper -n --no-gpg-checks --gpg-auto-import-keys'
         ${pm} refresh
         ${pm} install gzip
     else
@@ -37,9 +37,10 @@ install_puppet() {
         rpm --import RPM-GPG-KEY-puppet
         rm RPM-GPG-KEY-puppet
         ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
-        ${pm} --gpg-auto-import-keys refresh
+        ${pm} refresh
     fi
     ${pm} install puppet
+    ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
 }
 
 install_vim_syntax_highlighting() {
