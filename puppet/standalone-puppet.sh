@@ -30,6 +30,7 @@ install_deps() {
 
 install_puppet() {
     if [[ "${pm}" =~ "dnf" ]] ; then
+        ${pm} install coreutils
         ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
