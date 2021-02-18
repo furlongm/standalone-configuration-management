@@ -15,7 +15,7 @@ get_pm() {
         ${pm} makecache
         ${pm} install --skip-broken which findutils hostname libxcrypt-compat
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
-        pm='zypper -n'
+        pm='zypper -n --gpg-auto-import-keys'
         ${pm} refresh
         ${pm} install gzip
     else
