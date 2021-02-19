@@ -75,13 +75,20 @@ install_vim_syntax_highlighting() {
     rm -fr ${tmp_dir}
 }
 
-get_config_from_github() {
+get_config() {
     tmp_dir=$(mktemp -d)
-    git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-    mkdir -p /etc/puppet/{manifests,modules}
-    cp -Lr ${tmp_dir}/puppet/modules/* /etc/puppet/modules
-    cp -r ${tmp_dir}/puppet/manifests/* /etc/puppet/manifests
-    rm -fr ${tmp_dir}
+    if [ -z ${run_locally} ] ; then
+        git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+        mkdir -p /etc/puppet/{manifests,modules}
+        cp -Lr ${tmp_dir}/puppet/modules/* /etc/puppet/modules
+        cp -r ${tmp_dir}/puppet/manifests/* /etc/puppet/manifests
+        run_path=/etc/puppet
+    else
+        # FIXME don't use relative path
+        cp -Lr ./modules ${tmp_dir}
+        cp -Lr ./manfiests ${tmp_dir}
+        run_path=${tmp_dir}
+    fi
 }
 
 main() {
@@ -90,14 +97,12 @@ main() {
     which curl 1>/dev/null 2>&1 || install_deps
     which puppet 1>/dev/null 2>&1 || install_puppet
     install_vim_syntax_highlighting
-    if [ "${run_path}" != "." ] ; then
-        run_path=/etc/puppet
-        get_config_from_github
-    fi
+    get_config
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/standalone-site.pp
-    export PATH=${PATH}:/opt/puppetlabs/bin
+    export PATH=/opt/puppetlabs/bin:${PATH}
     puppet module install --target-dir ${run_path}/modules puppetlabs-mailalias_core
     puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
+    rm -fr ${tmp_dir}
 }
 
 while getopts ":le:" opt ; do
@@ -106,7 +111,7 @@ while getopts ":le:" opt ; do
             email=${OPTARG}
             ;;
         l)
-            run_path=.
+            run_locally=true
             ;;
         *)
             usage

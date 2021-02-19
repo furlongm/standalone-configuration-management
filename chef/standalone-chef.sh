@@ -51,11 +51,18 @@ install_vim_syntax_highlighting() {
     rm -fr ${tmp_dir}
 }
 
-get_config_from_github() {
+get_config() {
     tmp_dir=$(mktemp -d)
-    git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-    cp -Lr ${tmp_dir}/chef /srv
-    rm -fr ${tmp_dir}
+    if [ -z ${run_locally} ] ; then
+        git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+        cp -Lr ${tmp_dir}/chef /srv
+        run_path=/srv/chef
+        client_args="-c ${run_path}/client.rb"
+    else
+        # FIXME don't use relative path
+        cp -Lr . ${tmp_dir}
+        run_path=${tmp_dir}
+    fi
 }
 
 main() {
@@ -64,13 +71,10 @@ main() {
     which curl 1>/dev/null 2>&1 || install_deps
     which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
-    if [ "${run_path}" != "." ] ; then
-        run_path=/srv/chef
-        get_config_from_github
-        client_args="-c ${run_path}/client.rb"
-    fi
+    get_config
     sed -i -e "s/root_mail_alias.*/root_mail_alias\": \"${email}\"/" ${run_path}/node.json
     chef-client -z -j ${run_path}/node.json ${client_args} --chef-license accept
+    rm -fr ${tmp_dir}
 }
 
 while getopts ":le:" opt ; do
@@ -79,7 +83,7 @@ while getopts ":le:" opt ; do
             email=${OPTARG}
             ;;
         l)
-            run_path=.
+            run_locally=.
             ;;
         *)
             usage
