@@ -35,6 +35,7 @@ install_puppet() {
         wget https://apt.puppet.com/${deb}
         dpkg -i ${deb}
         rm ${deb}
+        ${pm} update
     elif [[ "${pm}" =~ "dnf" ]] ; then
         if [[ "${ID}" == "fedora" ]] ; then
             ${pm} install https://yum.puppetlabs.com/puppet-release-fedora-32.noarch.rpm
