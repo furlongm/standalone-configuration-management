@@ -50,7 +50,7 @@ install_puppet() {
         ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
         ${pm} refresh
     fi
-    ${pm} install puppet
+    ${pm} install puppet-agent
     ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
 }
 
