@@ -51,7 +51,6 @@ install_puppet() {
         ${pm} refresh
     fi
     ${pm} install puppet-agent
-    ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
 }
 
 install_vim_syntax_highlighting() {
