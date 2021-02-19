@@ -5,5 +5,34 @@
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
-- import_tasks: install-fail2ban.yml
-- import_tasks: configure-fail2ban.yml
+- name: install fail2ban
+  package:
+    name: fail2ban
+    state: present
+
+- name: start fail2ban service
+  service:
+    name: fail2ban
+    state: started
+    enabled: yes
+  when: ansible_virtualization_type != 'docker'
+
+- name: configure fail2ban
+  copy:
+    src: fail2ban.local
+    dest: /etc/fail2ban/fail2ban.local
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify: restart fail2ban
+
+- name: configure fail2ban ssh jail
+  template:
+    src: jail.local.j2
+    dest: /etc/fail2ban/jail.local
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify: restart fail2ban
