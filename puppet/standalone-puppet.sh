@@ -36,7 +36,11 @@ install_puppet() {
         dpkg -i ${deb}
         rm ${deb}
     elif [[ "${pm}" =~ "dnf" ]] ; then
-        ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
+        if [[ "${ID}" == "fedora" ]] ; then
+            ${pm} install https://yum.puppetlabs.com/puppet-release-fedora-32.noarch.rpm
+        else
+            ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
+        fi
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
         curl -k -O https://yum.puppetlabs.com/RPM-GPG-KEY-puppet
