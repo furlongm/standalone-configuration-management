@@ -72,8 +72,7 @@ main() {
         get_config_from_github
     fi
     set -e
-    sed -i -e "s/admin@example.com/${email}/" ${run_path}/salt/alias.sls
-    salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate
+    ROOT_ALIAS=${email} salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate
 }
 
 while getopts ":le:" opt ; do

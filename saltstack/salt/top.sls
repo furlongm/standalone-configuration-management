@@ -11,5 +11,4 @@ base:
     - fail2ban
     - haveged
     - vim
-    - alias
     - postfix
