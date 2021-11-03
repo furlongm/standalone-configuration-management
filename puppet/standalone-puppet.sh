@@ -38,7 +38,7 @@ install_puppet() {
         ${pm} update
     elif [[ "${pm}" =~ "dnf" ]] ; then
         if [[ "${ID}" == "fedora" ]] ; then
-            ${pm} install https://yum.puppetlabs.com/puppet-release-fedora-32.noarch.rpm
+            ${pm} install https://yum.puppetlabs.com/puppet-release-fedora-34.noarch.rpm
         else
             ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         fi
