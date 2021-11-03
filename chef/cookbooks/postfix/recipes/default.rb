@@ -18,6 +18,12 @@ package 'postfix' do
   action :install
 end
 
+if platform_family?('debian', 'fedora')
+  package 'postfix-lmdb' do
+    action :install
+  end
+end
+
 template 'main.cf' do
   path '/etc/postfix/main.cf'
   owner 'root'

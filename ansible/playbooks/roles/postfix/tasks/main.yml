@@ -20,6 +20,12 @@
     name: postfix
     state: present
 
+- name: Install postfix-lmdb package
+  package:
+    name: postfix-lmdb
+    state: present
+  when: ansible_os_family == 'Debian' or ansible_distribution == 'Fedora'
+
 - name: Start postfix service
   service:
     name: postfix

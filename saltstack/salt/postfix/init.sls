@@ -11,6 +11,12 @@ postfix:
       - file: /etc/postfix/main.cf
 {% endif %}
 
+{% if grains['os_family'] == 'Debian' or grains['os'] == 'Fedora' %}
+postfix-lmdb:
+  pkg:
+    - installed
+{% endif %}
+
 mailx:
   pkg:
     - installed
