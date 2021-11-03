@@ -65,7 +65,7 @@ jobs:
           name: ansible-debian
           command: |
             cd ansible
-            bash -x standalone-ansible.sh -e furlongm@gmail.com
+            bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-debian:
     docker:
       - image: debian:11
@@ -75,7 +75,7 @@ jobs:
           name: puppet-debian
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-debian:
     docker:
       - image: debian:11
@@ -85,7 +85,7 @@ jobs:
           name: salt-debian
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-debian:
     docker:
       - image: debian:11
@@ -95,7 +95,7 @@ jobs:
           name: chef-debian
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-ubuntu:
     docker:
       - image: ubuntu:20.04
@@ -105,7 +105,7 @@ jobs:
           name: ansible-ubuntu
           command: |
             cd ansible
-            bash -x standalone-ansible.sh -e furlongm@gmail.com
+            bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-ubuntu:
     docker:
       - image: ubuntu:20.04
@@ -116,7 +116,7 @@ jobs:
           command: |
             export DEBIAN_FRONTEND=noninteractive
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-ubuntu:
     docker:
       - image: ubuntu:20.04
@@ -126,7 +126,7 @@ jobs:
           name: salt-ubuntu
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-ubuntu:
     docker:
       - image: ubuntu:20.04
@@ -136,7 +136,7 @@ jobs:
           name: chef-ubuntu
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-centos:
     docker:
       - image: centos:8
@@ -146,7 +146,7 @@ jobs:
           name: ansible-centos
           command: |
             cd ansible
-            bash -x standalone-ansible.sh -e furlongm@gmail.com
+            bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-centos:
     docker:
       - image: centos:8
@@ -156,7 +156,7 @@ jobs:
           name: puppet-centos
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-centos:
     docker:
       - image: centos:8
@@ -166,7 +166,7 @@ jobs:
           name: salt-centos
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-centos:
     docker:
       - image: centos:8
@@ -176,7 +176,7 @@ jobs:
           name: chef-centos
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-opensuse:
     docker:
       - image: opensuse/leap:15.2
@@ -186,7 +186,7 @@ jobs:
           name: ansible-opensuse
           command: |
             cd ansible
-            bash -x standalone-ansible.sh -e furlongm@gmail.com
+            bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-opensuse:
     docker:
       - image: opensuse/leap:15.2
@@ -196,7 +196,7 @@ jobs:
           name: puppet-opensuse
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-opensuse:
     docker:
       - image: opensuse/leap:15.2
@@ -206,7 +206,7 @@ jobs:
           name: salt-opensuse
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-opensuse:
     docker:
       - image: opensuse/leap:15.2
@@ -216,7 +216,7 @@ jobs:
           name: chef-opensuse
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-fedora:
     docker:
       - image: fedora:33
@@ -226,7 +226,7 @@ jobs:
           name: ansible-fedora
           command: |
             cd ansible
-            bash -x standalone-ansible.sh -e furlongm@gmail.com
+            bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-fedora:
     docker:
       - image: fedora:33
@@ -236,7 +236,7 @@ jobs:
           name: puppet-fedora
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-fedora:
     docker:
       - image: fedora:33
@@ -246,8 +246,7 @@ jobs:
           name: salt-fedora
           command: |
             cd saltstack
-            echo https://github.com/saltstack/salt-bootstrap/issues/1488
-            #bash -x standalone-salt.sh -e furlongm@gmail.com
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-fedora:
     docker:
       - image: fedora:33
@@ -257,7 +256,7 @@ jobs:
           name: chef-fedora
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l
 
 workflows:
   version: 2
