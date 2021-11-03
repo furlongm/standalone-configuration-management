@@ -36,3 +36,13 @@ exim:
     - mode: '0644'
     - require:
       - pkg: postfix
+
+{% set root_alias = salt['environ.get']('ROOT_ALIAS') %}
+{% if root_alias %}
+root:
+  alias.present:
+    - target: {{ root_alias }}
+{% endif %}
+
+newaliases:
+  cmd.run
