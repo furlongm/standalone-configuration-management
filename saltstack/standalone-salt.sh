@@ -29,7 +29,34 @@ install_deps() {
 }
 
 install_salt() {
-    curl -L http://bootstrap.saltproject.io | bash -s -- -X -d -x python3 || exit 1
+    #curl -L http://bootstrap.saltproject.io | bash -s -- -X -d -x python3 || exit 1
+    . /etc/os-release
+    if [[ "${ID}" == "debian" ]] ; then
+        curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/debian/11/amd64/latest/salt-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] https://repo.saltproject.io/py3/debian/11/amd64/latest bullseye main" | tee /etc/apt/sources.list.d/salt.list
+        pm='apt -y'
+        ${pm} update
+    elif [[ "${ID}" == "ubuntu" ]] ; then
+        curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | tee /etc/apt/sources.list.d/salt.list
+        pm='apt -y'
+        ${pm} update
+    elif [[ "${ID_LIKE}" =~ "rhel" ]] ; then
+        rpm --import https://repo.saltproject.io/py3/redhat/8/x86_64/latest/SALTSTACK-GPG-KEY.pub
+        curl -fsSL https://repo.saltproject.io/py3/redhat/8/x86_64/latest.repo | tee /etc/yum.repos.d/salt.repo
+        pm='dnf -y'
+        ${pm} makecache
+    elif [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
+        pm='dnf -y'
+        ${pm} makecache
+    elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
+        pm='zypper -n'
+        ${pm} refresh
+    else
+        echo "Error: no package manager found."
+        exit 1
+    fi
+    ${pm} install salt-minion
 }
 
 install_vim_syntax_highlighting() {
