@@ -24,6 +24,12 @@ class postfix(
     ensure => absent,
   }
 
+  if ($::osfamily == 'Debian') or ($::operatingsystem == 'Fedora') {
+    package { 'postfix-lmdb':
+      ensure => installed,
+    }
+  }
+
   if $::virtual != 'docker' {
     service { 'postfix':
       ensure    => running,
