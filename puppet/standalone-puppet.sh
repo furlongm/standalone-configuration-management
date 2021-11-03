@@ -85,7 +85,7 @@ get_config() {
     else
         # FIXME don't use relative path
         cp -Lr ./modules ${tmp_dir}
-        cp -Lr ./manfiests ${tmp_dir}
+        cp -Lr ./manifests ${tmp_dir}
         run_path=${tmp_dir}
     fi
 }
