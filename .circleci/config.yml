@@ -125,6 +125,7 @@ jobs:
       - run:
           name: salt-ubuntu
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             cd saltstack
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-ubuntu:
