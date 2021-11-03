@@ -81,6 +81,7 @@ main() {
         run_path=/srv/ansible
         get_config_from_github
     fi
+    set -e
     ansible --version
     ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml -e "root_mail_alias=${email}" -e 'ansible_python_interpreter=/usr/bin/python3'
 }

@@ -73,6 +73,7 @@ main() {
     install_vim_syntax_highlighting
     get_config
     sed -i -e "s/root_mail_alias.*/root_mail_alias\": \"${email}\"/" ${run_path}/node.json
+    set -e
     chef-client -z -j ${run_path}/node.json ${client_args} --chef-license accept
     rm -fr ${tmp_dir}
 }

@@ -100,8 +100,24 @@ main() {
     sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/standalone-site.pp
     export PATH=/opt/puppetlabs/bin:${PATH}
     puppet module install --target-dir ${run_path}/modules puppetlabs-mailalias_core
-    puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
+    puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp --detailed-exitcodes
+    retval=${?}
+    echo ${retval}
+    case ${retval} in
+        0)
+            failed=false
+            ;;
+        2)
+            failed=false
+            ;;
+        *)
+            failed=true
+            ;;
+    esac
     rm -fr ${tmp_dir}
+    if [ "${failed}" == "true" ] ; then
+        exit 1
+    fi
 }
 
 while getopts ":le:" opt ; do
