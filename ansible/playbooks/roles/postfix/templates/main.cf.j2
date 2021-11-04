@@ -13,8 +13,13 @@ readme_directory = no
 smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_use_tls = yes
+{% if ansible_os_family == 'RedHat' -%}
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
+{% else -%}
+smtpd_tls_session_cache_database = lmdb:${data_directory}/smtpd_scache
+smtp_tls_session_cache_database = lmdb:${data_directory}/smtp_scache
+{% endif %}
 
 myhostname = {{ ansible_hostname }}
 {% if ansible_os_family == 'RedHat' -%}
@@ -32,7 +37,9 @@ mydestination = {{ ansible_fqdn }}, {{ ansible_hostname }}, localhost.localdomai
 mydestination = {{ ansible_hostname }}, localhost.localdomain, localhost
 {%- endif %}
 
-#relayhost =
+{% if mail_relay -%}
+relayhost = {{ mail_relay }}
+{% endif -%}
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +

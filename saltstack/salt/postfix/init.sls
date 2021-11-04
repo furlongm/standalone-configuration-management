@@ -37,11 +37,10 @@ exim:
     - require:
       - pkg: postfix
 
-{% set root_alias = salt['environ.get']('ROOT_ALIAS') %}
-{% if root_alias %}
+{% if salt['pillar.get']('root_alias') %}
 root:
   alias.present:
-    - target: {{ root_alias }}
+    - target: {{ salt['pillar.get']('root_alias') }}
 {% endif %}
 
 newaliases:

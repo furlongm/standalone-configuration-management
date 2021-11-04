@@ -47,5 +47,5 @@
   lineinfile:
     path: /etc/aliases
     regexp: '^root:'
-    line: "root: {{ root_mail_alias }}"
+    line: "root: {{ root_alias }}"
   notify: exec newaliases
