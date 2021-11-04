@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
     exit 1
 }
 
@@ -83,16 +83,19 @@ main() {
     fi
     set -e
     ansible --version
-    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml -e "root_mail_alias=${email}" -e 'ansible_python_interpreter=/usr/bin/python3'
+    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml -e "mail_relay=${mail_relay}" -e "root_alias=${root_alias}" -e 'ansible_python_interpreter=/usr/bin/python3'
 }
 
-while getopts ":le:" opt ; do
+while getopts ":le:m:" opt ; do
     case ${opt} in
         e)
-            email=${OPTARG}
+            root_alias=${OPTARG}
             ;;
         l)
             run_path=.
+            ;;
+        m)
+            mail_relay=${OPTARG}
             ;;
         *)
             usage
@@ -100,7 +103,7 @@ while getopts ":le:" opt ; do
     esac
 done
 
-if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
+if [[ -z ${root_alias} || ${EUID} -ne 0 ]] ; then
     usage
 fi
 main

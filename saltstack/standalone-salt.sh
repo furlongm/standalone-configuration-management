@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
     exit 1
 }
 
@@ -99,16 +99,19 @@ main() {
         get_config_from_github
     fi
     set -e
-    ROOT_ALIAS=${email} salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate
+    salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate pillar="{'mail_relay': \"${mail_relay}\", 'root_alias': \"${root_alias}\"}"
 }
 
-while getopts ":le:" opt ; do
+while getopts ":le:m:" opt ; do
     case ${opt} in
         e)
-            email=${OPTARG}
+            root_alias=${OPTARG}
             ;;
         l)
             run_path=.
+            ;;
+        m)
+            mail_relay=${OPTARG}
             ;;
         *)
             usage
@@ -116,7 +119,7 @@ while getopts ":le:" opt ; do
     esac
 done
 
-if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
+if [[ -z ${root_alias} || ${EUID} -ne 0 ]] ; then
     usage
 fi
 main

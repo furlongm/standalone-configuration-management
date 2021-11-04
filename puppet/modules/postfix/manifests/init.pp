@@ -51,7 +51,7 @@ class postfix(
   mailalias { 'root_alias':
     ensure    => present,
     name      => 'root',
-    recipient => $root_alias,
+    recipient => $::root_alias,
     target    => '/etc/aliases'
   }
 

@@ -30,6 +30,9 @@ template 'main.cf' do
   group 'root'
   mode '0644'
   action :create
+  variables(
+    mail_relay: node['postfix']['mail_relay']
+  )
   notifies :restart, 'service[postfix]'
 end
 
@@ -40,7 +43,7 @@ end
 
 ruby_block 'add_root_mail_alias' do
   block do
-    mail_alias = 'root: ' + node['postfix']['root_mail_alias']
+    mail_alias = 'root: ' + node['postfix']['root_alias']
     file = Chef::Util::FileEdit.new('/etc/aliases')
     file.search_file_replace_line(/^root:/, mail_alias)
     file.insert_line_if_no_match(/^root:/, mail_alias)

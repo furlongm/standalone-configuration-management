@@ -1,9 +1,8 @@
 {
-
   "postfix": {
-    "root_mail_alias": "admin@example.com"
+    "root_alias": "",
+    "mail_relay": ""
   },
-
   "run_list": [ "recipe[epel]",
                 "recipe[etckeeper]",
                 "recipe[misc]",

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
     exit 1
 }
 
@@ -97,12 +97,12 @@ main() {
     which puppet 1>/dev/null 2>&1 || install_puppet
     install_vim_syntax_highlighting
     get_config
-    sed -i -e "s/admin@example.com/${email}/" ${run_path}/manifests/standalone-site.pp
     export PATH=/opt/puppetlabs/bin:${PATH}
+    export FACTER_root_alias=${root_alias}
+    export FACTER_mail_relay=${mail_relay}
     puppet module install --target-dir ${run_path}/modules puppetlabs-mailalias_core
-    puppet apply --show_diff --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp --detailed-exitcodes
+    puppet apply --show_diff --detailed-exitcodes --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
     retval=${?}
-    echo ${retval}
     case ${retval} in
         0)
             failed=false
@@ -114,19 +114,22 @@ main() {
             failed=true
             ;;
     esac
-    rm -fr ${tmp_dir}
     if [ "${failed}" == "true" ] ; then
         exit 1
     fi
+    rm -fr ${tmp_dir}
 }
 
-while getopts ":le:" opt ; do
+while getopts ":le:m:" opt ; do
     case ${opt} in
         e)
-            email=${OPTARG}
+            root_alias=${OPTARG}
             ;;
         l)
             run_locally=true
+            ;;
+        m)
+            mail_relay=${OPTARG}
             ;;
         *)
             usage
@@ -134,7 +137,7 @@ while getopts ":le:" opt ; do
     esac
 done
 
-if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
+if [[ -z ${root_alias} || ${EUID} -ne 0 ]] ; then
     usage
 fi
 main

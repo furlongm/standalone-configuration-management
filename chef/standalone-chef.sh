@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
     exit 1
 }
 
@@ -57,7 +57,6 @@ get_config() {
         git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
         cp -Lr ${tmp_dir}/chef /srv
         run_path=/srv/chef
-        client_args="-c ${run_path}/client.rb"
     else
         # FIXME don't use relative path
         cp -Lr . ${tmp_dir}
@@ -72,19 +71,24 @@ main() {
     which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
     get_config
-    sed -i -e "s/root_mail_alias.*/root_mail_alias\": \"${email}\"/" ${run_path}/node.json
+    sed -i -e "s#run_path =.*#run_path = '${run_path}'#" ${run_path}/client.rb
+    sed -i -e "s/root_alias.*\"/root_alias\": \"${root_alias}\"/" ${run_path}/node.json
+    sed -i -e "s/mail_relay.*\"/mail_relay\": \"${mail_relay}\"/" ${run_path}/node.json
     set -e
-    chef-client -z -j ${run_path}/node.json ${client_args} --chef-license accept
+    chef-client -z -j ${run_path}/node.json -c ${run_path}/client.rb --chef-license accept
     rm -fr ${tmp_dir}
 }
 
-while getopts ":le:" opt ; do
+while getopts ":le:m:" opt ; do
     case ${opt} in
         e)
-            email=${OPTARG}
+            root_alias=${OPTARG}
             ;;
         l)
             run_locally=.
+            ;;
+        m)
+            mail_relay=${OPTARG}
             ;;
         *)
             usage
@@ -92,7 +96,7 @@ while getopts ":le:" opt ; do
     esac
 done
 
-if [[ -z ${email} || ${EUID} -ne 0 ]] ; then
+if [[ -z ${root_alias} || ${EUID} -ne 0 ]] ; then
     usage
 fi
 main

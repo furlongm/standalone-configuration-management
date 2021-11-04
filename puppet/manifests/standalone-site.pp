@@ -12,7 +12,6 @@ node default {
     stage => 'pre',
   }
 
-  include puppet
   include etckeeper
   include misc
   include net
@@ -21,8 +20,4 @@ node default {
   include fail2ban
   include haveged
   include vim
-
-  class { 'postfix':
-    root_alias => 'admin@example.com',
-  }
 }
