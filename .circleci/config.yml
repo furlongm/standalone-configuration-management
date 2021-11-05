@@ -15,7 +15,6 @@ jobs:
             pip install ansible ansible-lint
             cd ansible/playbooks/roles
             ansible-lint *
-            deactivate
   lint-puppet:
     docker:
       - image: ubuntu:20.04
@@ -42,7 +41,6 @@ jobs:
             . salt-lint/bin/activate
             pip install salt-lint
             find saltstack -name "*.sls" -print0 | xargs -0 -n1 salt-lint
-            deactivate
   lint-chef:
     docker:
       - image: ubuntu:20.04
