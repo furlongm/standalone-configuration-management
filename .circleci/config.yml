@@ -9,7 +9,7 @@ jobs:
           name: ansible-lint
           command: |
             apt update
-            apt -y install build-essential python3-virtualenv
+            apt -y install build-essential python3-virtualenv git
             virtualenv ansible-lint
             . ansible-lint/bin/activate
             pip install ansible ansible-lint
