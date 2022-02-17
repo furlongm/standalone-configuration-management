@@ -138,7 +138,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-centos:
     docker:
-      - image: centos:8
+      - image: quay.io/centos/centos:stream8
     steps:
       - checkout
       - run:
@@ -148,7 +148,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-centos:
     docker:
-      - image: centos:8
+      - image: quay.io/centos/centos:stream8
     steps:
       - checkout
       - run:
@@ -158,7 +158,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-centos:
     docker:
-      - image: centos:8
+      - image: quay.io/centos/centos:stream8
     steps:
       - checkout
       - run:
@@ -168,7 +168,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-centos:
     docker:
-      - image: centos:8
+      - image: quay.io/centos/centos:stream8
     steps:
       - checkout
       - run:
