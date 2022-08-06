@@ -25,7 +25,7 @@ get_pm() {
 }
 
 install_deps() {
-    ${pm} install git curl
+    ${pm} install git curl patch
 }
 
 install_salt() {
@@ -92,6 +92,7 @@ main() {
     get_pm
     which git 1>/dev/null 2>&1 || install_deps
     which curl 1>/dev/null 2>&1 || install_deps
+    which patch 1>/dev/null 2>&1 || install_deps
     which salt-call 1>/dev/null 2>&1 || install_salt
     install_vim_syntax_highlighting
     if [ "${run_path}" != "." ] ; then
@@ -99,6 +100,11 @@ main() {
         get_config_from_github
     fi
     set -e
+    if [[ "${ID}" != "fedora" ]] ;  then
+        # FIXME: remove patch when saltstack 3005 is released
+        curl https://github.com/saltstack/salt/commit/a273fffc857145198f25ba269f7e2493112e55fc.patch > patch
+        patch -Np1 -i patch $(find /usr -name "_compat.py" | grep "salt/_") || /bin/true
+    fi
     salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate pillar="{'mail_relay': \"${mail_relay}\", 'root_alias': \"${root_alias}\"}"
 }
 
