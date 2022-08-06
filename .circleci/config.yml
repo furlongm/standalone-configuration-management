@@ -1,8 +1,9 @@
-version: 2
+---
+version: 2.1
 jobs:
   lint-ansible:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -17,7 +18,7 @@ jobs:
             ansible-lint *
   lint-puppet:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -29,7 +30,7 @@ jobs:
             puppet-lint --no-documentation-check puppet/modules
   lint-salt:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -43,7 +44,7 @@ jobs:
             find saltstack -name "*.sls" -print0 | xargs -0 -n1 salt-lint
   lint-chef:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -96,17 +97,18 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-ubuntu:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
           name: ansible-ubuntu
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-ubuntu:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -117,7 +119,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-ubuntu:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -128,7 +130,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-ubuntu:
     docker:
-      - image: ubuntu:20.04
+      - image: ubuntu:22.04
     steps:
       - checkout
       - run:
@@ -258,9 +260,8 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
 
 workflows:
-  version: 2
   linters:
-   jobs:
+    jobs:
       - lint-ansible
       - lint-puppet
       - lint-salt
