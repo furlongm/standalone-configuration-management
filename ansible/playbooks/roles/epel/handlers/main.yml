@@ -1,4 +1,2 @@
-- name: update dnf cache
-  command: dnf -y makecache
-  args:
-    warn: false
+- name: Update dnf cache
+  ansible.builtin.command: dnf -y makecache

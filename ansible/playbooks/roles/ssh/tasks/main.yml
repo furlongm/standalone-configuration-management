@@ -1,27 +1,27 @@
 - name: Set up distro vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
 - name: Install openssh package
-  package:
+  ansible.builtin.package:
     name: "{{ openssh_package }}"
     state: present
 
 - name: Copy sshrc file
-  copy:
+  ansible.builtin.copy:
     src: sshrc
     dest: /etc/ssh/sshrc
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true
 
 - name: Start openssh service
-  service:
+  ansible.builtin.service:
     name: "{{ openssh_service }}"
     state: started
-    enabled: yes
+    enabled: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'

@@ -1,24 +1,24 @@
 - name: Install etckeeper packaqge
-  package:
+  ansible.builtin.package:
     name: etckeeper
     state: present
   register: installed_etckeeper_pkg
 
 - name: Check for /etc/.git dir
-  stat:
+  ansible.builtin.stat:
     path: /etc/.git
   register: etc_git
 
 - name: Run etckeeper init
-  command: /bin/true
-  notify: etckeeper init
+  ansible.builtin.command: /bin/true
+  notify: Exec etckeeper init
   when: installed_etckeeper_pkg or not etc_git.stat.exists
 
 - name: Force all notified handlers to run
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
 
 - name: Install /etc/.git/config
-  template:
+  ansible.builtin.template:
     src: gitconfig.j2
     dest: /etc/.git/config
     owner: root

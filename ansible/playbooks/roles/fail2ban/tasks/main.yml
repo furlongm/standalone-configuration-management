@@ -1,38 +1,38 @@
 - name: Set up distro vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
-- name: install fail2ban
-  package:
+- name: Install fail2ban
+  ansible.builtin.package:
     name: fail2ban
     state: present
 
-- name: start fail2ban service
-  service:
+- name: Start fail2ban service
+  ansible.builtin.service:
     name: fail2ban
     state: started
-    enabled: yes
+    enabled: true
   when: ansible_virtualization_type != 'docker'
 
-- name: configure fail2ban
-  copy:
+- name: Configure fail2ban
+  ansible.builtin.copy:
     src: fail2ban.local
     dest: /etc/fail2ban/fail2ban.local
     owner: root
     group: root
     mode: 0644
-    backup: yes
-  notify: restart fail2ban
+    backup: true
+  notify: Restart fail2ban
 
-- name: configure fail2ban ssh jail
-  template:
+- name: Configure fail2ban ssh jail
+  ansible.builtin.template:
     src: jail.local.j2
     dest: /etc/fail2ban/jail.local
     owner: root
     group: root
     mode: 0644
-    backup: yes
-  notify: restart fail2ban
+    backup: true
+  notify: Restart fail2ban

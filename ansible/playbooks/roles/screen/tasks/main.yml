@@ -1,13 +1,13 @@
 - name: Install screen package
-  package:
+  ansible.builtin.package:
     name: screen
     state: present
 
 - name: Copy screenrc file
-  copy:
+  ansible.builtin.copy:
     src: screenrc
     dest: /etc/screenrc
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true

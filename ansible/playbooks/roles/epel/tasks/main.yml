@@ -1,12 +1,12 @@
 - name: Set up distro vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution }}.yml"
     - default.yml
 
-- name: install epel release
-  dnf:
+- name: Install epel release
+  ansible.builtin.dnf:
     name: "{{ epel_release_uri }}"
     state: present
-  notify: update dnf cache
+  notify: Update dnf cache
