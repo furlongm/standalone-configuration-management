@@ -1,8 +1,8 @@
-- name: restart postfix
-  service:
+- name: Restart postfix
+  ansible.builtin.service:
     name: postfix
     state: restarted
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
 
-- name: exec newaliases
-  command: /usr/bin/newaliases
+- name: Exec newaliases
+  ansible.builtin.command: /usr/bin/newaliases

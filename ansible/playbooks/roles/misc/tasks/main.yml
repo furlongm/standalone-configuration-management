@@ -1,24 +1,24 @@
 - name: Install misc packages
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
-  with_items:
-  - htop
-  - tree
-  - git
-  - strace
-  - mlocate
-  - diffstat
-  - bash-completion
-  - pwgen
-  - lsof
-  - multitail
+  loop:
+    - htop
+    - tree
+    - git
+    - strace
+    - mlocate
+    - diffstat
+    - bash-completion
+    - pwgen
+    - lsof
+    - multitail
 
 - name: Install misc packages for Debian
-  package:
+  ansible.builtin.package:
     name: "{{ item }}"
     state: present
   when: ansible_os_family == 'Debian'
-  with_items:
-  - debian-goodies
-  - apt-transport-https
+  loop:
+    - debian-goodies
+    - apt-transport-https

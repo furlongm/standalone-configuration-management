@@ -1,2 +1,2 @@
-- name: locale-gen
-  command: locale-gen
+- name: Exec locale-gen
+  ansible.builtin.command: locale-gen

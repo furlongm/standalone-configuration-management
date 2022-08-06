@@ -1,11 +1,11 @@
 - name: Install haveged package
-  package:
+  ansible.builtin.package:
     name: haveged
     state: present
 
 - name: Start haveged service
-  service:
+  ansible.builtin.service:
     name: haveged
     state: started
-    enabled: yes
+    enabled: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'

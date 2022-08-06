@@ -1,48 +1,48 @@
 - name: Set up distro vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
 - name: Install vim package
-  package:
+  ansible.builtin.package:
     name: "{{ vim_package }}"
     state: present
 
 - name: Install vim-scripts on Debian
-  package:
+  ansible.builtin.package:
     name: vim-scripts
     state: present
   when: ansible_os_family == 'Debian'
 
 - name: Install vim-data on Suse
-  package:
+  ansible.builtin.package:
     name: vim-data
     state: present
   when: ansible_os_family == 'Suse'
 
 - name: Copy vimrc file
-  copy:
+  ansible.builtin.copy:
     src: vimrc.{{ ansible_os_family }}
     dest: /etc/vimrc
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Suse'
 
 - name: Ensure /etc/vim exists
-  file:
+  ansible.builtin.file:
     path: /etc/vim
     state: directory
     mode: 0755
 
 - name: Copy vimrc.local file
-  copy:
+  ansible.builtin.copy:
     src: vimrc.local
     dest: /etc/vim/vimrc.local
     owner: root
     group: root
     mode: 0644
-    backup: yes
+    backup: true

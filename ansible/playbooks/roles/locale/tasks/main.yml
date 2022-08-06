@@ -1,49 +1,49 @@
 - name: Include locale vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
   loop:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
 - name: Install locales package
-  package:
+  ansible.builtin.package:
     name: "{{ locales_package }}"
     state: present
 
 - name: Add /etc/locale.gen file on Debian
-  copy:
+  ansible.builtin.copy:
     dest: /etc/locale.gen
     content: "{{ locale }} UTF-8"
     owner: root
     group: root
-    mode: '0644'
+    mode: 0644
   when: ansible_os_family == 'Debian'
-  notify: locale-gen
+  notify: Exec locale-gen
 
 - name: Add /etc/environment
-  template:
-   src: environment.j2
-   dest: /etc/environment
-   owner: root
-   group: root
-   mode: '0644'
+  ansible.builtin.template:
+    src: environment.j2
+    dest: /etc/environment
+    owner: root
+    group: root
+    mode: 0644
 
 - name: Get locale
-  shell: localectl status | grep {{ locale }}
+  ansible.builtin.shell: localectl status | grep {{ locale }}
   register: result
-  ignore_errors: True
+  ignore_errors: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
 
 - name: Set locale
-  command: localectl set-locale LANG={{ locale }}
+  ansible.builtin.command: localectl set-locale LANG={{ locale }}
   when: result is defined and result is failed
 
 - name: Get timezone
-  shell: timedatectl status | grep {{ timezone }}
+  ansible.builtin.shell: timedatectl status | grep {{ timezone }}
   register: result
-  ignore_errors: True
+  ignore_errors: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
 
 - name: Set timezone
-  command: timedatectl set-timezone {{ timezone }}
+  ansible.builtin.command: timedatectl set-timezone {{ timezone }}
   when: result is defined and result is failed

@@ -1,51 +1,51 @@
 - name: Set up distro vars
-  include_vars:
+  ansible.builtin.include_vars:
     file: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
 - name: Remove exim package
-  package:
+  ansible.builtin.package:
     name: "{{ exim_package }}"
     state: absent
 
 - name: Install mailx package
-  package:
+  ansible.builtin.package:
     name: "{{ mailx_package }}"
     state: present
 
 - name: Install postfix package
-  package:
+  ansible.builtin.package:
     name: postfix
     state: present
 
 - name: Install postfix-lmdb package
-  package:
+  ansible.builtin.package:
     name: postfix-lmdb
     state: present
   when: ansible_os_family == 'Debian' or ansible_distribution == 'Fedora'
 
 - name: Start postfix service
-  service:
+  ansible.builtin.service:
     name: postfix
     state: started
-    enabled: yes
+    enabled: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
 
 - name: Configure postfix
-  template:
+  ansible.builtin.template:
     src: main.cf.j2
     dest: /etc/postfix/main.cf
     owner: root
     group: root
     mode: 0644
-    backup: yes
-  notify: restart postfix
+    backup: true
+  notify: Restart postfix
 
 - name: Add root mail alias
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/aliases
     regexp: '^root:'
     line: "root: {{ root_alias }}"
-  notify: exec newaliases
+  notify: Exec newaliases
