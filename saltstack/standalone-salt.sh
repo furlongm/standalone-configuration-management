@@ -29,7 +29,13 @@ install_deps() {
 }
 
 install_salt() {
-    curl -L http://bootstrap.saltproject.io | bash -s -- -X -d -x python3 || exit 1
+    if [[ "${ID}" == "fedora" ]] ; then
+        pm='dnf -y'
+        ${pm} makecache
+        ${pm} install salt-minion
+    else
+        curl -L http://bootstrap.saltproject.io | bash -s -- -X -d -x python3 || exit 1
+    fi
 }
 
 install_vim_syntax_highlighting() {
