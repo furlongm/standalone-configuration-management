@@ -12,7 +12,7 @@ locale.gen:
     - user: root
     - group: root
     - mode: '0644'
-    - on_changes:
+    - onchanges:
       - cmd.run 'locale-gen'
     - require:
       - pkg: locales
