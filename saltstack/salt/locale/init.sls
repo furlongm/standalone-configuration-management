@@ -5,6 +5,11 @@ locales:
 
 {% if grains['os_family'] == 'Debian' %}
 
+locale-gen:
+  cmd.run:
+    - onchanges:
+      - file: locale.gen
+
 locale.gen:
   file.managed:
     - name: /etc/locale.gen
@@ -12,8 +17,6 @@ locale.gen:
     - user: root
     - group: root
     - mode: '0644'
-    - onchanges:
-      - cmd.run 'locale-gen'
     - require:
       - pkg: locales
 
