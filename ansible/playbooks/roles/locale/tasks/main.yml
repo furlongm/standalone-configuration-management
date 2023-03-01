@@ -33,17 +33,21 @@
   register: result
   ignore_errors: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
+  changed_when: false
 
 - name: Set locale
   ansible.builtin.command: localectl set-locale LANG={{ locale }}
   when: result is defined and result is failed
+  changed_when: false
 
 - name: Get timezone
   ansible.builtin.shell: timedatectl status | grep {{ timezone }}
   register: result
   ignore_errors: true
   when: ansible_virtualization_type is not defined or ansible_virtualization_type != 'docker'
+  changed_when: false
 
 - name: Set timezone
   ansible.builtin.command: timedatectl set-timezone {{ timezone }}
   when: result is defined and result is failed
+  changed_when: false

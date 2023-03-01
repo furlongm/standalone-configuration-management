@@ -1,2 +1,0 @@
-- name: Exec etckeeper init
-  ansible.builtin.command: etckeeper init

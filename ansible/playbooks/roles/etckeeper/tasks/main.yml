@@ -2,7 +2,6 @@
   ansible.builtin.package:
     name: etckeeper
     state: present
-  register: installed_etckeeper_pkg
 
 - name: Check for /etc/.git dir
   ansible.builtin.stat:
@@ -10,9 +9,9 @@
   register: etc_git
 
 - name: Run etckeeper init
-  ansible.builtin.command: /bin/true
-  notify: Exec etckeeper init
-  when: installed_etckeeper_pkg or not etc_git.stat.exists
+  ansible.builtin.command: etckeeper init
+  when: not etc_git.stat.exists
+  changed_when: false
 
 - name: Force all notified handlers to run
   ansible.builtin.meta: flush_handlers
