@@ -5,12 +5,12 @@ miscpkgs:
       - tree
       - git
       - strace
-      - mlocate
       - diffstat
       - bash-completion
       - pwgen
       - lsof
       - multitail
+      - {{ salt['pillar.get']('pkgs:locate') }}
 
 {% if grains['os_family'] == 'Debian' %}
 

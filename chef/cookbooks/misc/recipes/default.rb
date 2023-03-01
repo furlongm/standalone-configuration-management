@@ -3,7 +3,6 @@ misc_packages = %w(
   tree
   git
   strace
-  mlocate
   diffstat
   bash-completion
   pwgen
@@ -11,6 +10,7 @@ misc_packages = %w(
   multitail
 )
 
+misc_packages += [node['locate']['package']]
 misc_packages += %w(debian-goodies apt-transport-https) if platform_family?('debian')
 
 package misc_packages do

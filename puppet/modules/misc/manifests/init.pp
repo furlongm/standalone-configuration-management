@@ -1,16 +1,22 @@
 class misc {
 
+  $locate = $::osfamily ? {
+    'Fedora' => 'plocate',
+    'Debian' => 'plocate',
+    default  => 'mlocate',
+  }
+
   $misc_packages = [
     'htop',
     'tree',
     'git',
     'strace',
-    'mlocate',
     'diffstat',
     'bash-completion',
     'pwgen',
     'lsof',
     'multitail',
+    $locate,
   ]
 
   package { $misc_packages:
