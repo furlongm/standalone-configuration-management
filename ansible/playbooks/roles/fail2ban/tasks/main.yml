@@ -23,7 +23,7 @@
     dest: /etc/fail2ban/fail2ban.local
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     backup: true
   notify: Restart fail2ban
 
@@ -33,6 +33,6 @@
     dest: /etc/fail2ban/jail.local
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     backup: true
   notify: Restart fail2ban

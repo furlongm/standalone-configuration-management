@@ -28,7 +28,7 @@
     dest: /etc/vimrc
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     backup: true
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'Suse'
 
@@ -36,7 +36,7 @@
   ansible.builtin.file:
     path: /etc/vim
     state: directory
-    mode: 0755
+    mode: '0755'
 
 - name: Copy vimrc.local file
   ansible.builtin.copy:
@@ -44,5 +44,5 @@
     dest: /etc/vim/vimrc.local
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     backup: true

@@ -16,7 +16,7 @@
     content: "{{ locale }} UTF-8"
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   when: ansible_os_family == 'Debian'
   notify: Exec locale-gen
 
@@ -26,7 +26,7 @@
     dest: /etc/environment
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
 
 - name: Get locale
   ansible.builtin.shell: localectl status | grep {{ locale }}

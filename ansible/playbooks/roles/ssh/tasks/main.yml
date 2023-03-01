@@ -16,7 +16,7 @@
     dest: /etc/ssh/sshrc
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
     backup: true
 
 - name: Start openssh service
