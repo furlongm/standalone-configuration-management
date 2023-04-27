@@ -1,2 +1,3 @@
 - name: Update dnf cache
   ansible.builtin.command: dnf -y makecache
+  changed_when: false
