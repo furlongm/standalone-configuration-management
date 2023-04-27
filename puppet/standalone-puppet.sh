@@ -30,6 +30,7 @@ install_deps() {
 }
 
 install_puppet() {
+    puppet_package=puppet-agent
     if [[ "${pm}" =~ "apt" ]] ; then
         deb=puppet7-release-${VERSION_CODENAME}.deb
         wget https://apt.puppet.com/${deb}
@@ -38,7 +39,7 @@ install_puppet() {
         ${pm} update
     elif [[ "${pm}" =~ "dnf" ]] ; then
         if [[ "${ID}" == "fedora" ]] ; then
-            ${pm} install https://yum.puppetlabs.com/puppet-release-fedora-34.noarch.rpm
+            puppet_package=puppet
         else
             ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
         fi
@@ -50,7 +51,7 @@ install_puppet() {
         ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
         ${pm} refresh
     fi
-    ${pm} install puppet-agent
+    ${pm} install ${puppet_package}
 }
 
 install_vim_syntax_highlighting() {
