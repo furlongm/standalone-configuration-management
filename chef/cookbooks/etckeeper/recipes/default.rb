@@ -1,6 +1,6 @@
 etckeeper_packages = %w(etckeeper)
 
-etckeeper_packages += %w(etckeeper-dnf) if platform_family?('rhel')
+etckeeper_packages += %w(etckeeper-dnf python) if platform_family?('rhel')
 
 package etckeeper_packages do
   action :install
