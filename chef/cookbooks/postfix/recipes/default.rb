@@ -1,14 +1,14 @@
-if platform_family?('debian')
-  exim = 'exim4'
-else
-  exim = 'exim'
-end
+exim = if platform_family?('debian')
+         'exim4'
+       else
+         'exim'
+       end
 
-if platform_family?('suse')
-  mailx = 'mailx'
-else
-  mailx = 's-nail'
-end
+mailx = if platform_family?('suse')
+          'mailx'
+        else
+          's-nail'
+        end
 
 package exim do
   action :remove
