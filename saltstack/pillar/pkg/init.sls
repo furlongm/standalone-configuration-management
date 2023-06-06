@@ -3,7 +3,7 @@ pkgs:
   openssh-server: openssh-server
   apache: httpd
   vim: vim-enhanced
-  mailx: mailx
+  mailx: s-nail
   exim: exim
   bind-utils: bind-utils
   iperf: iperf3
@@ -13,7 +13,7 @@ pkgs:
   openssh-server: openssh-server
   apache: httpd
   vim: vim-enhanced
-  mailx: mailx
+  mailx: s-nail
   exim: exim
   bind-utils: bind-utils
   iperf: iperf3
@@ -23,7 +23,7 @@ pkgs:
   openssh-server: openssh-server
   apache: apache2
   vim: vim
-  mailx: bsd-mailx
+  mailx: s-nail
   exim: exim4
   bind-utils: dnsutils
   iperf: iperf3

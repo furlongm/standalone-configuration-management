@@ -1,9 +1,13 @@
 if platform_family?('debian')
   exim = 'exim4'
-  mailx = 'bsd-mailx'
 else
   exim = 'exim'
+end
+
+if platform_family?('suse')
   mailx = 'mailx'
+else
+  mailx = 's-nail'
 end
 
 package exim do
