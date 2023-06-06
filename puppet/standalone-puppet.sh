@@ -32,7 +32,7 @@ install_deps() {
 install_puppet() {
     puppet_package=puppet-agent
     if [[ "${pm}" =~ "apt" ]] ; then
-        deb=puppet7-release-${VERSION_CODENAME}.deb
+        deb=puppet8-release-${VERSION_CODENAME}.deb
         wget https://apt.puppet.com/${deb}
         dpkg -i ${deb}
         rm ${deb}
@@ -41,7 +41,7 @@ install_puppet() {
         if [[ "${ID}" == "fedora" ]] ; then
             puppet_package=puppet
         else
-            ${pm} install https://yum.puppetlabs.com/puppet-release-el-8.noarch.rpm
+            ${pm} install https://yum.puppetlabs.com/puppet-release-el-9.noarch.rpm
         fi
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
