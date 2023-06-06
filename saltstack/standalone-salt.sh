@@ -11,9 +11,9 @@ get_pm() {
         pm='apt -y'
         ${pm} update
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
-        pm='dnf -y'
+        pm='dnf -y --allowerasing'
         ${pm} makecache
-        ${pm} install --skip-broken which findutils hostname libxcrypt-compat
+        ${pm} install which findutils hostname libxcrypt-compat coreutils
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} refresh
