@@ -4,7 +4,7 @@ class epel {
 
     $epel_release_uri = $facts['os']['name']? {
       'CentOS' => 'epel-release',
-      default  => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm',
+      default  => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm',
     }
 
     package { $epel_release_uri:
