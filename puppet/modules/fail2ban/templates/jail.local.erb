@@ -7,12 +7,12 @@ destemail = root@localhost
 
 [sshd]
 enabled = true
-<% if @osfamily == 'Debian' -%>
+<% if @facts['os']['family'] == 'Debian' -%>
 logpath = /var/log/auth.log
 <% end -%>
-<% if @osfamily == 'RedHat' -%>
+<% if @facts['os']['family'] == 'RedHat' -%>
 logpath = /var/log/secure
 <% end -%>
-<% if @osfamily == 'Suse' -%>
+<% if @facts['os']['family'] == 'Suse' -%>
 logpath = /var/log/messages
 <% end -%>

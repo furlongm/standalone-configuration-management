@@ -1,11 +1,11 @@
 class net {
 
-  $bindutils = $::osfamily ? {
+  $bindutils = $facts['os']['family'] ? {
     'Debian' => 'dnsutils',
     default  => 'bind-utils',
   }
 
-  $iperf = $::osfamily ? {
+  $iperf = $facts['os']['family'] ? {
     'Suse'  => 'iperf',
     default => 'iperf3',
   }

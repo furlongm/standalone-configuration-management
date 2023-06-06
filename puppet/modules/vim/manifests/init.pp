@@ -1,6 +1,6 @@
 class vim {
 
-  $vim = $::osfamily ? {
+  $vim = $facts['os']['family'] ? {
     'RedHat' => 'vim-enhanced',
     default  => 'vim',
   }
@@ -9,13 +9,13 @@ class vim {
     ensure => installed,
   }
 
-  if $::osfamily == 'Debian' {
+  if $facts['os']['family'] == 'Debian' {
     package { 'vim-scripts':
       ensure => installed,
     }
   }
 
-  if $::osfamily == 'Suse' {
+  if $facts['os']['family'] == 'Suse' {
     package { 'vim-data':
       ensure => installed,
     }
@@ -29,7 +29,7 @@ class vim {
     }
   }
 
-  if $::osfamily == 'RedHat' {
+  if $facts['os']['family'] == 'RedHat' {
     file { '/etc/vimrc':
       ensure => present,
       owner  => 'root',

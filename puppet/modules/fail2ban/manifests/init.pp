@@ -4,7 +4,7 @@ class fail2ban {
     ensure => installed,
   }
 
-  if $::virtual != 'docker' {
+  if $facts['virtual'] != 'docker' {
     service { 'fail2ban':
       ensure    => running,
       enable    => true,

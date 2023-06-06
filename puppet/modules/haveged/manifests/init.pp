@@ -4,7 +4,7 @@ class haveged {
     ensure => installed,
   }
 
-  if $::virtual != 'docker' {
+  if $facts['virtual'] != 'docker' {
     service { 'haveged':
       ensure  => running,
       enable  => true,

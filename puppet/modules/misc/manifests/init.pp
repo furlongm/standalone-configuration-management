@@ -1,6 +1,6 @@
 class misc {
 
-  $locate = $::osfamily ? {
+  $locate = $facts['os']['family'] ? {
     'Fedora' => 'plocate',
     'Debian' => 'plocate',
     default  => 'mlocate',
@@ -23,7 +23,7 @@ class misc {
     ensure => installed,
   }
 
-  if $::osfamily == 'Debian' {
+  if $facts['os']['family'] == 'Debian' {
     $debian_packages = [
       'apt-transport-https',
       'debian-goodies',
