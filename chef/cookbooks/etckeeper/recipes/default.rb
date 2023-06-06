@@ -1,4 +1,8 @@
-package 'etckeeper' do
+etckeeper_packages = %w(etckeeper)
+
+etckeeper_packages += %w(etckeeper-dnf) if platform_family?('rhel')
+
+package etckeeper_packages do
   action :install
   notifies :run, 'execute[etckeeper-init]', :immediately
 end
