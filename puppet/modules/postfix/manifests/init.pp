@@ -3,8 +3,8 @@ class postfix(
 ) {
 
   $mailx = $::osfamily ? {
-    'Debian' => 'bsd-mailx',
-    default  => 'mailx',
+    'Suse' => 'mailx',
+    default  => 's-nail',
   }
 
   package { $mailx:

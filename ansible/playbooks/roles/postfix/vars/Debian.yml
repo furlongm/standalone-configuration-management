@@ -1,2 +1,2 @@
 exim_package: exim4
-mailx_package: bsd-mailx
+mailx_package: s-nail
