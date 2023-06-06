@@ -2,7 +2,7 @@ class postfix(
   $root_alias='admin@example.com'
 ) {
 
-  $mailx = $::osfamily ? {
+  $mailx = $facts['os']['family'] ? {
     'Suse' => 'mailx',
     default  => 's-nail',
   }
@@ -11,7 +11,7 @@ class postfix(
     ensure => installed,
   }
 
-  $exim = $::osfamily ? {
+  $exim = $facts['os']['family'] ? {
     'Debian' => 'exim4',
     default  => 'exim',
   }
@@ -24,13 +24,13 @@ class postfix(
     ensure => absent,
   }
 
-  if ($::osfamily == 'Debian') or ($::operatingsystem == 'Fedora') {
+  if ($facts['os']['family'] == 'Debian') or ($facts['os']['name'] == 'Fedora') {
     package { 'postfix-lmdb':
       ensure => installed,
     }
   }
 
-  if $::virtual != 'docker' {
+  if $facts['virtual'] != 'docker' {
     service { 'postfix':
       ensure    => running,
       enable    => true,
@@ -51,7 +51,7 @@ class postfix(
   mailalias { 'root_alias':
     ensure    => present,
     name      => 'root',
-    recipient => $::root_alias,
+    recipient => $root_alias,
     target    => '/etc/aliases'
   }
 

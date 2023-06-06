@@ -1,8 +1,8 @@
 class epel {
 
-  if $::osfamily == 'RedHat' {
+  if $facts['os']['family'] == 'RedHat' {
 
-    $epel_release_uri = $::operatingsystem ? {
+    $epel_release_uri = $facts['os']['name']? {
       'CentOS' => 'epel-release',
       default  => 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm',
     }

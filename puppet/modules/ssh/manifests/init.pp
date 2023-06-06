@@ -1,11 +1,11 @@
 class ssh {
 
-  $openssh_service = $::osfamily ? {
+  $openssh_service = $facts['os']['family'] ? {
     'Debian' => 'ssh',
     default  => 'sshd',
   }
 
-  $openssh_package = $::osfamily ? {
+  $openssh_package = $facts['os']['family'] ? {
     'Suse'   => 'openssh',
     default => 'openssh-server',
   }
@@ -22,7 +22,7 @@ class ssh {
     source => 'puppet:///modules/ssh/sshrc',
   }
 
-  if $::virtual != 'docker' {
+  if $facts['virtual'] != 'docker' {
     service { $openssh_service:
       ensure  => running,
       require => [Package[$openssh_package],

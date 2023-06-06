@@ -13,7 +13,7 @@ readme_directory = no
 smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_use_tls = yes
-<% if @osfamily == 'RedHat' -%>
+<% if @facts['os']['family'] == 'RedHat' -%>
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 <% else -%>
@@ -22,7 +22,7 @@ smtp_tls_session_cache_database = lmdb:${data_directory}/smtp_scache
 <% end -%>
 
 myhostname = <%= @hostname %>
-<% if @osfamily == 'RedHat' -%>
+<% if @facts['os']['family'] == 'RedHat' -%>
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 <% else -%>
@@ -45,7 +45,7 @@ mailbox_size_limit = 0
 recipient_delimiter = +
 inet_interfaces = loopback-only
 
-<% if @osfamily == 'Suse' -%>
+<% if @facts['os']['family'] == 'Suse' -%>
 setgid_group = maildrop
 daemon_directory = /usr/lib/postfix/bin/
 <% end -%>
