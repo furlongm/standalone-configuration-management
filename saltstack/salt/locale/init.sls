@@ -13,7 +13,7 @@ locale-gen:
 locale.gen:
   file.managed:
     - name: /etc/locale.gen
-    - contents: "{{ salt['pillar.get']('locale:locale') }} UTF-8"
+    - contents: "{{ salt['pillar.get']('locale:locale') }} UTF-8\n"
     - user: root
     - group: root
     - mode: '0644'

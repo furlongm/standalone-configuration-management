@@ -13,7 +13,7 @@
 - name: Add /etc/locale.gen file on Debian
   ansible.builtin.copy:
     dest: /etc/locale.gen
-    content: "{{ locale }} UTF-8"
+    content: "{{ locale }} UTF-8\n"
     owner: root
     group: root
     mode: '0644'
