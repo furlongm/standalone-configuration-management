@@ -4,6 +4,7 @@
     "mail_relay": ""
   },
   "run_list": [ "recipe[epel]",
+                "recipe[locale]",
                 "recipe[etckeeper]",
                 "recipe[misc]",
                 "recipe[net]",
