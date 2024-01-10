@@ -13,6 +13,7 @@ node default {
   }
 
   include etckeeper
+  include locale
   include misc
   include net
   include screen
