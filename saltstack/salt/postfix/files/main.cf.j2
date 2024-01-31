@@ -37,6 +37,9 @@ mydestination = {{ grains['fqdn'] }}, {{ grains['host'] }}, localhost.localdomai
 mydestination = {{ grains['host'] }}, localhost.localdomain, localhost
 {%- endif %}
 
+smtpd_recipient_restrictions = permit_mynetworks,reject
+smtpd_relay_restrictions = permit_sasl_authenticated,reject
+
 {% if pillar['mail_relay'] -%}
 relayhost = {{ pillar['mail_relay'] }}
 {%- endif %}

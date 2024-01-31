@@ -37,6 +37,9 @@ mydestination = <%= @fqdn %>, <%= @hostname %>, localhost.localdomain, localhost
 mydestination = <%= @fqdn %>, localhost.localdomain, localhost
 <% end -%>
 
+smtpd_recipient_restrictions = permit_mynetworks,reject
+smtpd_relay_restrictions = permit_sasl_authenticated,reject
+
 <% if @mail_relay != "" -%>
 relayhost = <%= @mail_relay %>
 <% end -%>
