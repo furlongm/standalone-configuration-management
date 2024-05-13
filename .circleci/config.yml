@@ -10,7 +10,7 @@ jobs:
           name: ansible-lint
           command: |
             apt update
-            apt -y install build-essential python3-virtualenv git
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential python3-virtualenv git
             virtualenv ansible-lint
             . ansible-lint/bin/activate
             pip install ansible ansible-lint
@@ -25,7 +25,7 @@ jobs:
           name: puppet-lint
           command: |
             apt update
-            apt -y install build-essential zlib1g-dev ruby ruby-dev
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential zlib1g-dev ruby ruby-dev
             gem install puppet-lint
             puppet-lint --fail-on-warnings --no-documentation-check puppet/modules
   lint-salt:
@@ -37,7 +37,7 @@ jobs:
           name: salt-lint
           command: |
             apt update
-            apt -y install build-essential python3-dev python3-virtualenv
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential python3-dev python3-virtualenv
             virtualenv salt-lint
             . salt-lint/bin/activate
             pip install salt-lint
@@ -51,7 +51,7 @@ jobs:
           name: chef-lint
           command: |
             apt update
-            apt -y install build-essential zlib1g-dev ruby ruby-dev
+            DEBIAN_FRONTEND=noninteractive apt -y install build-essential zlib1g-dev ruby ruby-dev
             gem install foodcritic cookstyle
             foodcritic -t ~FC031 -t ~FC071 -t ~FC011 -t ~FC109 chef/cookbooks
             cookstyle chef
