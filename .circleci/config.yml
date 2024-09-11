@@ -180,7 +180,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l
   ansible-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -190,7 +190,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -200,7 +200,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l
   salt-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
@@ -210,7 +210,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l
   chef-opensuse:
     docker:
-      - image: opensuse/leap:15.5
+      - image: opensuse/leap:15.6
     steps:
       - checkout
       - run:
