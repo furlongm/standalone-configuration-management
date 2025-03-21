@@ -17,7 +17,7 @@ class postfix(
   }
 
   package { 'postfix':
-    ensure  => installed,
+    ensure => installed,
   }
 
   package { $exim:
