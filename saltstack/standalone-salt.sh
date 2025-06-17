@@ -16,8 +16,9 @@ get_pm() {
         ${pm} install which findutils hostname libxcrypt-compat coreutils
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
+        ${pm} rm busybox-which
         ${pm} refresh
-        ${pm} install gzip
+        ${pm} install which gzip
     else
         echo "Error: no package manager found."
         exit 1
