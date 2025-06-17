@@ -13,7 +13,7 @@ get_pm() {
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
-        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl
+        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} rm busybox-which
