@@ -84,7 +84,7 @@ jobs:
           name: salt-debian
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com -l
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-debian:
     docker:
       - image: debian:12
@@ -127,7 +127,7 @@ jobs:
           command: |
             export DEBIAN_FRONTEND=noninteractive
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com -l
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-ubuntu:
     docker:
       - image: ubuntu:24.04
@@ -167,7 +167,7 @@ jobs:
           name: salt-centos
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com -l
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-centos:
     docker:
       - image: quay.io/centos/centos:stream9
@@ -207,7 +207,7 @@ jobs:
           name: salt-opensuse
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com -l
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-opensuse:
     docker:
       - image: opensuse/leap:15.6
@@ -247,7 +247,7 @@ jobs:
           name: salt-fedora
           command: |
             cd saltstack
-            bash -x standalone-salt.sh -e furlongm@gmail.com -l
+            bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-fedora:
     docker:
       - image: fedora:41

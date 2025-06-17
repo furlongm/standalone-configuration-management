@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] [-c] (as root)"
     exit 1
 }
 
@@ -10,15 +10,15 @@ get_pm() {
     if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
         pm='apt -y'
         ${pm} update
+        ${pm} install virt-what
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
-        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk
+        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk virt-what systemd
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
-        ${pm} rm busybox-which
         ${pm} refresh
-        ${pm} install which gzip
+        ${pm} install which gzip virt-what
     else
         echo "Error: no package manager found."
         exit 1
@@ -74,10 +74,11 @@ main() {
         get_config_from_github
     fi
     set -e
-    salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate pillar="{'mail_relay': \"${mail_relay}\", 'root_alias': \"${root_alias}\"}"
+    salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate pillar="{'containerized': ${containerized}, 'mail_relay': \"${mail_relay}\", 'root_alias': \"${root_alias}\"}"
 }
 
-while getopts ":le:m:" opt ; do
+containerized=false
+while getopts ":lce:m:" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}
@@ -87,6 +88,9 @@ while getopts ":le:m:" opt ; do
             ;;
         m)
             mail_relay=${OPTARG}
+            ;;
+        c)
+            containerized=true
             ;;
         *)
             usage
