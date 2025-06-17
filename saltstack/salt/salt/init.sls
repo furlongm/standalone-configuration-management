@@ -1,4 +1,4 @@
-{% if not salt['grains.get']('virtual_subtype') or grains['virtual_subtype'] != 'Docker' %}
+{% if not salt['pillar.get']('containerized') %}
 salt-minion:
   service:
     - dead

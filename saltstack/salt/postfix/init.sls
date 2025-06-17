@@ -3,8 +3,8 @@ postfix:
     - installed
     - require:
       - pkg: exim
-{% if not salt['grains.get']('virtual_subtype') or grains['virtual_subtype'] != 'Docker' %}
-  service:
+{% if not salt['pillar.get']('containerized') %}
+service:
     - running
     - enable: True
     - watch:
