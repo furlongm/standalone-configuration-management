@@ -12,7 +12,7 @@ get_pm() {
         ${pm} update
         ${pm} install wget
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
-        pm='dnf -y'
+        pm='dnf -y --allowerasing'
         ${pm} makecache
         ${pm} install which findutils hostname libxcrypt-compat coreutils
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
