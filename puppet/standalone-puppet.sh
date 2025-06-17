@@ -12,9 +12,9 @@ get_pm() {
         ${pm} update
         ${pm} install wget
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
-        pm='dnf -y --allowerasing'
+        pm='dnf -y'
         ${pm} makecache
-        ${pm} install which findutils hostname libxcrypt-compat coreutils
+        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n --no-gpg-checks --gpg-auto-import-keys'
         ${pm} refresh
