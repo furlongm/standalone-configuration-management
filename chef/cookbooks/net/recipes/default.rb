@@ -5,7 +5,7 @@ net_packages = %w(
   telnet
   iftop
   whois
-  wget
+  wget2
   ipset
   nload
   bmon

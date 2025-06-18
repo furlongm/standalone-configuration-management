@@ -7,7 +7,7 @@ netpkgs:
       - telnet
       - iftop
       - whois
-      - wget
+      - wget2
       - ipset
       - nload
       - bmon
