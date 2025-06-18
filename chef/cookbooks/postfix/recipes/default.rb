@@ -42,7 +42,7 @@ end
 
 service 'postfix' do
   action [:enable, :start]
-  not_if { node['virtualization']['system'] == 'docker' }
+  not_if { node['containerized'] }
 end
 
 ruby_block 'add_root_mail_alias' do

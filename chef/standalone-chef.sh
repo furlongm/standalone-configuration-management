@@ -13,7 +13,7 @@ get_pm() {
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
-        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk
+        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk dnf-utils
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n'
         ${pm} refresh
@@ -29,7 +29,7 @@ install_deps() {
 }
 
 install_chef() {
-    curl -L https://www.chef.io/chef/install.sh | bash || exit 1
+    curl -L https://omnitruck.cinc.sh/install.sh | bash || exit 1
 }
 
 install_vim_syntax_highlighting() {
@@ -74,13 +74,14 @@ main() {
     sed -i -e "s#run_path =.*#run_path = '${run_path}'#" ${run_path}/client.rb
     sed -i -e "s/root_alias.*\"/root_alias\": \"${root_alias}\"/" ${run_path}/node.json
     sed -i -e "s/mail_relay.*\"/mail_relay\": \"${mail_relay}\"/" ${run_path}/node.json
+    sed -i -e "s/containerized.*/containerized\": ${containerized},/" ${run_path}/node.json
     set -e
     chef-client -z -j ${run_path}/node.json -c ${run_path}/client.rb --chef-license accept
     rm -fr ${tmp_dir}
 }
 
 containerized=false
-while getopts ":le:m:" opt ; do
+while getopts ":le:m:c" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}

@@ -4,5 +4,5 @@ end
 
 service 'haveged' do
   action [:enable, :start]
-  not_if { node['virtualization']['system'] == 'docker' }
+  not_if { node['containerized'] }
 end

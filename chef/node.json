@@ -1,4 +1,5 @@
 {
+  "containerized": false,
   "postfix": {
     "root_alias": "",
     "mail_relay": ""

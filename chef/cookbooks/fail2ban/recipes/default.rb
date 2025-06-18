@@ -4,7 +4,7 @@ end
 
 service 'fail2ban' do
   action [:enable, :start]
-  not_if { node['virtualization']['system'] == 'docker' }
+  not_if { node['containerized'] }
 end
 
 cookbook_file 'fail2ban.local' do

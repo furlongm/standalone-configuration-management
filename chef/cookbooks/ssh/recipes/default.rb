@@ -14,5 +14,5 @@ end
 service 'openssh' do
   service_name node['ssh']['service']
   action [:enable, :start]
-  not_if { node['virtualization']['system'] == 'docker' }
+  not_if { node['containerized'] }
 end
