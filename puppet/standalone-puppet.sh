@@ -10,15 +10,15 @@ get_pm() {
     if [[ "${ID_LIKE}" =~ "debian" ]] || [[ "${ID}" == "debian" ]] ; then
         pm='apt -y'
         ${pm} update
-        ${pm} install wget
+        ${pm} install wget virt-what
     elif [[ "${ID_LIKE}" =~ "rhel" ]] || [[ "${ID_LIKE}" =~ "fedora" ]] || [[ "${ID}" == "fedora" ]] ; then
         pm='dnf -y'
         ${pm} makecache
-        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk
+        ${pm} install --allowerasing which findutils hostname libxcrypt-compat coreutils curl procps gawk virt-what
     elif [[ "${ID_LIKE}" =~ "suse" ]] ; then
         pm='zypper -n --no-gpg-checks --gpg-auto-import-keys'
         ${pm} refresh
-        ${pm} install gzip
+        ${pm} install gzip virt-what
     else
         echo "Error: no package manager found."
         exit 1
