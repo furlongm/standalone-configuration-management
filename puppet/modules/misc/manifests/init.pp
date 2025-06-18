@@ -1,9 +1,9 @@
 class misc {
 
-  $locate = $facts['os']['family'] ? {
-    'Fedora' => 'plocate',
-    'Debian' => 'plocate',
-    default  => 'mlocate',
+  if $facts['os']['family'] == 'Debian' or $facts['os']['distro']['id'] == 'Fedora' {
+    $locate = 'plocate'
+  } else {
+    $locate = 'mlocate'
   }
 
   $misc_packages = [

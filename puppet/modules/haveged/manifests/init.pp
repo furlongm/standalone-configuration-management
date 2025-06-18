@@ -4,7 +4,7 @@ class haveged {
     ensure => installed,
   }
 
-  if $facts['virtual'] != 'docker' {
+  if $facts['containerized'] == 'false' {
     service { 'haveged':
       ensure  => running,
       enable  => true,

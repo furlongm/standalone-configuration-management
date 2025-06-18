@@ -30,25 +30,22 @@ install_deps() {
 }
 
 install_puppet() {
-    puppet_package=puppet-agent
+    puppet_package=openvox-agent
     if [[ "${pm}" =~ "apt" ]] ; then
-        deb=puppet8-release-${VERSION_CODENAME}.deb
-        wget https://apt.puppet.com/${deb}
+        deb=openvox8-release-${ID}${VERSION_ID}.deb
+        wget https://apt.voxpupuli.org/${deb}
         dpkg -i ${deb}
         rm ${deb}
         ${pm} update
     elif [[ "${pm}" =~ "dnf" ]] ; then
         if [[ "${ID}" == "fedora" ]] ; then
-            puppet_package=puppet
+            ${pm} install https://yum.voxpupuli.org/openvox8-release-fedora-${VERSION_ID}.noarch.rpm
         else
-            ${pm} install https://yum.puppetlabs.com/puppet-release-el-9.noarch.rpm
+            ${pm} install https://yum.voxpupuli.org/openvox8-release-el-${VERSION_ID}.noarch.rpm
         fi
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
-        curl -k -O https://yum.puppetlabs.com/RPM-GPG-KEY-puppet
-        rpm --import RPM-GPG-KEY-puppet
-        rm RPM-GPG-KEY-puppet
-        ${pm} ar https://yum.puppetlabs.com/puppet/sles/15/x86_64/ puppet
+        ${pm} install https://yum.voxpupuli.org/openvox8-release-sles-${VERSION_ID/.*/}.noarch.rpm
         ${pm} refresh
     fi
     ${pm} install ${puppet_package}
@@ -101,6 +98,7 @@ main() {
     export PATH=/opt/puppetlabs/bin:${PATH}
     export FACTER_root_alias=${root_alias}
     export FACTER_mail_relay=${mail_relay}
+    export FACTER_containerized=${containerized}
     puppet module install --target-dir ${run_path}/modules puppetlabs-mailalias_core
     puppet apply --show_diff --detailed-exitcodes --modulepath ${run_path}/modules ${run_path}/manifests/standalone-site.pp
     retval=${?}
@@ -121,7 +119,8 @@ main() {
     rm -fr ${tmp_dir}
 }
 
-while getopts ":le:m:" opt ; do
+containerized=false
+while getopts ":le:m:c" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}
@@ -131,6 +130,9 @@ while getopts ":le:m:" opt ; do
             ;;
         m)
             mail_relay=${OPTARG}
+            ;;
+        c)
+            containerized=true
             ;;
         *)
             usage

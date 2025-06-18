@@ -30,7 +30,7 @@ class postfix(
     }
   }
 
-  if $facts['virtual'] != 'docker' {
+  if $facts['containerized'] == 'false' {
     service { 'postfix':
       ensure    => running,
       enable    => true,

@@ -74,7 +74,7 @@ jobs:
           name: puppet-debian
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-debian:
     docker:
       - image: debian:12
@@ -116,7 +116,7 @@ jobs:
           command: |
             export DEBIAN_FRONTEND=noninteractive
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-ubuntu:
     docker:
       - image: ubuntu:24.04
@@ -157,7 +157,7 @@ jobs:
           name: puppet-centos
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-centos:
     docker:
       - image: quay.io/centos/centos:stream9
@@ -197,7 +197,7 @@ jobs:
           name: puppet-opensuse
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-opensuse:
     docker:
       - image: opensuse/leap:15.6
@@ -237,7 +237,7 @@ jobs:
           name: puppet-fedora
           command: |
             cd puppet
-            bash -x standalone-puppet.sh -e furlongm@gmail.com -l
+            bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-fedora:
     docker:
       - image: fedora:41

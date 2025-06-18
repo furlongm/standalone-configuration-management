@@ -4,7 +4,7 @@ class fail2ban {
     ensure => installed,
   }
 
-  if $facts['virtual'] != 'docker' {
+  if $facts['containerized'] == 'false' {
     service { 'fail2ban':
       ensure    => running,
       enable    => true,
