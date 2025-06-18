@@ -36,7 +36,7 @@ class locale {
     }
   }
 
-  if $facts['virtual'] != 'docker' {
+  if $facts['containerized'] == 'false' {
     exec { 'set-locale':
       path    => '/usr/bin:/usr/sbin:/bin:/sbin',
       command => "localectl set-locale LANG=${locale}",

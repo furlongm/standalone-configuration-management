@@ -79,6 +79,7 @@ main() {
     rm -fr ${tmp_dir}
 }
 
+containerized=false
 while getopts ":le:m:" opt ; do
     case ${opt} in
         e)
@@ -89,6 +90,9 @@ while getopts ":le:m:" opt ; do
             ;;
         m)
             mail_relay=${OPTARG}
+            ;;
+        c)
+            containerized=true
             ;;
         *)
             usage

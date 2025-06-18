@@ -22,7 +22,7 @@ class ssh {
     source => 'puppet:///modules/ssh/sshrc',
   }
 
-  if $facts['virtual'] != 'docker' {
+  if $facts['containerized'] == 'false' {
     service { $openssh_service:
       ensure  => running,
       require => [Package[$openssh_package],
