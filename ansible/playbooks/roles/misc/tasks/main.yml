@@ -2,7 +2,7 @@
   ansible.builtin.include_vars:
     file: "{{ item }}"
   with_first_found:
-    - "{{ ansible_os }}.yml"
+    - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
     - default.yml
 
