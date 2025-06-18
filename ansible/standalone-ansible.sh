@@ -83,7 +83,7 @@ main() {
     fi
     set -e
     ansible --version
-    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml -e "mail_relay=${mail_relay}" -e "root_alias=${root_alias}" -e 'ansible_python_interpreter=/usr/bin/python3'
+    ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml -e "mail_relay=${mail_relay}" -e "root_alias=${root_alias}"
 }
 
 while getopts ":le:m:" opt ; do
