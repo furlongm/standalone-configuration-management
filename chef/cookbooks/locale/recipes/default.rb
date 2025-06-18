@@ -30,12 +30,12 @@ end
 
 execute 'set-locale' do
   command "localectl set-locale LANG=#{locale}"
-  not_if  { node['virtualization']['system'] == 'docker' }
+  not_if  { node['containerized'] }
   not_if  "localectl status | grep #{locale}"
 end
 
 execute 'set-timezone' do
   command "timedatectl set-timezone #{timezone}"
-  not_if  { node['virtualization']['system'] == 'docker' }
+  not_if  { node['containerized'] }
   not_if  "timedatectl status | grep #{timezone}"
 end

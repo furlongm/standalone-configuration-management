@@ -94,7 +94,7 @@ jobs:
           name: chef-debian
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com -l
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
   ansible-ubuntu:
     docker:
       - image: ubuntu:24.04
@@ -137,7 +137,7 @@ jobs:
           name: chef-ubuntu
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com -l
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
   ansible-centos:
     docker:
       - image: quay.io/centos/centos:stream9
@@ -177,7 +177,7 @@ jobs:
           name: chef-centos
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com -l
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
   ansible-opensuse:
     docker:
       - image: opensuse/leap:15.6
@@ -217,7 +217,7 @@ jobs:
           name: chef-opensuse
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com -l
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
   ansible-fedora:
     docker:
       - image: fedora:41
@@ -257,7 +257,7 @@ jobs:
           name: chef-fedora
           command: |
             cd chef
-            bash -x standalone-chef.sh -e furlongm@gmail.com -l
+            bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
 
 workflows:
   linters:
