@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] [-c] (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] [-c] [-b branch] (as root)"
     exit 1
 }
 
@@ -56,10 +56,15 @@ install_vim_syntax_highlighting() {
 
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
-    git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    git clone --branch ${branch} https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
     cp -Lr ${tmp_dir}/saltstack/salt /srv
     cp -r ${tmp_dir}/saltstack/pillar /srv
     rm -fr ${tmp_dir}
+    run_path=/srv
+}
+
+get_local_config() {
+    run_path=.
 }
 
 main() {
@@ -69,28 +74,35 @@ main() {
     which patch 1>/dev/null 2>&1 || install_deps
     which salt-call 1>/dev/null 2>&1 || install_salt
     install_vim_syntax_highlighting
-    if [ "${run_path}" != "." ] ; then
-        run_path=/srv
+    if [ -z ${run_locally} ] ; then
         get_config_from_github
+    else
+        get_local_config
     fi
     set -e
     salt-call --local --file-root ${run_path}/salt --pillar-root ${run_path}/pillar state.highstate pillar="{'containerized': ${containerized}, 'mail_relay': \"${mail_relay}\", 'root_alias': \"${root_alias}\"}"
 }
 
+# defaults
 containerized=false
-while getopts ":lce:m:" opt ; do
+branch=main
+
+while getopts ":le:m:cb:" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}
             ;;
         l)
-            run_path=.
+            run_locally=true
             ;;
         m)
             mail_relay=${OPTARG}
             ;;
         c)
             containerized=true
+            ;;
+        b)
+            branch=${OPTARG}
             ;;
         *)
             usage

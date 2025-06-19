@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] [-c] [-b branch] (as root)"
     exit 1
 }
 
@@ -72,20 +72,20 @@ install_vim_syntax_highlighting() {
     rm -fr ${tmp_dir}
 }
 
-get_config() {
+get_config_from_github() {
     tmp_dir=$(mktemp -d)
-    if [ -z ${run_locally} ] ; then
-        git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-        mkdir -p /etc/puppet/{manifests,modules}
-        cp -Lr ${tmp_dir}/puppet/modules/* /etc/puppet/modules
-        cp -r ${tmp_dir}/puppet/manifests/* /etc/puppet/manifests
-        run_path=/etc/puppet
-    else
-        # FIXME don't use relative path
-        cp -Lr ./modules ${tmp_dir}
-        cp -Lr ./manifests ${tmp_dir}
-        run_path=${tmp_dir}
-    fi
+    git clone --branch ${branch} https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    mkdir -p /etc/puppet/{manifests,modules}
+    cp -Lr ${tmp_dir}/puppet/modules/* /etc/puppet/modules
+    cp -r ${tmp_dir}/puppet/manifests/* /etc/puppet/manifests
+    run_path=/etc/puppet
+}
+
+get_local_config() {
+    tmp_dir=$(mktemp -d)
+    cp -Lr ./modules ${tmp_dir}
+    cp -Lr ./manifests ${tmp_dir}
+    run_path=${tmp_dir}
 }
 
 main() {
@@ -94,7 +94,12 @@ main() {
     which curl 1>/dev/null 2>&1 || install_deps
     which puppet 1>/dev/null 2>&1 || install_puppet
     install_vim_syntax_highlighting
-    get_config
+    if [ -z ${run_locally} ] ; then
+        get_config_from_github
+    else
+        get_local_config
+    fi
+    get_config_from_github
     export PATH=/opt/puppetlabs/bin:${PATH}
     export FACTER_root_alias=${root_alias}
     export FACTER_mail_relay=${mail_relay}
@@ -119,8 +124,11 @@ main() {
     rm -fr ${tmp_dir}
 }
 
+# defaults
 containerized=false
-while getopts ":le:m:c" opt ; do
+branch=main
+
+while getopts ":le:m:cb:" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}
@@ -133,6 +141,9 @@ while getopts ":le:m:c" opt ; do
             ;;
         c)
             containerized=true
+            ;;
+        b)
+            branch=${OPTARG}
             ;;
         *)
             usage
