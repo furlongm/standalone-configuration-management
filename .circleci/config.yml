@@ -220,7 +220,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
   ansible-fedora:
     docker:
-      - image: fedora:41
+      - image: fedora:42
     steps:
       - checkout
       - run:
@@ -230,7 +230,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-fedora:
     docker:
-      - image: fedora:41
+      - image: fedora:42
     steps:
       - checkout
       - run:
@@ -240,7 +240,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-fedora:
     docker:
-      - image: fedora:41
+      - image: fedora:42
     steps:
       - checkout
       - run:
@@ -250,7 +250,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-fedora:
     docker:
-      - image: fedora:41
+      - image: fedora:42
     steps:
       - checkout
       - run:
