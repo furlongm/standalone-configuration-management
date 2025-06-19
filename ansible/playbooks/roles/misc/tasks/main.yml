@@ -1,11 +1,3 @@
-- name: Set up distro vars
-  ansible.builtin.include_vars:
-    file: "{{ item }}"
-  with_first_found:
-    - "{{ ansible_distribution }}.yml"
-    - "{{ ansible_os_family }}.yml"
-    - default.yml
-
 - name: Install misc packages
   ansible.builtin.package:
     name: "{{ item }}"
@@ -20,7 +12,7 @@
     - pwgen
     - lsof
     - multitail
-    - "{{ locate_package }}"
+    - plocate
 
 - name: Install misc packages for Debian
   ansible.builtin.package:

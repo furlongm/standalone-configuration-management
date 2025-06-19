@@ -8,9 +8,9 @@ misc_packages = %w(
   pwgen
   lsof
   multitail
+  plocate
 )
 
-misc_packages += [node['locate']['package']]
 misc_packages += %w(debian-goodies apt-transport-https) if platform_family?('debian')
 
 package misc_packages do
