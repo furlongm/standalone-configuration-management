@@ -24,7 +24,7 @@ class postfix(
     ensure => absent,
   }
 
-  if ($facts['os']['family'] == 'Debian') or ($facts['os']['name'] == 'Fedora') {
+  if ($facts['os']['family'] == 'Debian') or ($facts['os']['family'] == 'RedHat') {
     package { 'postfix-lmdb':
       ensure => installed,
     }
