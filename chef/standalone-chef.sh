@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] [-c] [-b branch] (as root)"
     exit 1
 }
 
@@ -51,17 +51,18 @@ install_vim_syntax_highlighting() {
     rm -fr ${tmp_dir}
 }
 
-get_config() {
+get_config_from_github() {
     tmp_dir=$(mktemp -d)
-    if [ -z ${run_locally} ] ; then
-        git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
-        cp -Lr ${tmp_dir}/chef /srv
-        run_path=/srv/chef
-    else
-        # FIXME don't use relative path
-        cp -Lr . ${tmp_dir}
-        run_path=${tmp_dir}
-    fi
+    git clone --branch ${branch} https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    cp -Lr ${tmp_dir}/chef /srv
+    rm -fr ${tmp_dir}
+    run_path=/srv/chef
+}
+
+get_local_config() {
+    tmp_dir=$(mktemp -d)
+    cp -Lr . ${tmp_dir}
+    run_path=${tmp_dir}
 }
 
 main() {
@@ -70,7 +71,11 @@ main() {
     which curl 1>/dev/null 2>&1 || install_deps
     which chef-client 1>/dev/null 2>&1 || install_chef
     install_vim_syntax_highlighting
-    get_config
+    if [ -z ${run_locally} ] ; then
+        get_config_from_github
+    else
+        get_local_config
+    fi
     sed -i -e "s#run_path =.*#run_path = '${run_path}'#" ${run_path}/client.rb
     sed -i -e "s/root_alias.*\"/root_alias\": \"${root_alias}\"/" ${run_path}/node.json
     sed -i -e "s/mail_relay.*\"/mail_relay\": \"${mail_relay}\"/" ${run_path}/node.json
@@ -80,20 +85,26 @@ main() {
     rm -fr ${tmp_dir}
 }
 
+# defaults
 containerized=false
-while getopts ":le:m:c" opt ; do
+branch=main
+
+while getopts ":le:m:cb:" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}
             ;;
         l)
-            run_locally=.
+            run_locally=true
             ;;
         m)
             mail_relay=${OPTARG}
             ;;
         c)
             containerized=true
+            ;;
+        b)
+            branch=${OPTARG}
             ;;
         *)
             usage

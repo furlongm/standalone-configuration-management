@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] (as root)"
+    echo "Usage: $0 -e EMAIL_ADDRESS [-m MAIL_RELAY_HOST] [-l] [-c] [-b branch] (as root)"
     exit 1
 }
 
@@ -65,9 +65,14 @@ install_vim_syntax_highlighting() {
 
 get_config_from_github() {
     tmp_dir=$(mktemp -d)
-    git clone https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
+    git clone --branch ${branch} https://github.com/furlongm/standalone-configuration-management ${tmp_dir}
     cp -Lr ${tmp_dir}/ansible /srv
     rm -fr ${tmp_dir}
+    run_path=/srv/ansible
+}
+
+get_local_config() {
+    run_path=.
 }
 
 main() {
@@ -77,25 +82,36 @@ main() {
     which curl 1>/dev/null 2>&1 || install_deps
     which ansible 1>/dev/null 2>&1 || install_ansible
     install_vim_syntax_highlighting
-    if [ "${run_path}" != "." ] ; then
-        run_path=/srv/ansible
+    if [ -z ${run_locally} ] ; then
         get_config_from_github
+    else
+        get_local_config
     fi
     set -e
     ansible --version
     ansible-playbook --diff -i ${run_path}/hosts ${run_path}/playbooks/site.yml -e "mail_relay=${mail_relay}" -e "root_alias=${root_alias}"
 }
 
-while getopts ":le:m:" opt ; do
+# defaults
+containerized=false
+branch=main
+
+while getopts ":le:m:cb:" opt ; do
     case ${opt} in
         e)
             root_alias=${OPTARG}
             ;;
         l)
-            run_path=.
+            run_locally=true
             ;;
         m)
             mail_relay=${OPTARG}
+            ;;
+        c)
+            containerized=true  # noop on ansible as ansible is the only one that correctly detects being run in a container
+            ;;
+        b)
+            branch=${OPTARG}
             ;;
         *)
             usage
