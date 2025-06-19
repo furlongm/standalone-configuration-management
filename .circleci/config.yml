@@ -1,6 +1,17 @@
 ---
 version: 2.1
 jobs:
+  shellcheck:
+    docker:
+      - image: ubuntu:24.04
+    steps:
+      - checkout
+      - run:
+          name: shellcheck
+          command: |
+            apt update
+            DEBIAN_FRONTEND=noninteractive apt -y install shellcheck
+            find -name *.sh -print0 | xargs -0 -n1 shellcheck -x
   lint-ansible:
     docker:
       - image: ubuntu:24.04
@@ -262,6 +273,7 @@ jobs:
 workflows:
   linters:
     jobs:
+      - shellcheck
       - lint-ansible
       - lint-puppet
       - lint-salt
