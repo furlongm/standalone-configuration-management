@@ -24,7 +24,7 @@
   ansible.builtin.package:
     name: postfix-lmdb
     state: present
-  when: ansible_os_family == 'Debian' or ansible_distribution == 'Fedora'
+  when: ansible_os_family in ['Debian', 'RedHat']
 
 - name: Start postfix service
   ansible.builtin.service:

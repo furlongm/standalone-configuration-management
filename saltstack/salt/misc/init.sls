@@ -10,7 +10,7 @@ miscpkgs:
       - pwgen
       - lsof
       - multitail
-      - {{ salt['pillar.get']('pkgs:locate') }}
+      - plocate
 
 {% if grains['os_family'] == 'Debian' %}
 

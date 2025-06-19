@@ -1,11 +1,5 @@
 class misc {
 
-  if $facts['os']['family'] == 'Debian' or $facts['os']['distro']['id'] == 'Fedora' {
-    $locate = 'plocate'
-  } else {
-    $locate = 'mlocate'
-  }
-
   $misc_packages = [
     'htop',
     'tree',
@@ -16,7 +10,7 @@ class misc {
     'pwgen',
     'lsof',
     'multitail',
-    $locate,
+    'plocate',
   ]
 
   package { $misc_packages:
