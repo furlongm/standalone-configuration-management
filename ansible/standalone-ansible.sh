@@ -26,7 +26,7 @@ get_pm() {
 
 install_epel() {
     if [[ "${NAME}" =~ "Red Hat" ]] ; then
-        epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+        epel_release_uri=https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
     else
         epel_release_uri=epel-release
     fi
