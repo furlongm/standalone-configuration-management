@@ -7,6 +7,6 @@ dnf -y makecache:
 
 epel-release:
   pkg.installed:
-    - source: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    - source: https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
 
 {% endif %}

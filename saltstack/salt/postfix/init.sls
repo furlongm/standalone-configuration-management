@@ -11,7 +11,7 @@ service:
       - file: /etc/postfix/main.cf
 {% endif %}
 
-{% if grains['os_family'] == 'Debian' or grains['os'] == 'Fedora' %}
+{% if grains['os_family'] in ['Debian', 'RedHat'] %}
 postfix-lmdb:
   pkg:
     - installed
