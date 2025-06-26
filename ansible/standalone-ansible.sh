@@ -39,7 +39,12 @@ install_deps() {
 }
 
 install_ansible() {
-    ${pm} install ansible
+    if [[ "${NAME}" =~ "CentOS" ]] ; then
+        ansible=ansible-core
+    else
+        ansible=ansible
+    fi
+    ${pm} install ${ansible}
 }
 
 install_vim_syntax_highlighting() {
