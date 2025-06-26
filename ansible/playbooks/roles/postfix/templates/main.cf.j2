@@ -13,22 +13,12 @@ readme_directory = no
 smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_use_tls = yes
-{% if ansible_os_family == 'RedHat' -%}
-smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
-smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-{% else -%}
 smtpd_tls_session_cache_database = lmdb:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = lmdb:${data_directory}/smtp_scache
-{% endif %}
 
 myhostname = {{ ansible_hostname }}
-{% if ansible_os_family == 'RedHat' -%}
-alias_maps = hash:/etc/aliases
-alias_database = hash:/etc/aliases
-{% else -%}
 alias_maps = lmdb:/etc/aliases
 alias_database = lmdb:/etc/aliases
-{% endif -%}
 myorigin = {{ ansible_fqdn }}
 
 {% if ansible_fqdn != ansible_hostname -%}
