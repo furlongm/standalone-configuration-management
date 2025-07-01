@@ -25,7 +25,7 @@ pkgs:
   vim: vim
   mailx: s-nail
   exim: exim4
-  bind-utils: dnsutils
+  bind-utils: bind9-dnsutils
   iperf: iperf3
   locales: locales
   locate: plocate
