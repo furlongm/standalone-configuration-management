@@ -1,2 +1,2 @@
-bindutils_package: dnsutils
+bindutils_package: bind9-dnsutils
 iperf_package: iperf3
