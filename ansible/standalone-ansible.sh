@@ -40,9 +40,9 @@ install_deps() {
 
 install_ansible() {
     if [[ "${NAME}" =~ "CentOS" ]] ; then
-        ansible=ansible-core
+        ansible="ansible-core"
     else
-        ansible=ansible
+        ansible="ansible"
     fi
     ${pm} install ${ansible}
 }
