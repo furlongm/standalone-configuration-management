@@ -1,7 +1,7 @@
 class net {
 
   $bindutils = $facts['os']['family'] ? {
-    'Debian' => 'dnsutils',
+    'Debian' => 'bind9-dnsutils',
     default  => 'bind-utils',
   }
 
