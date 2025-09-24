@@ -1,4 +1,6 @@
 ## Synopsis
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffurlongm%2Fstandalone-configuration-management.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffurlongm%2Fstandalone-configuration-management?ref=badge_shield)
+
 
 This project aims to give some basic examples of how to use each of chef,
 puppet, salt and ansible as standalone configuration management systems.
@@ -28,3 +30,7 @@ sudo -E bash -x standalone-chef.sh -e furlongm@gmail.com
 curl -O https://raw.githubusercontent.com/furlongm/standalone-configuration-management/main/ansible/standalone-ansible.sh
 sudo -E bash -x standalone-ansible.sh -e furlongm@gmail.com
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ffurlongm%2Fstandalone-configuration-management.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ffurlongm%2Fstandalone-configuration-management?ref=badge_large)
