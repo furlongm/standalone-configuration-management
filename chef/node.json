@@ -4,7 +4,7 @@
     "root_alias": "",
     "mail_relay": ""
   },
-  "run_list": [ "recipe[epel]",
+  "run_list": [ "recipe[repos]",
                 "recipe[locale]",
                 "recipe[etckeeper]",
                 "recipe[misc]",

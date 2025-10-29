@@ -83,7 +83,7 @@ get_local_config() {
 
 main() {
     get_pm
-    which dnf 1>/dev/null 2>&1 && install_epel
+#    which dnf 1>/dev/null 2>&1 && install_epel
     which git 1>/dev/null 2>&1 || install_deps
     which curl 1>/dev/null 2>&1 || install_deps
     which ansible 1>/dev/null 2>&1 || install_ansible
