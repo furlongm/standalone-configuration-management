@@ -7,6 +7,10 @@ dnf -y makecache:
 
 epel-release:
   pkg.installed:
-    - source: https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm
+    {% if grains['os'] == 'Rocky' %}
+    - name: epel-release
+    {% else %}
+    - source: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ grains['osmajorrelease'] }}.noarch.rpm
+    {% endif %}
 
 {% endif %}

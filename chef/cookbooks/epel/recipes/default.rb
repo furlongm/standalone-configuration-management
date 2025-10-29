@@ -6,9 +6,12 @@ if platform_family?('rhel')
   end
 
   package 'epel-release' do
-    source 'http://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm'
-    action :install
-    provider Chef::Provider::Package::Rpm
+    if node['platform'] == 'rocky'
+      action :install
+    else
+      source "https://dl.fedoraproject.org/pub/epel/epel-release-latest-#{node['platform_version'].to_i}.noarch.rpm"
+      provider Chef::Provider::Package::Rpm
+    end
     notifies :run, 'execute[dnf_makecache]', :immediately
   end
 end

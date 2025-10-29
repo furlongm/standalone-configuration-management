@@ -41,7 +41,7 @@ install_puppet() {
         if [[ "${ID}" == "fedora" ]] ; then
             ${pm} install https://yum.voxpupuli.org/openvox8-release-fedora-"${VERSION_ID}".noarch.rpm
         else
-            ${pm} install https://yum.voxpupuli.org/openvox8-release-el-"${VERSION_ID}".noarch.rpm
+            ${pm} install https://yum.voxpupuli.org/openvox8-release-el-"${VERSION_ID/.*/}".noarch.rpm
         fi
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
@@ -100,7 +100,6 @@ main() {
     else
         get_local_config
     fi
-    get_config_from_github
     export PATH=/opt/puppetlabs/bin:${PATH}
     export FACTER_root_alias=${root_alias}
     export FACTER_mail_relay=${mail_relay}
