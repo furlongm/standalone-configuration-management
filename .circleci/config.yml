@@ -63,7 +63,7 @@ jobs:
           command: |
             apt update
             DEBIAN_FRONTEND=noninteractive apt -y install build-essential zlib1g-dev ruby ruby-dev
-            gem install foodcritic cookstyle
+            gem install foodcritic cookstyle ffi
             foodcritic -t ~FC031 -t ~FC071 -t ~FC011 -t ~FC109 chef/cookbooks
             cookstyle chef
   ansible-debian:
