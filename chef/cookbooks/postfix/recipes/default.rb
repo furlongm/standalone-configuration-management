@@ -22,7 +22,7 @@ package 'postfix' do
   action :install
 end
 
-if platform_family?('debian', 'fedora', 'redhat')
+if platform_family?('debian', 'fedora', 'rhel')
   package 'postfix-lmdb' do
     action :install
   end

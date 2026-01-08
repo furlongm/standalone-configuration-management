@@ -63,7 +63,7 @@ jobs:
           command: |
             apt update
             DEBIAN_FRONTEND=noninteractive apt -y install build-essential zlib1g-dev ruby ruby-dev
-            gem install foodcritic cookstyle
+            gem install foodcritic cookstyle ffi
             foodcritic -t ~FC031 -t ~FC071 -t ~FC011 -t ~FC109 chef/cookbooks
             cookstyle chef
   ansible-debian:
@@ -231,7 +231,7 @@ jobs:
             bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
   ansible-fedora:
     docker:
-      - image: fedora:42
+      - image: fedora:43
     steps:
       - checkout
       - run:
@@ -241,7 +241,7 @@ jobs:
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
   puppet-fedora:
     docker:
-      - image: fedora:42
+      - image: fedora:43
     steps:
       - checkout
       - run:
@@ -251,7 +251,7 @@ jobs:
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
   salt-fedora:
     docker:
-      - image: fedora:42
+      - image: fedora:43
     steps:
       - checkout
       - run:
@@ -261,7 +261,7 @@ jobs:
             bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
   chef-fedora:
     docker:
-      - image: fedora:42
+      - image: fedora:43
     steps:
       - checkout
       - run:
