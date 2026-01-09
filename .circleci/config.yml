@@ -149,43 +149,43 @@ jobs:
           command: |
             cd chef
             bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
-  ansible-centos:
+  ansible-rocky:
     docker:
-      - image: quay.io/centos/centos:stream10
+      - image: rockylinux/rockylinux:10
     steps:
       - checkout
       - run:
-          name: ansible-centos
+          name: ansible-rocky
           command: |
             cd ansible
             bash -x standalone-ansible.sh -e furlongm@gmail.com -l
-  puppet-centos:
+  puppet-rocky:
     docker:
-      - image: quay.io/centos/centos:stream10
+      - image: rockylinux/rockylinux:10
     steps:
       - checkout
       - run:
-          name: puppet-centos
+          name: puppet-rocky
           command: |
             cd puppet
             bash -x standalone-puppet.sh -e furlongm@gmail.com -l -c
-  salt-centos:
+  salt-rocky:
     docker:
-      - image: quay.io/centos/centos:stream10
+      - image: rockylinux/rockylinux:10
     steps:
       - checkout
       - run:
-          name: salt-centos
+          name: salt-rocky
           command: |
             cd saltstack
             bash -x standalone-salt.sh -e furlongm@gmail.com -l -c
-  chef-centos:
+  chef-rocky:
     docker:
-      - image: quay.io/centos/centos:stream10
+      - image: rockylinux/rockylinux:10
     steps:
       - checkout
       - run:
-          name: chef-centos
+          name: chef-rocky
           command: |
             cd chef
             bash -x standalone-chef.sh -e furlongm@gmail.com -l -c
@@ -282,21 +282,21 @@ workflows:
     jobs:
       - ansible-debian
       - ansible-ubuntu
-      - ansible-centos
+      - ansible-rocky
       - ansible-opensuse
       - ansible-fedora
       - puppet-debian
       - puppet-ubuntu
-      - puppet-centos
+      - puppet-rocky
       - puppet-opensuse
       - puppet-fedora
       - salt-debian
       - salt-ubuntu
-      - salt-centos
+      - salt-rocky
       - salt-opensuse
       - salt-fedora
       - chef-debian
       - chef-ubuntu
-      - chef-centos
+      - chef-rocky
       - chef-opensuse
       - chef-fedora
