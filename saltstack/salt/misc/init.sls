@@ -9,7 +9,6 @@ miscpkgs:
       - bash-completion
       - pwgen
       - lsof
-      - multitail
       - plocate
 
 {% if grains['os_family'] == 'Debian' %}

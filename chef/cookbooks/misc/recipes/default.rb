@@ -7,7 +7,6 @@ misc_packages = %w(
   bash-completion
   pwgen
   lsof
-  multitail
   plocate
 )
 

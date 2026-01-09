@@ -10,6 +10,5 @@ netpkgs:
       - wget2
       - ipset
       - nload
-      - bmon
       - {{ salt['pillar.get']('pkgs:bind-utils') }}
       - {{ salt['pillar.get']('pkgs:iperf') }}

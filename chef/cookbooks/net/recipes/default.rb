@@ -8,7 +8,6 @@ net_packages = %w(
   wget2
   ipset
   nload
-  bmon
 )
 
 net_packages += [node['bind-utils']['package']]

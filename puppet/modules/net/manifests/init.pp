@@ -20,7 +20,6 @@ class net {
     'wget2',
     'ipset',
     'nload',
-    'bmon',
     $bindutils,
     $iperf,
   ]

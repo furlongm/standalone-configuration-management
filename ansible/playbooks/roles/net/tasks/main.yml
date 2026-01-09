@@ -18,6 +18,5 @@
     - wget2
     - ipset
     - nload
-    - bmon
     - "{{ iperf_package }}"
     - "{{ bindutils_package }}"
