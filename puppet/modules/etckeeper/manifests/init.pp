@@ -1,6 +1,6 @@
 class etckeeper {
 
-  require epel
+  require repos
 
   package { 'etckeeper':
     ensure => installed,

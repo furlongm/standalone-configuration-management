@@ -1,7 +1,7 @@
 base:
   '*':
     - salt
-    - epel
+    - repos
     - locale
     - etckeeper
     - misc

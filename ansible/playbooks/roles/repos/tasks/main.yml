@@ -1,0 +1,25 @@
+---
+- name: Add EPEL repo
+  when: ansible_os_family == 'RedHat' and ansible_distribution != 'Fedora'
+  block:
+    - name: Set up distro vars
+      ansible.builtin.include_vars:
+        file: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution }}.yml"
+        - default.yml
+
+    - name: Install epel release
+      ansible.builtin.dnf:
+        name: "{{ epel_release_uri }}"
+        state: present
+      notify: Update dnf cache
+
+- name: Add openSUSE non-oss repo
+  ansible.builtin.command: zypper modifyrepo --enable "openSUSE:repo-non-oss"
+  register: repo_status
+  when: ansible_os_family == "Suse"
+  changed_when: "'already enabled' not in repo_status.stdout"
+  failed_when:
+    - repo_status.rc != 0
+    - "'not found' not in repo_status.stderr"

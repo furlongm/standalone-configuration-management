@@ -9,7 +9,6 @@ class misc {
     'bash-completion',
     'pwgen',
     'lsof',
-    'multitail',
     'plocate',
   ]
 

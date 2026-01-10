@@ -45,6 +45,8 @@ install_puppet() {
         fi
         ${pm} makecache
     elif [[ "${pm}" =~ "zypper" ]] ; then
+        # FIXME: override for missing package
+        VERSION_ID=15
         ${pm} install https://yum.voxpupuli.org/openvox8-release-sles-"${VERSION_ID/.*/}".noarch.rpm
         ${pm} refresh
     fi

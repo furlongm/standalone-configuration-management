@@ -13,4 +13,11 @@ epel-release:
     - source: https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ grains['osmajorrelease'] }}.noarch.rpm
     {% endif %}
 
+{% elif grains['os_family'] == 'Suse' %}
+
+enable_non_oss_repo:
+  pkgrepo.managed:
+    - name: 'openSUSE:repo-non-oss'
+    - enabled: True
+
 {% endif %}

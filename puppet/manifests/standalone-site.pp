@@ -8,7 +8,7 @@ node default {
 
   Stage['pre'] -> Stage['main'] -> Stage['post']
 
-  class { 'epel':
+  class { 'repos':
     stage => 'pre',
   }
 
